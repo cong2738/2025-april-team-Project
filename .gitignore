@@ -76,7 +76,7 @@
 !*.png
 
 #ignore all tree exept srcs
-/*
+./*
 !my_RISC-V.srcs/
 
 #isolate private test area
