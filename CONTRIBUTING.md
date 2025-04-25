@@ -1,5 +1,5 @@
 # contrivute guide
-- sim, elv tool uses AMD Vivado 
+- sim, elv tool: AMD Vivado 
 - vivado version: 2020.2  
 
 # team anounce  
