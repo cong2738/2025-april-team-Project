@@ -75,9 +75,9 @@
 #png
 !*.png
 
-# ignore all tree exept srcs
+#ignore all tree exept srcs
 /*
 !my_RISC-V.srcs/
 
-# isolate private test area
+#isolate private test area
 testcode.mem
