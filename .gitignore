@@ -74,3 +74,6 @@
 !*.md
 #png
 !*.png
+
+# isolate private test area
+testcode.mem
