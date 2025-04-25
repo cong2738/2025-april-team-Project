@@ -20,12 +20,12 @@
     마크다운 미리보기 단축키는 기본설정 기준 "ctrl+art+v"이다.  
     제목은 맨 앞에 "#" 붙히면 된다.(갯수에 따라 깊이가 다르니 주의)  
     나도 마크다운 아는게 많지 않다. 애매하면 GPT와 코딩커뮤니티(스택오버플로우)로.  
-    
+
 ### 진행상황 
 #### 2025 04 25  
 - RISC-V  
     - core  
-        - R_Type 
+        - R_Type
             - ADD 
             - SUB 
             - SLL 
@@ -61,6 +61,8 @@
         - AU_Type
         - J_Type
         - JR_Type 
+    - ram   
+    - rom   
     - AMBA APB BUS  
 - Peripheral    
     - APB GPIO template  
