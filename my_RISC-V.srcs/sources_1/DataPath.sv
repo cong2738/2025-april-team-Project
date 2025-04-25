@@ -5,7 +5,7 @@
 module DataPath (
     input  logic        clk,
     input  logic        reset,
-    // control unit side port
+    // control unit side port 
     input  logic        regFileWe,
     input  logic [ 3:0] aluControl,
     input  logic        aluSrcMuxSel,
