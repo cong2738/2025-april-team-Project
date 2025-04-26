@@ -22,6 +22,7 @@
 
 #ignore all tree exept srcs
 !my_RISC-V.srcs/
+!.github/
 
 #isolate private test area
 testcode.mem
