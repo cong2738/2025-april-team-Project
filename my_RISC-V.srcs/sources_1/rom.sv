@@ -27,7 +27,7 @@ module rom (
         rom[3] = 32'h00012183;
         */
 
-        $readmemh("code.mem", rom);
+        $readmemh("testcode.mem", rom);
     end
     assign data = rom[addr[31:2]];
 endmodule
