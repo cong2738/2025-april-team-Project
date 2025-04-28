@@ -1,6 +1,6 @@
 ---
-name: Custom issue template
-about: Describe this issue template's purpose here.
+name: module add anounce
+about: vivado check
 title: ''
 labels: ''
 assignees: ''
