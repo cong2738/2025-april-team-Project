@@ -1,0 +1,28 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  --include "../../../../my_RISC-V.srcs/sources_1" \
+"../../../../my_RISC-V.srcs/sources_1/DataPath.sv" \
+"../../../../my_RISC-V.srcs/sources_1/rom.sv" \
+
+verilog xil_defaultlib  --include "../../../../my_RISC-V.srcs/sources_1" \
+"../../../../my_RISC-V.srcs/sources_1/fndController.v" \
+
+sv xil_defaultlib  --include "../../../../my_RISC-V.srcs/sources_1" \
+"../../../../my_RISC-V.srcs/sources_1/gpi.sv" \
+"../../../../my_RISC-V.srcs/sources_1/APB_Master.sv" \
+"../../../../my_RISC-V.srcs/sources_1/APB_Slave.sv" \
+"../../../../my_RISC-V.srcs/sources_1/gpio.sv" \
+"../../../../my_RISC-V.srcs/sources_1/RV32I_Core.sv" \
+"../../../../my_RISC-V.srcs/sources_1/ControlUnit.sv" \
+"../../../../my_RISC-V.srcs/sources_1/MCU.sv" \
+"../../../../my_RISC-V.srcs/sources_1/GP_fnd.sv" \
+"../../../../my_RISC-V.srcs/sources_1/ram.sv" \
+"../../../../my_RISC-V.srcs/sources_1/new/fifo.sv" \
+"../../../../my_RISC-V.srcs/sim_1/new/tb_fndController_APB_Periph.sv" \
+"../../../../my_RISC-V.srcs/sim_1/new/tb_fifo.sv" \
+"../../../../my_RISC-V.srcs/sim_1/new/tb_fifo_sv.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

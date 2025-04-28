@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sat Apr 26 01:58:11 2025
+# Process ID: 41740
+# Current directory: D:/harman/HarmanSemiconAcademy_2025April_TeamProject
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent8944 D:\harman\HarmanSemiconAcademy_2025April_TeamProject\my_RISC-V.xpr
+# Log file: D:/harman/HarmanSemiconAcademy_2025April_TeamProject/vivado.log
+# Journal file: D:/harman/HarmanSemiconAcademy_2025April_TeamProject\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.xpr
+export_ip_user_files -of_objects  [get_files D:/harman/HarmanSemiconAcademy_2025April_TeamProject/tb_fndController_APB_Periph_behav.wcfg] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 D:/harman/HarmanSemiconAcademy_2025April_TeamProject/tb_fndController_APB_Periph_behav.wcfg
