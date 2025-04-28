@@ -1,6 +1,6 @@
 ---
 name: module add anounce
-about: vivado check
+about: check pull and vivado plz
 title: ''
 labels: ''
 assignees: ''
