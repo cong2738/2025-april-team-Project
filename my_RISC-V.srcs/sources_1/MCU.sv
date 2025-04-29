@@ -66,7 +66,7 @@ module MCU (
 
     GPIO_Periph U_GPIB (
         .*,
-        .PSEL  (PSEL[2]),
+        .PSEL(PSEL[2]),
         .PRDATA(PRDATA[2]),
         .PREADY(PREADY[2]),
         .inoutPort(GPIOB)
@@ -96,5 +96,13 @@ module MCU (
         .fndFont(fndFont),
         .fndCom (fndCom)
     );
+
+    GP_FIFO u_GP_FIFO (
+        .*,
+        .PSEL   (PSEL[6]),
+        .PRDATA (PRDATA[6]),
+        .PREADY (PREADY[6])
+    );
+
 
 endmodule
