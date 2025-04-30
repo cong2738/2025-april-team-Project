@@ -1,0 +1,105 @@
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
+| Date         : Wed Apr 30 15:53:33 2025
+| Host         : DESKTOP-7CFQ9ND running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file MCU_control_sets_placed.rpt
+| Design       : MCU
+| Device       : xc7a35t
+------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    27 |
+|    Minimum number of control sets                        |    27 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    30 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    27 |
+| >= 0 to < 4        |     2 |
+| >= 4 to < 6        |     3 |
+| >= 6 to < 8        |     1 |
+| >= 8 to < 10       |     1 |
+| >= 10 to < 12      |     0 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    20 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |               1 |            1 |
+| No           | No                    | Yes                    |             303 |          106 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |             160 |           61 |
+| Yes          | No                    | Yes                    |             454 |          158 |
+| Yes          | Yes                   | No                     |               4 |            1 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++----------------+----------------------------------------------------------------+----------------------------------------+------------------+----------------+--------------+
+|  Clock Signal  |                          Enable Signal                         |            Set/Reset Signal            | Slice Load Count | Bel Load Count | Bels / Slice |
++----------------+----------------------------------------------------------------+----------------------------------------+------------------+----------------+--------------+
+|  clk_IBUF_BUFG |                                                                |                                        |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG | U_DHT11/U_DHT11_IP/dht11/u_sen/data_reg_i_1_n_0                | reset_IBUF                             |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG | U_GPIOD/U_APB_Intf_GPIO/reset                                  | U_APB_Master/FSM_onehot_state_reg[2]_3 |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG | U_DHT11/U_DHT11_IP/dht11/u_sen/FSM_sequential_state[3]_i_1_n_0 | reset_IBUF                             |                2 |              4 |         2.00 |
+|  clk_IBUF_BUFG | U_Core/U_ControlUnit/FSM_sequential_state[3]_i_1__0_n_0        | reset_IBUF                             |                3 |              4 |         1.33 |
+|  clk_IBUF_BUFG | U_DHT11/U_DHT11_IP/dht11/u_sen/data_count[5]_i_1_n_0           | reset_IBUF                             |                3 |              6 |         2.00 |
+|  clk_IBUF_BUFG | U_DHT11/U_DHT11_IP/dht11/u_sen/real_count[7]_i_1_n_0           | reset_IBUF                             |                3 |              8 |         2.67 |
+|  clk_IBUF_BUFG | U_DHT11/U_DHT11_IP/dht11/u_sen/tick_count[15]_i_1_n_0          | reset_IBUF                             |                8 |             16 |         2.00 |
+|  clk_IBUF_BUFG | U_APB_Master/temp_addr_reg_reg[13]_2[0]                        | reset_IBUF                             |               12 |             32 |         2.67 |
+|  clk_IBUF_BUFG | U_APB_Master/temp_addr_reg_reg[13]_5[0]                        |                                        |               15 |             32 |         2.13 |
+|  clk_IBUF_BUFG | U_APB_Master/temp_addr_reg_reg[13]_4[0]                        | reset_IBUF                             |                7 |             32 |         4.57 |
+|  clk_IBUF_BUFG | U_APB_Master/temp_addr_reg_reg[13]_1[0]                        | reset_IBUF                             |               11 |             32 |         2.91 |
+|  clk_IBUF_BUFG | U_APB_Master/temp_addr_reg_reg[3]_0[0]                         |                                        |                6 |             32 |         5.33 |
+|  clk_IBUF_BUFG | U_APB_Master/temp_addr_reg_reg[13]_6[0]                        |                                        |               13 |             32 |         2.46 |
+|  clk_IBUF_BUFG | U_APB_Master/temp_addr_reg_reg[13]_7[0]                        |                                        |               13 |             32 |         2.46 |
+|  clk_IBUF_BUFG | U_APB_Master/temp_addr_reg_reg[13]_0[0]                        | reset_IBUF                             |                6 |             32 |         5.33 |
+|  clk_IBUF_BUFG | U_APB_Master/temp_addr_reg_reg[13]_3[0]                        | reset_IBUF                             |               11 |             32 |         2.91 |
+|  clk_IBUF_BUFG | U_APB_Master/temp_addr_reg_reg[13]_8[0]                        |                                        |               14 |             32 |         2.29 |
+|  clk_IBUF_BUFG | U_APB_Master/slv_reg0                                          | reset_IBUF                             |               13 |             32 |         2.46 |
+|  clk_IBUF_BUFG | U_APB_Master/slv_reg0_0                                        | reset_IBUF                             |               11 |             32 |         2.91 |
+|  clk_IBUF_BUFG | U_APB_Master/E[0]                                              | reset_IBUF                             |                7 |             32 |         4.57 |
+|  clk_IBUF_BUFG | U_DHT11/U_DHT11_IP/dht11/u_sen/finish_tick_reg_reg_0[0]        | reset_IBUF                             |                9 |             32 |         3.56 |
+|  clk_IBUF_BUFG | U_DHT11/U_DHT11_IP/dht11/u_sen/E[0]                            | reset_IBUF                             |                8 |             32 |         4.00 |
+|  clk_IBUF_BUFG | U_Core/U_ControlUnit/E[0]                                      | reset_IBUF                             |               16 |             32 |         2.00 |
+|  clk_IBUF_BUFG | U_Core/U_ControlUnit/temp_addr_next                            | reset_IBUF                             |               27 |             63 |         2.33 |
+|  clk_IBUF_BUFG | U_Core/U_ControlUnit/regFileWe                                 |                                        |               12 |             96 |         8.00 |
+|  clk_IBUF_BUFG |                                                                | reset_IBUF                             |              106 |            303 |         2.86 |
++----------------+----------------------------------------------------------------+----------------------------------------+------------------+----------------+--------------+
+
+

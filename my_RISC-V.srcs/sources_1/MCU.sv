@@ -5,6 +5,7 @@ module MCU (
     input  logic       reset,
     inout  logic [7:0] GPIOC,
     inout  logic [3:0] GPIOD,
+    inout logic DHT11_DATA,
     output logic [3:0] fndCom,
     output logic [7:0] fndFont
 );
@@ -87,7 +88,7 @@ module MCU (
         .PREADY(PREADY[4]),
         .inoutPort(GPIOD)
     );
-
+/*
     fnd_Periph u_fnd_pp (
         .*,
         .PSEL   (PSEL[5]),
@@ -95,6 +96,32 @@ module MCU (
         .PREADY (PREADY[5]),
         .fndFont(fndFont),
         .fndCom (fndCom)
+    );*/
+/*
+    DHT11_Periph U_dht11_pp (
+        .*,
+        .PSEL(PSEL[6]),
+        .PRDATA(PRDATA[6]),
+        .PREADY(PREADY[6]),
+        .DATA_IO(GPIOC[0]),
+        .fndCom(fndCom),
+        .fndFont(fndFont)
+    );
+    */
+
+    DHT11_Periph U_DHT11 (
+        .PCLK    (PCLK),
+        .PRESET  (PRESET),
+        .PADDR   (PADDR[3:0]),
+        .PWDATA  (PWDATA),        
+        .PWRITE  (PWRITE),
+        .PENABLE (PENABLE),
+        .PSEL    (PSEL[6]),      
+        .PRDATA  (PRDATA[6]),
+        .PREADY  (PREADY[6]),
+        .DATA_IO (DHT11_DATA), 
+        .fndCom  (fndCom),
+        .fndFont (fndFont)
     );
 
 endmodule
