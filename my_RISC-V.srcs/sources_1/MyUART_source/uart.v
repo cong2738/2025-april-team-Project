@@ -5,24 +5,24 @@
 module uart #(
     BAUD_RATE = 9600
 ) (
-    input clk,
-    input rst,
-    input tx_start_triger,
-    input [7:0] tx_data,
-    input rx,
-    output tx,
-    output tx_done,
-    output tx_busy,
+    input        clk,
+    input        rst,
+    input        tx_start_triger,
+    input  [7:0] tx_data,
+    input        rx,
+    output       tx,
+    output       tx_busy,
+    output       tx_done,
     output [7:0] rx_data,
-    output rx_done,
-    output rx_busy
+    output       rx_busy,
+    output       rx_done
 );
 
     wire tick;
     // rx에쓰려고 16배속 했지만 클럭 동기화 이슈때문에 TX에도 같은곳의 클럭을 써야한다.
     boud_tick_gen #(
         .BAUD_RATE(BAUD_RATE)
-    ) U_btn_Debounce (
+    ) clk_devider (
         .clk(clk),
         .rst(rst),
         .baud_tick(tick)
@@ -34,6 +34,7 @@ module uart #(
         .tick(tick),
         .rx(rx),
         .rx_data(rx_data),
+        .rx_busy(rx_done),
         .rx_done(rx_done)
     );
 
@@ -44,7 +45,8 @@ module uart #(
         .start_trigger(tx_start_triger),
         .i_data(tx_data),
         .o_tx(tx),
-        .tx_busy(tx_busy)
+        .tx_busy(tx_busy),
+        .tx_done(tx_done)
     );
 
 endmodule
@@ -54,8 +56,8 @@ module uart_rx (
     input rst,
     input tick,
     input rx,
-    output rx_done,
     output rx_busy,
+    output rx_done,
     output [7:0] rx_data
 );
 
@@ -70,7 +72,6 @@ module uart_rx (
     assign rx_done = r_rx_done;
     assign rx_busy = r_rx_busy;
     assign rx_data = data;
-
 
     always @(posedge clk, posedge rst) begin
         if (rst) begin
@@ -89,7 +90,6 @@ module uart_rx (
             r_rx_busy <= r_rx_busy_next;
         end
     end
-
 
     always @(*) begin
         next = state;
@@ -159,8 +159,8 @@ module uart_tx (
     input [7:0] i_data,
     input start_trigger,
     output o_tx,
-    output tx_done,
-    output tx_busy
+    output tx_busy,
+    output tx_done
 );
     parameter R_IDLE = 4'h0, START = 4'h1, DATA_STATE = 4'h2, STOP = 4'h3;
 
@@ -233,8 +233,6 @@ module uart_tx (
                         begin
                             tx_next = temp_data_reg[data_count];
                             // tx_next = i_data[data_count];
-
-
                             tick_count_next = 0;
                             if (data_count_next == 7) begin
                                 next = STOP;
@@ -286,8 +284,6 @@ module boud_tick_gen #(
     end
 
     //next
-
-
     always @(*) begin
         count_next = count_reg;
         tick_next  = tick_reg;

@@ -52,11 +52,11 @@ module GP_UART (  //GPIO
         .tx_data        (tx_data),
         .rx             (rx),
         .tx             (tx),
+        .tx_done        (tx_done),
         .tx_busy        (tx_busy),
-        .tx_busy        (tx_done),
         .rx_data        (rx_data),
         .rx_done        (rx_done),
-        .rx_done        (rx_busy)
+        .rx_busy        (rx_busy)
     );
 
     fifo u_outputBuffer (
