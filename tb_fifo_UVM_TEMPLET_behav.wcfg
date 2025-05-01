@@ -3,59 +3,178 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="tb_fifo_UVM_TEMPLET_behav.wdb" id="1">
+      <db_ref path="tb_GPUART_behav.wdb" id="1">
          <top_modules>
-            <top_module name="\$unit_gpi_sv " />
             <top_module name="glbl" />
-            <top_module name="std" />
-            <top_module name="tb_fifo_UVM_TEMPLET" />
+            <top_module name="tb_GPUART" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="1000000fs"></ZoomEndTime>
-      <Cursor1Time time="999996fs"></Cursor1Time>
+      <ZoomEndTime time="9685001fs"></ZoomEndTime>
+      <Cursor1Time time="9685000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="165"></NameColumnWidth>
-      <ValueColumnWidth column_width="79"></ValueColumnWidth>
+      <ValueColumnWidth column_width="75"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="9" />
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/reset" type="logic">
-      <obj_property name="ElementShortName">reset</obj_property>
-      <obj_property name="ObjectShortName">reset</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/clk" type="logic">
+   <WVObjectSize size="7" />
+   <wvobject fp_name="/tb_GPUART/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/reset" type="logic">
+   <wvobject fp_name="/tb_GPUART/reset" type="logic">
       <obj_property name="ElementShortName">reset</obj_property>
       <obj_property name="ObjectShortName">reset</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/wdata" type="array">
-      <obj_property name="ElementShortName">wdata[7:0]</obj_property>
-      <obj_property name="ObjectShortName">wdata[7:0]</obj_property>
+   <wvobject fp_name="/tb_GPUART/uart_baudrate" type="logic">
+      <obj_property name="ElementShortName">uart_baudrate</obj_property>
+      <obj_property name="ObjectShortName">uart_baudrate</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/wr_en" type="logic">
-      <obj_property name="ElementShortName">wr_en</obj_property>
-      <obj_property name="ObjectShortName">wr_en</obj_property>
+   <wvobject fp_name="/tb_GPUART/rx_state" type="array">
+      <obj_property name="ElementShortName">rx_state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_state[3:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/full" type="logic">
-      <obj_property name="ElementShortName">full</obj_property>
-      <obj_property name="ObjectShortName">full</obj_property>
+   <wvobject fp_name="/tb_GPUART/rx_data_count" type="array">
+      <obj_property name="ElementShortName">rx_data_count[31:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_data_count[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/rdata" type="array">
-      <obj_property name="ElementShortName">rdata[7:0]</obj_property>
-      <obj_property name="ObjectShortName">rdata[7:0]</obj_property>
+   <wvobject fp_name="group15" type="group">
+      <obj_property name="label">intf</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_GPUART/intf/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/intf/reset" type="logic">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/intf/PADDR" type="array">
+         <obj_property name="ElementShortName">PADDR[3:0]</obj_property>
+         <obj_property name="ObjectShortName">PADDR[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/intf/PWDATA" type="array">
+         <obj_property name="ElementShortName">PWDATA[31:0]</obj_property>
+         <obj_property name="ObjectShortName">PWDATA[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/intf/PWRITE" type="logic">
+         <obj_property name="ElementShortName">PWRITE</obj_property>
+         <obj_property name="ObjectShortName">PWRITE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/intf/PENABLE" type="logic">
+         <obj_property name="ElementShortName">PENABLE</obj_property>
+         <obj_property name="ObjectShortName">PENABLE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/intf/PSEL" type="logic">
+         <obj_property name="ElementShortName">PSEL</obj_property>
+         <obj_property name="ObjectShortName">PSEL</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/intf/PRDATA" type="array">
+         <obj_property name="ElementShortName">PRDATA[31:0]</obj_property>
+         <obj_property name="ObjectShortName">PRDATA[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/intf/PREADY" type="logic">
+         <obj_property name="ElementShortName">PREADY</obj_property>
+         <obj_property name="ObjectShortName">PREADY</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/intf/rx" type="logic">
+         <obj_property name="ElementShortName">rx</obj_property>
+         <obj_property name="ObjectShortName">rx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/intf/tx" type="logic">
+         <obj_property name="ElementShortName">tx</obj_property>
+         <obj_property name="ObjectShortName">tx</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/rd_en" type="logic">
-      <obj_property name="ElementShortName">rd_en</obj_property>
-      <obj_property name="ObjectShortName">rd_en</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/empty" type="logic">
-      <obj_property name="ElementShortName">empty</obj_property>
-      <obj_property name="ObjectShortName">empty</obj_property>
+   <wvobject fp_name="group37" type="group">
+      <obj_property name="label">rx</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/rst" type="logic">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/tick" type="logic">
+         <obj_property name="ElementShortName">tick</obj_property>
+         <obj_property name="ObjectShortName">tick</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/rx" type="logic">
+         <obj_property name="ElementShortName">rx</obj_property>
+         <obj_property name="ObjectShortName">rx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/rx_busy" type="logic">
+         <obj_property name="ElementShortName">rx_busy</obj_property>
+         <obj_property name="ObjectShortName">rx_busy</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/rx_done" type="logic">
+         <obj_property name="ElementShortName">rx_done</obj_property>
+         <obj_property name="ObjectShortName">rx_done</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/rx_data" type="array">
+         <obj_property name="ElementShortName">rx_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">rx_data[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/data" type="array">
+         <obj_property name="ElementShortName">data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/data_next" type="array">
+         <obj_property name="ElementShortName">data_next[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_next[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/tick_count" type="array">
+         <obj_property name="ElementShortName">tick_count[4:0]</obj_property>
+         <obj_property name="ObjectShortName">tick_count[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/tick_count_next" type="array">
+         <obj_property name="ElementShortName">tick_count_next[4:0]</obj_property>
+         <obj_property name="ObjectShortName">tick_count_next[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/state" type="array">
+         <obj_property name="ElementShortName">state[1:0]</obj_property>
+         <obj_property name="ObjectShortName">state[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/next" type="array">
+         <obj_property name="ElementShortName">next[1:0]</obj_property>
+         <obj_property name="ObjectShortName">next[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/r_rx_done_next" type="logic">
+         <obj_property name="ElementShortName">r_rx_done_next</obj_property>
+         <obj_property name="ObjectShortName">r_rx_done_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/r_rx_busy_next" type="logic">
+         <obj_property name="ElementShortName">r_rx_busy_next</obj_property>
+         <obj_property name="ObjectShortName">r_rx_busy_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/data_count" type="array">
+         <obj_property name="ElementShortName">data_count[3:0]</obj_property>
+         <obj_property name="ObjectShortName">data_count[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/data_count_next" type="array">
+         <obj_property name="ElementShortName">data_count_next[3:0]</obj_property>
+         <obj_property name="ObjectShortName">data_count_next[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/R_IDLE" type="array">
+         <obj_property name="ElementShortName">R_IDLE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">R_IDLE[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/START" type="array">
+         <obj_property name="ElementShortName">START[3:0]</obj_property>
+         <obj_property name="ObjectShortName">START[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/DATA_STATE" type="array">
+         <obj_property name="ElementShortName">DATA_STATE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA_STATE[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/U_Rx/STOP" type="array">
+         <obj_property name="ElementShortName">STOP[3:0]</obj_property>
+         <obj_property name="ObjectShortName">STOP[3:0]</obj_property>
+      </wvobject>
    </wvobject>
 </wave_config>
