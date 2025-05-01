@@ -67,7 +67,7 @@ module uart_rx (
     reg r_rx_done, r_rx_done_next;
     reg r_rx_busy, r_rx_busy_next;
     reg [3:0] data_count, data_count_next;
-    parameter R_IDLE = 4'h0, START = 4'h1, DATA_STATE = 4'h2, STOP = 4'h3;
+    localparam R_IDLE = 4'h0, START = 4'h1, DATA_STATE = 4'h2, STOP = 4'h3;
     assign rx_data = data;
     assign rx_done = r_rx_done;
     assign rx_busy = r_rx_busy;
@@ -162,7 +162,7 @@ module uart_tx (
     output tx_busy,
     output tx_done
 );
-    parameter R_IDLE = 4'h0, START = 4'h1, DATA_STATE = 4'h2, STOP = 4'h3;
+    localparam R_IDLE = 4'h0, START = 4'h1, DATA_STATE = 4'h2, STOP = 4'h3;
 
     reg [3:0] data_count, data_count_next;
     reg [3:0] state, next;
