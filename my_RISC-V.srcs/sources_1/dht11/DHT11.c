@@ -25,8 +25,9 @@ typedef struct{
 } GPFND_TypeDef;
 
 typedef struct{
-    __IO uint32_t RH_REG;
-    __IO uint32_t T_REG;
+    __IO uint32_t rh_int;
+    __IO uint32_t t_int;
+    __IO uint32_t finish_int;
 } DHT11_TypeDef;
 
 #define APB_BASEADDR    0x10000000
@@ -65,19 +66,20 @@ uint32_t dht11_read_T(DHT11_TypeDef *dht11);
 
 int main(void)
 {
-
+    uint32_t rh = 0;
+    uint32_t t  = 0;
+    uint32_t disp = 0;
     FND_init(GPFND, FND_ON);
 
     while (1)
     {
         
-        uint32_t rh = dht11_read_RH(DHT11) & 0xFF;
-        uint32_t t  = dht11_read_T (DHT11) & 0xFF;
-
-        uint32_t disp = rh * 100 + t;
+        rh = dht11_read_RH(DHT11) & 0xFF;
+        t  = dht11_read_T (DHT11) & 0xFF;
+        disp = rh * 100 + t;
 
         FND_writeData(GPFND, disp, 0xB);
-        delay(100);
+        // delay(100);
     }
     return 0;
 }
@@ -125,10 +127,10 @@ void FND_writeData(GPFND_TypeDef *fnd, uint32_t data, uint32_t dp)
 
 uint32_t dht11_read_RH(DHT11_TypeDef *dht11)
 {
-    return dht11->RH_REG;
+    return dht11->rh_int;
 };
 
 uint32_t dht11_read_T(DHT11_TypeDef *dht11)
 {
-    return dht11->T_REG;
+    return dht11->t_int;
 };

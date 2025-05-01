@@ -101,12 +101,7 @@ module MCU (
   );
 
   DHT11_Periph U_DHT11 (
-      .PCLK   (PCLK),
-      .PRESET (PRESET),
-      .PADDR  (PADDR[3:0]),
-      .PWDATA (PWDATA),
-      .PWRITE (PWRITE),
-      .PENABLE(PENABLE),
+      .*,
       .PSEL   (PSEL[6]),
       .PRDATA (PRDATA[6]),
       .PREADY (PREADY[6]),
