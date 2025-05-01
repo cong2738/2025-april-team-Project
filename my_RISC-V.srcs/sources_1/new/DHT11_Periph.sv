@@ -18,7 +18,6 @@ module DHT11_Periph (
 
   logic [7:0] rh_int, t_int;
   logic finish_int;
-  // logic [7:0] rh_reg, t_reg;
 
   APB_SlaveIntf_DHT11 U_APB_Intf (
       .PCLK      (PCLK),
@@ -75,6 +74,8 @@ module APB_SlaveIntf_DHT11 (
             //slv_reg1 <= 0;
             //slv_reg2 <= 0;
             // slv_reg3 <= 0;
+            // PREADY <= 1'b0;
+            // PRDATA <= 32'd0;
         end else begin
             if (PSEL && PENABLE) begin
                 PREADY <= 1'b1;

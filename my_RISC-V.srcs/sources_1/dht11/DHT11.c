@@ -74,12 +74,28 @@ int main(void)
     while (1)
     {
         
-        rh = dht11_read_RH(DHT11) & 0xFF;
-        t  = dht11_read_T (DHT11) & 0xFF;
-        disp = rh * 100 + t;
+        uint32_t rh = dht11_read_RH(DHT11) & 0xFF;
+        uint32_t t  = dht11_read_T (DHT11) & 0xFF;
+        // rh = dht11_read_RH(DHT11);
+        // t  = dht11_read_T (DHT11);
+        // disp = rh * 100 + t;
 
-        FND_writeData(GPFND, disp, 0xB);
-        // delay(100);
+        // 온습도 각각 test
+        // FND_writeData(GPFND, disp, 0xB);
+        // uint32_t t = dht11_read_T(DHT11) & 0xFF;
+        // FND_writeData(GPFND, t, 0xB);
+        // uint32_t rh = dht11_read_RH(DHT11) & 0xFF;
+        // FND_writeData(GPFND, rh, 0xB);
+        uint32_t bcd =
+            ((rh / 10) << 12) |
+            ((rh % 10) <<  8) |
+            ((t  / 10) <<  4) |
+            ((t  % 10) <<  0);
+
+        FND_writeData(GPFND, bcd, 0xB);
+
+
+        delay(100);
     }
     return 0;
 }
@@ -128,9 +144,9 @@ void FND_writeData(GPFND_TypeDef *fnd, uint32_t data, uint32_t dp)
 uint32_t dht11_read_RH(DHT11_TypeDef *dht11)
 {
     return dht11->rh_int;
-};
+}
 
 uint32_t dht11_read_T(DHT11_TypeDef *dht11)
 {
     return dht11->t_int;
-};
+}
