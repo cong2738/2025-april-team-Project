@@ -107,11 +107,15 @@ module APB_UARTIntf (
     logic rd_reg, rd_next;
     logic [31:0] slv_reg0, slv_next0;
     logic [31:0] slv_reg1, slv_next1;
+    logic [31:0] slv_reg2;
+    logic [31:0] slv_reg3;
 
     assign uart_write = wr_reg;
     assign uart_read  = rd_reg;
     assign TXD        = slv_reg0[7:0];
     assign slv_reg1   = RXD;
+    assign slv_reg2   = tx_full;
+    assign slv_reg3   = rx_empty;
 
     always_ff @(posedge PCLK, posedge PRESET) begin
         if (PRESET) begin
