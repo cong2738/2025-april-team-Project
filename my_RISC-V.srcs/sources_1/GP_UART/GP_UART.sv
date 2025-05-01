@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module GP_UART (  //GPIO
+module GP_UART #(parameter BAUD_RATE = 9600) (  //GPIO
     // global signal
     input  logic        PCLK,
     input  logic        PRESET,
@@ -45,7 +45,7 @@ module GP_UART (  //GPIO
         .RXD       (RXD)
     );
 
-    uart u_uart (
+    uart #(.BAUD_RATE(BAUD_RATE)) u_uart (
         .clk            (PCLK),
         .rst            (PRESET),
         .tx_start_triger(~tx_empty),
