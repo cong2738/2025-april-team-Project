@@ -91,10 +91,28 @@ module tb_GPUART ();
         reset = 1;
         initialize_intf();
         #10 reset = 0;
+        // receive test
         rx_Send("a");
         rx_Send("b");
         rx_Send("c");
         rx_Send("d");
+        $display("receive test done");
+
+        // transport test
+        gp_run(1,"e");
+        gp_run(1,"f");
+        gp_run(1,"g");
+        gp_run(1,"h");
+        $display("transport test done");
+
+        // get data test
+        gp_run(0,0);
+        gp_run(0,0);
+        gp_run(0,0);
+        gp_run(0,0);
+        gp_run(0,0);
+        $display("get_data test done");
+
         #10 $finish;
     end
 endmodule
