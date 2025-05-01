@@ -6,7 +6,9 @@ module MCU (
     inout  logic [7:0] GPIOC,
     inout  logic [3:0] GPIOD,
     output logic [3:0] fndCom,
-    output logic [7:0] fndFont
+    output logic [7:0] fndFont,
+    output logic       tx,
+    input  logic       rx
 );
     logic        PCLK;
     logic        PRESET;
@@ -99,10 +101,20 @@ module MCU (
 
     GP_FIFO u_GP_FIFO (
         .*,
-        .PSEL   (PSEL[6]),
-        .PRDATA (PRDATA[6]),
-        .PREADY (PREADY[6])
+        .PSEL  (PSEL[6]),
+        .PRDATA(PRDATA[6]),
+        .PREADY(PREADY[6])
     );
 
+    GP_UART #(
+        .BAUD_RATE(9600)
+    ) u_GP_UART (
+        .*,
+        .PSEL  (PSEL[7]),
+        .PRDATA(PRDATA[7]),
+        .PREADY(PREADY[7]),
+        .rx    (rx),
+        .tx    (tx)
+    );
 
 endmodule
