@@ -34,7 +34,7 @@ module uart #(
         .tick(tick),
         .rx(rx),
         .rx_data(rx_data),
-        .rx_busy(rx_done),
+        .rx_busy(rx_busy),
         .rx_done(rx_done)
     );
 
@@ -56,21 +56,19 @@ module uart_rx (
     input rst,
     input tick,
     input rx,
-    output rx_busy,
-    output rx_done,
+    output reg rx_busy,
+    output reg rx_done,
     output [7:0] rx_data
 );
 
     reg [7:0] data, data_next;
     reg [4:0] tick_count, tick_count_next;
     reg [1:0] state, next;
-    reg r_rx_done, r_rx_done_next;
-    reg r_rx_busy, r_rx_busy_next;
+    reg r_rx_done_next;
+    reg r_rx_busy_next;
     reg [3:0] data_count, data_count_next;
     localparam R_IDLE = 4'h0, START = 4'h1, DATA_STATE = 4'h2, STOP = 4'h3;
     assign rx_data = data;
-    assign rx_done = r_rx_done;
-    assign rx_busy = r_rx_busy;
     assign rx_data = data;
 
     always @(posedge clk, posedge rst) begin
@@ -79,15 +77,15 @@ module uart_rx (
             data       <= 0;
             data_count <= 0;
             tick_count <= 0;
-            r_rx_done  <= 0;
-            r_rx_busy  <= 0;
+            rx_done  <= 0;
+            rx_busy  <= 0;
         end else begin
             state <= next;
             data <= data_next;
             data_count <= data_count_next;
             tick_count <= tick_count_next;
-            r_rx_done <= r_rx_done_next;
-            r_rx_busy <= r_rx_busy_next;
+            rx_done <= r_rx_done_next;
+            rx_busy <= r_rx_busy_next;
         end
     end
 
@@ -97,7 +95,7 @@ module uart_rx (
         data_count_next = data_count;
         tick_count_next = tick_count;
         r_rx_done_next = 0;
-        r_rx_busy_next = r_rx_busy;
+        r_rx_busy_next = rx_busy;
         case (state)
             R_IDLE: begin
                 r_rx_busy_next = 0;
@@ -159,8 +157,8 @@ module uart_tx (
     input [7:0] i_data,
     input start_trigger,
     output o_tx,
-    output tx_busy,
-    output tx_done
+    output reg tx_busy,
+    output reg tx_done
 );
     localparam R_IDLE = 4'h0, START = 4'h1, DATA_STATE = 4'h2, STOP = 4'h3;
 
@@ -169,10 +167,8 @@ module uart_tx (
     reg [4:0] tick_count, tick_count_next;
     reg [7:0] temp_data_reg, temp_data_next;  // ts data buffer 25-03-21
     reg tx, tx_next;
-    reg r_tx_done, r_tx_done_next;
-    reg r_tx_busy, r_tx_busy_next;
-    assign tx_done = r_tx_done;
-    assign tx_busy = r_tx_busy;
+    reg r_tx_done_next;
+    reg r_tx_busy_next;
     assign o_tx = tx;
     always @(posedge clk, posedge rst) begin
         if (rst) begin
@@ -181,16 +177,16 @@ module uart_tx (
             data_count <= 0;
             temp_data_reg <= 0;
             tick_count <= 0;
-            r_tx_done <= 0;
-            r_tx_busy <= 0;
+            tx_done <= 0;
+            tx_busy <= 0;
         end else begin
             state <= next;
             tx <= tx_next;
             data_count <= data_count_next;
             tick_count <= tick_count_next;
             temp_data_reg <= temp_data_next;
-            r_tx_done <= r_tx_done_next;
-            r_tx_busy <= r_tx_busy_next;
+            tx_done <= r_tx_done_next;
+            tx_busy <= r_tx_busy_next;
         end
     end
 
@@ -201,7 +197,7 @@ module uart_tx (
         data_count_next = data_count;
         tick_count_next = tick_count;
         r_tx_done_next = 0;
-        r_tx_busy_next = r_tx_busy;
+        r_tx_busy_next = tx_busy;
         case (state)
             R_IDLE: begin
                 tx_next = 1'b1;
