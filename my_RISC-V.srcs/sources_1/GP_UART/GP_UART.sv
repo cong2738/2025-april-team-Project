@@ -25,30 +25,12 @@ module GP_UART #(parameter BAUD_RATE = 9600) (  //GPIO
     logic [7:0] rx_data;
     logic [7:0] tx_data;
 
-    APB_UARTIntf u_APB_UARTIntf (
-        .PCLK      (PCLK),
-        .PRESET    (PRESET),
-        .PADDR     (PADDR),
-        .PWDATA    (PWDATA),
-        .PWRITE    (PWRITE),
-        .PENABLE   (PENABLE),
-        .PSEL      (PSEL),
-        .PRDATA    (PRDATA),
-        .PREADY    (PREADY),
-        .tx_full   (tx_full),
-        .tx_empty  (tx_empty),
-        .rx_full   (rx_full),
-        .rx_empty  (rx_empty),
-        .uart_write(uart_write),
-        .uart_read (uart_read),
-        .TXD       (TXD),
-        .RXD       (RXD)
-    );
+    APB_UARTIntf u_APB_UARTIntf(.*);
 
     uart #(.BAUD_RATE(BAUD_RATE)) u_uart (
         .clk            (PCLK),
         .rst            (PRESET),
-        .tx_start_triger(~tx_empty),
+        .tx_start_triger(~tx_empty & ~tx_busy),
         .tx_data        (tx_data),
         .rx             (rx),
         .tx             (tx),
@@ -59,7 +41,10 @@ module GP_UART #(parameter BAUD_RATE = 9600) (  //GPIO
         .rx_busy        (rx_busy)
     );
 
-    fifo u_outputBuffer (
+    fifo #(
+        .FIFO_UNIT(8),
+        .FIFO_CAP(2**2)
+    ) u_outputBuffer (
         .clk  (PCLK),
         .reset(PRESET),
         .wr_en(uart_write),
@@ -69,7 +54,10 @@ module GP_UART #(parameter BAUD_RATE = 9600) (  //GPIO
         .full (tx_full),
         .empty(tx_empty)
     );
-    fifo u_inputBuffer (
+    fifo #(
+        .FIFO_UNIT(8),
+        .FIFO_CAP(2**2)
+    ) u_inputBuffer (
         .clk  (PCLK),
         .reset(PRESET),
         .wr_en(rx_done),
@@ -95,8 +83,12 @@ module APB_UARTIntf (
     output logic [31:0] PRDATA,
     output logic        PREADY,
     // internal signals
+    input  logic        tx_busy,
+    input  logic        tx_done,
     input  logic        tx_full,
     input  logic        tx_empty,
+    input  logic        rx_busy,
+    input  logic        rx_done,
     input  logic        rx_full,
     input  logic        rx_empty,
     output logic        uart_write,
@@ -106,7 +98,6 @@ module APB_UARTIntf (
 );
     typedef enum logic [1:0] {
         STOP,
-        ACCESS,
         READ,
         SEND
     } fifoIntf_state_e;
@@ -147,10 +138,10 @@ module APB_UARTIntf (
                 wr_next = 0;
                 rd_next = 0;
                 if (PSEL && PENABLE) begin
-                    next = ACCESS;
+                    next = READ;
                 end
             end
-            ACCESS: begin
+            READ: begin
                 if (PWRITE) begin
                     rd_next = 0;
                     case (PADDR[3:2])
@@ -171,10 +162,10 @@ module APB_UARTIntf (
                         end
                     endcase
                 end
+                PREADY = 1;
                 next = SEND;
             end
             SEND: begin
-                PREADY = 1;
                 wr_next = 0;
                 rd_next = 0;
                 next = STOP;
