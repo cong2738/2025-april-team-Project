@@ -14,12 +14,13 @@ module GP_UART #(parameter BAUD_RATE = 9600) (  //GPIO
     output logic        PREADY,
     // inout signals
     input  logic        rx,
-    output logic        tx
+    output logic        tx,
+    output logic tx_full, tx_empty,
+    output logic rx_full, rx_empty
 );
     logic [7:0] TXD;
     logic [7:0] RXD;
-    logic tx_full, tx_empty;
-    logic rx_full, rx_empty;
+    
     logic uart_write;
     logic uart_read;
     logic [7:0] rx_data;

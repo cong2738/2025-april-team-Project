@@ -8,7 +8,9 @@ module MCU (
     output logic [3:0] fndCom,
     output logic [7:0] fndFont,
     output logic       tx,
-    input  logic       rx
+    input  logic       rx,
+    output logic tx_full, tx_empty,
+    output logic rx_full, rx_empty
 );
     logic        PCLK;
     logic        PRESET;
@@ -114,7 +116,12 @@ module MCU (
         .PRDATA(PRDATA[7]),
         .PREADY(PREADY[7]),
         .rx    (rx),
-        .tx    (tx)
+        .tx    (tx),
+        .tx_full    (tx_full),
+        .tx_empty    (tx_empty),
+        .rx_full    (rx_full),
+        .rx_empty    (rx_empty)
+
     );
 
 endmodule

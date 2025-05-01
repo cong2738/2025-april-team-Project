@@ -14,17 +14,13 @@ module fnd_Periph (
     output logic        PREADY,
     // export signals
     output logic [ 3:0] fndCom,
-    output logic [ 7:0] fndFont,
-    output logic [ 3:0] sim_dp,   // 시뮬레이션을 위한 출력포트
-    output logic [13:0] sim_bcd   // 시뮬레이션을 위한 출력포트
+    output logic [ 7:0] fndFont
 );
     logic        FCR;
     logic [13:0] FDR;
     logic [ 3:0] DP;  //FPR
     APB_SlaveIntf_fnd U_APB_Intf_GPIO (.*);
     GPfnd U_GPIO_IP (.*);
-    assign sim_dp  = DP;  // 시뮬레이션을 위한 assign
-    assign sim_bcd = FDR;  // 시뮬레이션을 위한 assign
 endmodule
 
 module APB_SlaveIntf_fnd (
