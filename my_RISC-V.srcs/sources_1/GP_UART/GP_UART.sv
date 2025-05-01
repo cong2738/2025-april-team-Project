@@ -25,30 +25,30 @@ module GP_UART (  //GPIO
     logic [7:0] rx_data;
     logic [7:0] tx_data;
 
-    APB_UARTIntf u_APB_UARTIntf(
-        .PCLK       (PCLK       ),
-        .PRESET     (PRESET     ),
-        .PADDR      (PADDR      ),
-        .PWDATA     (PWDATA     ),
-        .PWRITE     (PWRITE     ),
-        .PENABLE    (PENABLE    ),
-        .PSEL       (PSEL       ),
-        .PRDATA     (PRDATA     ),
-        .PREADY     (PREADY     ),
-        .tx_full    (tx_full    ),
-        .tx_empty   (tx_empty   ),
-        .rx_full    (rx_full    ),
-        .rx_empty   (rx_empty   ),
-        .uart_write (uart_write ),
-        .uart_read  (uart_read  ),
-        .TXD        (TXD        ),
-        .RXD        (RXD        )
+    APB_UARTIntf u_APB_UARTIntf (
+        .PCLK      (PCLK),
+        .PRESET    (PRESET),
+        .PADDR     (PADDR),
+        .PWDATA    (PWDATA),
+        .PWRITE    (PWRITE),
+        .PENABLE   (PENABLE),
+        .PSEL      (PSEL),
+        .PRDATA    (PRDATA),
+        .PREADY    (PREADY),
+        .tx_full   (tx_full),
+        .tx_empty  (tx_empty),
+        .rx_full   (rx_full),
+        .rx_empty  (rx_empty),
+        .uart_write(uart_write),
+        .uart_read (uart_read),
+        .TXD       (TXD),
+        .RXD       (RXD)
     );
-    
+
     uart u_uart (
         .clk            (PCLK),
         .rst            (PRESET),
-        .tx_start_triger(tx_en),
+        .tx_start_triger(~tx_empty),
         .tx_data        (tx_data),
         .rx             (rx),
         .tx             (tx),
