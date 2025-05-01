@@ -44,14 +44,14 @@ typedef struct{
 #define GPIOC_BASEADDR  (APB_BASEADDR + 0x3000)
 #define GPIOD_BASEADDR  (APB_BASEADDR + 0x4000)
 #define GPFND_BASEADDR  (APB_BASEADDR + 0x5000)
-#define GPUART_BASEADDR  (APB_BASEADDR + 0x6000)
+#define GPUART_BASEADDR (APB_BASEADDR + 0x6000)
 
 #define GPOA            ((GPO_TypeDef *) GPOA_BASEADDR)
 #define GPIB            ((GPI_TypeDef *) GPIB_BASEADDR)
 #define GPIOC           ((GPIO_TypeDef *) GPIOC_BASEADDR)
 #define GPIOD           ((GPIO_TypeDef *) GPIOD_BASEADDR)
 #define GPFND           ((GPFND_TypeDef *) GPFND_BASEADDR)
-#define GPUART           ((GPUART_TypeDef *) GPUART_BASEADDR)
+#define GPUART          ((GPUART_TypeDef *) GPUART_BASEADDR)
 
 void delay(int n);
 
