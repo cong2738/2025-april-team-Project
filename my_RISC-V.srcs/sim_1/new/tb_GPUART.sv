@@ -82,7 +82,7 @@ module tb_GPUART ();
             @(posedge uart_baudrate);
         end
         intf.rx = 1;
-        @(posedge rx_done);
+        @(negedge rx_done);
     endtask  //
 
     always #5 clk = ~clk;
@@ -92,6 +92,9 @@ module tb_GPUART ();
         initialize_intf();
         #10 reset = 0;
         rx_Send("a");
+        rx_Send("b");
+        rx_Send("c");
+        rx_Send("d");
         #10 $finish;
     end
 endmodule
