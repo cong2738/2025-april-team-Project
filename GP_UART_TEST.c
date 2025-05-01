@@ -74,8 +74,8 @@ int main(void)
     uint32_t readData = 0;
     while (1)
     {
-        if(!UART_isEMPTY(GPUART)) readData = UART_read(GPUART);
-        if(!UART_isFUll(GPUART)) if(readData) UART_trans(GPUART, readData);
+        if(UART_isEMPTY(GPUART)==0) readData = UART_read(GPUART);
+        if(UART_isFUll(GPUART)==0) if(readData) UART_trans(GPUART, readData);
     }
     
     return 0;
