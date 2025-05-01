@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="64075145fs"></ZoomEndTime>
-      <Cursor1Time time="0fs"></Cursor1Time>
+      <ZoomEndTime time="138946001fs"></ZoomEndTime>
+      <Cursor1Time time="77125000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="165"></NameColumnWidth>
       <ValueColumnWidth column_width="75"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="8" />
+   <WVObjectSize size="10" />
    <wvobject fp_name="/tb_GPUART/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -27,6 +27,10 @@
    <wvobject fp_name="/tb_GPUART/reset" type="logic">
       <obj_property name="ElementShortName">reset</obj_property>
       <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/state" type="array">
+      <obj_property name="ElementShortName">state[1:0]</obj_property>
+      <obj_property name="ObjectShortName">state[1:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_GPUART/uart_baudrate" type="logic">
       <obj_property name="ElementShortName">uart_baudrate</obj_property>
@@ -60,6 +64,7 @@
       <wvobject fp_name="/tb_GPUART/intf/PWDATA" type="array">
          <obj_property name="ElementShortName">PWDATA[31:0]</obj_property>
          <obj_property name="ObjectShortName">PWDATA[31:0]</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_GPUART/intf/PWRITE" type="logic">
          <obj_property name="ElementShortName">PWRITE</obj_property>
@@ -76,6 +81,7 @@
       <wvobject fp_name="/tb_GPUART/intf/PRDATA" type="array">
          <obj_property name="ElementShortName">PRDATA[31:0]</obj_property>
          <obj_property name="ObjectShortName">PRDATA[31:0]</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_GPUART/intf/PREADY" type="logic">
          <obj_property name="ElementShortName">PREADY</obj_property>
@@ -130,6 +136,7 @@
       <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/rx_data" type="array">
          <obj_property name="ElementShortName">rx_data[7:0]</obj_property>
          <obj_property name="ObjectShortName">rx_data[7:0]</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_GPUART/u_GP_UART/u_uart/rx_busy" type="logic">
          <obj_property name="ElementShortName">rx_busy</obj_property>
@@ -194,177 +201,70 @@
       </wvobject>
       <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem" type="array">
          <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="ElementShortName">mem[0:15][7:0]</obj_property>
-         <obj_property name="ObjectShortName">mem[0:15][7:0]</obj_property>
+         <obj_property name="ElementShortName">mem[0:3][7:0]</obj_property>
+         <obj_property name="ObjectShortName">mem[0:3][7:0]</obj_property>
          <obj_property name="label">inputbuffer</obj_property>
          <obj_property name="Radix">ASCIIRADIX</obj_property>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[0]" type="array">
-            <obj_property name="ElementShortName">[0][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[0][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[1]" type="array">
-            <obj_property name="ElementShortName">[1][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[1][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[2]" type="array">
-            <obj_property name="ElementShortName">[2][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[2][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[3]" type="array">
-            <obj_property name="ElementShortName">[3][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[3][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[4]" type="array">
-            <obj_property name="ElementShortName">[4][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[4][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[5]" type="array">
-            <obj_property name="ElementShortName">[5][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[5][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[6]" type="array">
-            <obj_property name="ElementShortName">[6][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[6][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[7]" type="array">
-            <obj_property name="ElementShortName">[7][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[7][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[8]" type="array">
-            <obj_property name="ElementShortName">[8][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[8][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[9]" type="array">
-            <obj_property name="ElementShortName">[9][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[9][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[10]" type="array">
-            <obj_property name="ElementShortName">[10][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[10][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[11]" type="array">
-            <obj_property name="ElementShortName">[11][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[11][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[12]" type="array">
-            <obj_property name="ElementShortName">[12][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[12][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[13]" type="array">
-            <obj_property name="ElementShortName">[13][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[13][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[14]" type="array">
-            <obj_property name="ElementShortName">[14][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[14][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/u_fifo_ram/mem[15]" type="array">
-            <obj_property name="ElementShortName">[15][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[15][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group163" type="group">
+      <obj_property name="label">outputBuff</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/reset" type="logic">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/wr_en" type="logic">
+         <obj_property name="ElementShortName">wr_en</obj_property>
+         <obj_property name="ObjectShortName">wr_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/rd_en" type="logic">
+         <obj_property name="ElementShortName">rd_en</obj_property>
+         <obj_property name="ObjectShortName">rd_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/wData" type="array">
+         <obj_property name="ElementShortName">wData[7:0]</obj_property>
+         <obj_property name="ObjectShortName">wData[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/rData" type="array">
+         <obj_property name="ElementShortName">rData[7:0]</obj_property>
+         <obj_property name="ObjectShortName">rData[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/full" type="logic">
+         <obj_property name="ElementShortName">full</obj_property>
+         <obj_property name="ObjectShortName">full</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/empty" type="logic">
+         <obj_property name="ElementShortName">empty</obj_property>
+         <obj_property name="ObjectShortName">empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/wr_ptr" type="array">
+         <obj_property name="ElementShortName">wr_ptr[1:0]</obj_property>
+         <obj_property name="ObjectShortName">wr_ptr[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/rd_ptr" type="array">
+         <obj_property name="ElementShortName">rd_ptr[1:0]</obj_property>
+         <obj_property name="ObjectShortName">rd_ptr[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/FIFO_UNIT" type="array">
+         <obj_property name="ElementShortName">FIFO_UNIT[31:0]</obj_property>
+         <obj_property name="ObjectShortName">FIFO_UNIT[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/FIFO_CAP" type="array">
+         <obj_property name="ElementShortName">FIFO_CAP[31:0]</obj_property>
+         <obj_property name="ObjectShortName">FIFO_CAP[31:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem" type="array">
          <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="ElementShortName">mem[0:15][7:0]</obj_property>
-         <obj_property name="ObjectShortName">mem[0:15][7:0]</obj_property>
+         <obj_property name="ElementShortName">mem[0:3][7:0]</obj_property>
+         <obj_property name="ObjectShortName">mem[0:3][7:0]</obj_property>
          <obj_property name="label">outputbuffer</obj_property>
          <obj_property name="Radix">ASCIIRADIX</obj_property>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[0]" type="array">
-            <obj_property name="ElementShortName">[0][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[0][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[1]" type="array">
-            <obj_property name="ElementShortName">[1][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[1][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[2]" type="array">
-            <obj_property name="ElementShortName">[2][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[2][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[3]" type="array">
-            <obj_property name="ElementShortName">[3][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[3][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[4]" type="array">
-            <obj_property name="ElementShortName">[4][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[4][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[5]" type="array">
-            <obj_property name="ElementShortName">[5][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[5][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[6]" type="array">
-            <obj_property name="ElementShortName">[6][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[6][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[7]" type="array">
-            <obj_property name="ElementShortName">[7][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[7][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[8]" type="array">
-            <obj_property name="ElementShortName">[8][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[8][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[9]" type="array">
-            <obj_property name="ElementShortName">[9][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[9][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[10]" type="array">
-            <obj_property name="ElementShortName">[10][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[10][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[11]" type="array">
-            <obj_property name="ElementShortName">[11][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[11][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[12]" type="array">
-            <obj_property name="ElementShortName">[12][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[12][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[13]" type="array">
-            <obj_property name="ElementShortName">[13][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[13][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[14]" type="array">
-            <obj_property name="ElementShortName">[14][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[14][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/u_fifo_ram/mem[15]" type="array">
-            <obj_property name="ElementShortName">[15][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[15][7:0]</obj_property>
-            <obj_property name="Radix">ASCIIRADIX</obj_property>
-         </wvobject>
       </wvobject>
    </wvobject>
 </wave_config>

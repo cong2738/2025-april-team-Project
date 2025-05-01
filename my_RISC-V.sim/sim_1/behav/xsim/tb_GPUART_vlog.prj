@@ -23,6 +23,7 @@ verilog xil_defaultlib  --include "../../../../my_RISC-V.srcs/sources_1" \
 
 sv xil_defaultlib  --include "../../../../my_RISC-V.srcs/sources_1" \
 "../../../../my_RISC-V.srcs/sources_1/fifo.sv" \
+"../../../../my_RISC-V.srcs/sources_1/GP_FIFO.sv" \
 "../../../../my_RISC-V.srcs/sim_1/new/tb_fndController_APB_Periph.sv" \
 "../../../../my_RISC-V.srcs/sim_1/new/tb_fifo.sv" \
 "../../../../my_RISC-V.srcs/sim_1/new/tb_fifo_sv.sv" \
