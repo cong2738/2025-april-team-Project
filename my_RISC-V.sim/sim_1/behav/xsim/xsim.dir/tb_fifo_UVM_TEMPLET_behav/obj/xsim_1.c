@@ -124,7 +124,7 @@ void sensitize(char *dp)
 
 void simulate(char *dp)
 {
-iki_register_root_pointers(3, 10040, -7,0,7832, 11,0,0,13864, -7,0) ; 
+iki_register_root_pointers(3, 13864, -7,0,7832, 11,0,0,10040, -7,0) ; 
 		iki_schedule_processes_at_time_zero(dp, "xsim.dir/tb_fifo_UVM_TEMPLET_behav/xsim.reloc");
 	// Initialize Verilog nets in mixed simulation, for the cases when the value at time 0 should be propagated from the mixed language Vhdl net
 	iki_execute_processes();
@@ -134,10 +134,10 @@ iki_register_root_pointers(3, 10040, -7,0,7832, 11,0,0,13864, -7,0) ;
 
 }
 #include "iki_bridge.h"
-void subprog_m_bda38592_23b8a6aa_4() ;
-void subprog_m_bda38592_23b8a6aa_3() ;
-void subprog_m_bda38592_23b8a6aa_2() ;
-static char* ng00[] = {(void *)subprog_m_bda38592_23b8a6aa_4, (void *)subprog_m_bda38592_23b8a6aa_3, (void *)subprog_m_bda38592_23b8a6aa_2};
+void subprog_m_bda38592_f8a83c0_4() ;
+void subprog_m_bda38592_f8a83c0_3() ;
+void subprog_m_bda38592_f8a83c0_2() ;
+static char* ng00[] = {(void *)subprog_m_bda38592_f8a83c0_4, (void *)subprog_m_bda38592_f8a83c0_3, (void *)subprog_m_bda38592_f8a83c0_2};
 void relocate(char *);
 
 void sensitize(char *);
