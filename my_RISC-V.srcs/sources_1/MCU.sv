@@ -3,14 +3,14 @@
 module MCU (
     input  logic       clk,
     input  logic       reset,
-    inout  logic [7:0] GPIOC,
-    inout  logic [3:0] GPIOD,
     output logic [3:0] fndCom,
     output logic [7:0] fndFont,
     output logic       tx,
     input  logic       rx,
-    output logic tx_full, tx_empty,
-    output logic rx_full, rx_empty
+    output logic       tx_full,
+    tx_empty,
+    output logic       rx_full,
+    rx_empty
 );
     logic        PCLK;
     logic        PRESET;
@@ -60,68 +60,36 @@ module MCU (
         .PREADY(PREADY[0])
     );
 
-    GPIO_Periph U_GPOA (
-        .*,
-        .PSEL(PSEL[1]),
-        .PRDATA(PRDATA[1]),
-        .PREADY(PREADY[1]),
-        .inoutPort(GPIOA)
-    );
-
-    GPIO_Periph U_GPIB (
-        .*,
-        .PSEL(PSEL[2]),
-        .PRDATA(PRDATA[2]),
-        .PREADY(PREADY[2]),
-        .inoutPort(GPIOB)
-    );
-
-    GPIO_Periph U_GPIOC (
-        .*,
-        .PSEL(PSEL[3]),
-        .PRDATA(PRDATA[3]),
-        .PREADY(PREADY[3]),
-        .inoutPort(GPIOC)
-    );
-
-    GPIO_Periph U_GPIOD (
-        .*,
-        .PSEL(PSEL[4]),
-        .PRDATA(PRDATA[4]),
-        .PREADY(PREADY[4]),
-        .inoutPort(GPIOD)
-    );
-
     fnd_Periph u_fnd_pp (
         .*,
-        .PSEL   (PSEL[5]),
-        .PRDATA (PRDATA[5]),
-        .PREADY (PREADY[5]),
+        .PSEL   (PSEL[1]),
+        .PRDATA (PRDATA[1]),
+        .PREADY (PREADY[1]),
         .fndFont(fndFont),
         .fndCom (fndCom)
-    );
-
-    GP_FIFO u_GP_FIFO (
-        .*,
-        .PSEL  (PSEL[6]),
-        .PRDATA(PRDATA[6]),
-        .PREADY(PREADY[6])
     );
 
     GP_UART #(
         .BAUD_RATE(9600)
     ) u_GP_UART (
         .*,
-        .PSEL  (PSEL[7]),
-        .PRDATA(PRDATA[7]),
-        .PREADY(PREADY[7]),
-        .rx    (rx),
-        .tx    (tx),
-        .tx_full    (tx_full),
-        .tx_empty    (tx_empty),
-        .rx_full    (rx_full),
-        .rx_empty    (rx_empty)
+        .PSEL    (PSEL[2]),
+        .PRDATA  (PRDATA[2]),
+        .PREADY  (PREADY[2]),
+        .rx      (rx),
+        .tx      (tx),
+        .tx_full (tx_full),
+        .tx_empty(tx_empty),
+        .rx_full (rx_full),
+        .rx_empty(rx_empty)
 
+    );
+
+    GP_HCSR04 u_GP_HCSR04 (
+        .PSEL     (PSEL[3]),
+        .PRDATA   (PRDATA[3]),
+        .PREADY   (PREADY[3]),
+        .echo_data(echo_data)
     );
 
 endmodule
