@@ -70,11 +70,15 @@ uint32_t HCSR04_READ(HCSR04_TypeDef* hc_sr04);
 
 int main(void)
 {
-    uint32_t readData ='x';
+    FND_init(GPFND, 1);
+    uint32_t readData = 0;
     while (1)
-    {
+    {  
         readData = UART_read(GPUART);
         UART_trans(GPUART, readData);
+        if(readData != 0)
+            FND_writeData(GPFND, readData,0xf);
+        delay(1000);
     }
     
     return 0;
