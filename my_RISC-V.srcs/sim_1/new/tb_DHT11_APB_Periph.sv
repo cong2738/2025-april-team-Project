@@ -49,11 +49,7 @@ class generator;
   mailbox #(transaction) Gen2Drv_mbox;
   event gen_next_event;
 
-  function new(
-    virtual APB_Slave_Interface vif,
-    mailbox #(transaction) mb,
-    event                 ev
-  );
+  function new(virtual APB_Slave_Interface vif, mailbox#(transaction) mb, event ev);
     this.vif            = vif;
     this.Gen2Drv_mbox   = mb;
     this.gen_next_event = ev;
@@ -65,36 +61,38 @@ class generator;
 
       // START
       tr = new();
-      tr.PADDR   = 4'h0;    
-      tr.PWDATA  = 32'h1;   
+      tr.PADDR   = 4'h0;
+      tr.PWDATA  = 32'h1;
       tr.PWRITE  = 1'b1;
       tr.PSEL    = 1'b1;
       tr.PENABLE = 1'b0;
       Gen2Drv_mbox.put(tr);
       @(gen_next_event);
 
+      @(posedge vif.sim_finish);
+
 
       // RH 읽기
       tr = new();
-      tr.PADDR   = 4'h0;   
+      tr.PADDR   = 4'h0;
       tr.PWRITE  = 1'b0;
       tr.PSEL    = 1'b1;
       tr.PENABLE = 1'b0;
       Gen2Drv_mbox.put(tr);
       @(gen_next_event);
 
-      // T 읽기 트랜잭션
+      // T 읽기
       tr = new();
-      tr.PADDR   = 4'h4;    
+      tr.PADDR   = 4'h4;
       tr.PWRITE  = 1'b0;
       tr.PSEL    = 1'b1;
       tr.PENABLE = 1'b0;
       Gen2Drv_mbox.put(tr);
       @(gen_next_event);
 
-      // Finish 읽기 트랜잭션
+      // Finish 읽기
       tr = new();
-      tr.PADDR   = 4'h8;   
+      tr.PADDR   = 4'h8;
       tr.PWRITE  = 1'b0;
       tr.PSEL    = 1'b1;
       tr.PENABLE = 1'b0;
@@ -117,18 +115,18 @@ class driver;
   task run();
     forever begin
       Gen2Drv_mbox.get(tr);
-      
+
       @(posedge vif.PCLK);
       vif.PADDR   <= tr.PADDR;
-      vif.PWDATA  <= tr.PWDATA; 
+      vif.PWDATA  <= tr.PWDATA;
       vif.PWRITE  <= tr.PWRITE;
       vif.PSEL    <= tr.PSEL;
       vif.PENABLE <= 1'b0;
-     
+
       @(posedge vif.PCLK);
       vif.PENABLE <= 1'b1;
       wait (vif.PREADY == 1'b1);
-      
+
       @(posedge vif.PCLK);
       vif.PSEL    <= 1'b0;
       vif.PENABLE <= 1'b0;
@@ -168,7 +166,7 @@ class scoreboard;
   event gen_next_event;
   // reference model
   logic [31:0] refReg[0:2];  // [0]=RH, [1]=T, [2]=finish
-  
+
   int total_cnt;
   int read_cnt;
   int rh_pass_cnt;
@@ -177,7 +175,7 @@ class scoreboard;
   int t_fail_cnt;
   int finish_pass_cnt;
   int finish_fail_cnt;
-  
+
   function new(mailbox#(transaction) mb, event ev);
     this.Mon2SCB_mbox   = mb;
     this.gen_next_event = ev;
@@ -191,8 +189,8 @@ class scoreboard;
     finish_fail_cnt     = 0;
     for (int i = 0; i < 3; i++) refReg[i] = 0;
   endfunction
-  
-   task run();
+
+  task run();
     forever begin
       Mon2SCB_mbox.get(tr);
       // 쓰기 스킵킵
@@ -209,17 +207,17 @@ class scoreboard;
         4'h0: begin  // RH 읽기
           refReg[0] = tr.sim_rh;
           if (tr.PRDATA[7:0] === tr.sim_rh) rh_pass_cnt++;
-          else                                rh_fail_cnt++;
+          else rh_fail_cnt++;
         end
         4'h4: begin  // T  읽기
           refReg[1] = tr.sim_t;
-          if (tr.PRDATA[7:0] === tr.sim_t)  t_pass_cnt++;
-          else                                t_fail_cnt++;
+          if (tr.PRDATA[7:0] === tr.sim_t) t_pass_cnt++;
+          else t_fail_cnt++;
         end
         4'h8: begin  // Finish 읽기
           refReg[2] = tr.sim_finish;
-          if (tr.PRDATA[0]   === tr.sim_finish) finish_pass_cnt++;
-          else                                    finish_fail_cnt++;
+          if (tr.PRDATA[0] === tr.sim_finish) finish_pass_cnt++;
+          else finish_fail_cnt++;
         end
       endcase
 
@@ -299,7 +297,8 @@ module tb_DHT11_APB_Periph;
 
   // DHT11 START 펄스 감지 -> 응답 -> 40비트 전송
   initial begin
-    sensor_drive = 0;
+    sensor_drive   = 0;
+    vif.sim_finish = 0;  // 추가가
     forever begin
       // DUT가 스타트 펄스(약 18ms LOW) 시작
       wait (vif.DATA_IO === 1'b0);
@@ -314,10 +313,17 @@ module tb_DHT11_APB_Periph;
       #80_000;
 
       // 40비트 전송
-      RH_var = $urandom_range(20, 90);
-      T_var = $urandom_range(15, 35);
-      chk_var = (RH_var + T_var) & 8'hFF;
-      bits_var = {RH_var, 8'h00, T_var, 8'h00, chk_var};
+      RH_var         = $urandom_range(20, 90);
+      T_var          = $urandom_range(15, 35);
+      chk_var        = (RH_var + T_var) & 8'hFF;
+      bits_var       = {RH_var, 8'h00, T_var, 8'h00, chk_var};
+
+      // sim_ 신호
+      vif.sim_rh     = RH_var;
+      vif.sim_t      = T_var;
+      vif.sim_finish = 0;
+
+
       for (i = 39; i >= 0; i = i - 1) begin
         // 50us LOW
         sensor_drive = 1;
@@ -328,7 +334,12 @@ module tb_DHT11_APB_Periph;
         else #26_000;
       end
 
-      sensor_drive = 0;
+      // 전송 끝
+      sensor_drive   = 0;
+      vif.sim_finish = 1;
+      #10;
+      vif.sim_finish = 0;
+
       #100_000;
     end
   end

@@ -114,12 +114,13 @@ IKI_DLLESPEC extern void vlog_transfunc_eventcallback(char*, char*, unsigned, un
 IKI_DLLESPEC extern void transaction_0(char*, char*, unsigned, unsigned, unsigned);
 IKI_DLLESPEC extern void transaction_78(char*, char*, unsigned, unsigned, unsigned);
 IKI_DLLESPEC extern void transaction_86(char*, char*, unsigned, unsigned, unsigned);
-funcp funcTab[60] = {(funcp)execute_49, (funcp)execute_50, (funcp)execute_51, (funcp)execute_52, (funcp)execute_58, (funcp)execute_87, (funcp)execute_88, (funcp)execute_89, (funcp)execute_90, (funcp)execute_91, (funcp)execute_92, (funcp)execute_93, (funcp)vlog_simple_process_execute_0_fast_for_reg, (funcp)execute_99, (funcp)execute_100, (funcp)execute_101, (funcp)execute_102, (funcp)execute_103, (funcp)execute_81, (funcp)execute_82, (funcp)execute_83, (funcp)execute_84, (funcp)execute_85, (funcp)execute_86, (funcp)execute_36, (funcp)execute_61, (funcp)execute_62, (funcp)execute_63, (funcp)execute_64, (funcp)execute_65, (funcp)execute_80, (funcp)execute_39, (funcp)execute_66, (funcp)execute_67, (funcp)execute_68, (funcp)execute_69, (funcp)execute_70, (funcp)execute_41, (funcp)execute_42, (funcp)vlog_simple_process_execute_0_fast_no_reg_no_agg, (funcp)execute_72, (funcp)vlog_simple_process_execute_1_fast_no_reg_no_agg, (funcp)execute_44, (funcp)execute_45, (funcp)execute_47, (funcp)execute_48, (funcp)execute_54, (funcp)execute_55, (funcp)execute_56, (funcp)execute_57, (funcp)execute_104, (funcp)execute_105, (funcp)execute_106, (funcp)execute_107, (funcp)execute_108, (funcp)execute_109, (funcp)vlog_transfunc_eventcallback, (funcp)transaction_0, (funcp)transaction_78, (funcp)transaction_86};
-const int NumRelocateId= 60;
+IKI_DLLESPEC extern void transaction_90(char*, char*, unsigned, unsigned, unsigned);
+funcp funcTab[61] = {(funcp)execute_49, (funcp)execute_50, (funcp)execute_51, (funcp)execute_52, (funcp)execute_58, (funcp)execute_87, (funcp)execute_88, (funcp)execute_89, (funcp)execute_90, (funcp)execute_91, (funcp)execute_92, (funcp)execute_93, (funcp)vlog_simple_process_execute_0_fast_for_reg, (funcp)execute_99, (funcp)execute_100, (funcp)execute_101, (funcp)execute_102, (funcp)execute_103, (funcp)execute_81, (funcp)execute_82, (funcp)execute_83, (funcp)execute_84, (funcp)execute_85, (funcp)execute_86, (funcp)execute_36, (funcp)execute_61, (funcp)execute_62, (funcp)execute_63, (funcp)execute_64, (funcp)execute_65, (funcp)execute_80, (funcp)execute_39, (funcp)execute_66, (funcp)execute_67, (funcp)execute_68, (funcp)execute_69, (funcp)execute_70, (funcp)execute_41, (funcp)execute_42, (funcp)vlog_simple_process_execute_0_fast_no_reg_no_agg, (funcp)execute_72, (funcp)vlog_simple_process_execute_1_fast_no_reg_no_agg, (funcp)execute_44, (funcp)execute_45, (funcp)execute_47, (funcp)execute_48, (funcp)execute_54, (funcp)execute_55, (funcp)execute_56, (funcp)execute_57, (funcp)execute_104, (funcp)execute_105, (funcp)execute_106, (funcp)execute_107, (funcp)execute_108, (funcp)execute_109, (funcp)vlog_transfunc_eventcallback, (funcp)transaction_0, (funcp)transaction_78, (funcp)transaction_86, (funcp)transaction_90};
+const int NumRelocateId= 61;
 
 void relocate(char *dp)
 {
-	iki_relocate(dp, "xsim.dir/tb_DHT11_APB_Periph_behav/xsim.reloc",  (void **)funcTab, 60);
+	iki_relocate(dp, "xsim.dir/tb_DHT11_APB_Periph_behav/xsim.reloc",  (void **)funcTab, 61);
 
 	/*Populate the transaction function pointer field in the whole net structure */
 }
@@ -141,12 +142,12 @@ iki_register_root_pointers(1, 10896, 11,0,0) ;
 
 }
 #include "iki_bridge.h"
-void subprog_m_8055789c_7bd74cdb_6() ;
-void subprog_m_8055789c_7bd74cdb_5() ;
-void subprog_m_8055789c_7bd74cdb_4() ;
-void subprog_m_8055789c_7bd74cdb_3() ;
-void subprog_m_8055789c_7bd74cdb_2() ;
-static char* ng00[] = {(void *)subprog_m_8055789c_7bd74cdb_6, (void *)subprog_m_8055789c_7bd74cdb_5, (void *)subprog_m_8055789c_7bd74cdb_4, (void *)subprog_m_8055789c_7bd74cdb_3, (void *)subprog_m_8055789c_7bd74cdb_2};
+void subprog_m_93410bd6_7bd74cdb_6() ;
+void subprog_m_93410bd6_7bd74cdb_5() ;
+void subprog_m_93410bd6_7bd74cdb_4() ;
+void subprog_m_93410bd6_7bd74cdb_3() ;
+void subprog_m_93410bd6_7bd74cdb_2() ;
+static char* ng00[] = {(void *)subprog_m_93410bd6_7bd74cdb_6, (void *)subprog_m_93410bd6_7bd74cdb_5, (void *)subprog_m_93410bd6_7bd74cdb_4, (void *)subprog_m_93410bd6_7bd74cdb_3, (void *)subprog_m_93410bd6_7bd74cdb_2};
 void relocate(char *);
 
 void sensitize(char *);
