@@ -13,11 +13,18 @@ module DHT11_Periph (
     input  logic        PSEL,
     output logic [31:0] PRDATA,
     output logic        PREADY,
-    inout  logic        DATA_IO
+    inout  logic        DATA_IO,
+    // 검증용
+    output logic [7:0] sim_rh,
+    output logic [7:0] sim_t,
+    output logic        sim_finish
 );
 
   logic [7:0] rh_int, t_int;
   logic finish_int;
+
+    assign sim_rh  = rh_int;  // 시뮬레이션을 위한 assign
+    assign sim_t = t_int;  // 시뮬레이션을 위한 assign
 
   APB_SlaveIntf_DHT11 U_APB_Intf (
       .PCLK      (PCLK),
