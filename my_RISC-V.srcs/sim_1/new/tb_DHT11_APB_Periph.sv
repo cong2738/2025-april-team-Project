@@ -16,7 +16,6 @@ class transaction;
   logic      [ 7:0] sim_t;
   logic             sim_finish;
 
-
   constraint c_read_addr {PADDR inside {4'h0, 4'h4, 4'h8};}
   constraint c_read_only {PWRITE == 1'b0;}
   constraint c_dummy_data {PWDATA inside {32'h0};}
@@ -356,8 +355,18 @@ module tb_DHT11_APB_Periph;
   initial begin
     env = new(vif);
     env.run(3);
-    #50;
+    #20_000_000;
     env.show_report();
     $finish;
   end
 endmodule
+
+// ======================= 오류 정리 =======================
+// Time resolution is 1 ps
+// [MON] PADDR=0, PRDATA=xxxxxxxx, PREADY=1, sim_rh=0, sim_t=0, sim_finish=0
+// [SCB] PADDR=0, PRDATA=xxxxxxxx, PREADY=1, sim_rh=0, sim_t=0, sim_finish=0
+
+// 원인 예상
+// 1. DHT11_Periph 내부에서 sim_rh, sim_t가 업뎃이 안됨
+// 2. 센서의 fsm이 idle에서 벗어나지 못하는가?
+// 3. localparam BAUD_COUNT = 1_000_000; 카운트가 너무 커서 시뮬이 안되나?
