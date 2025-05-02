@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="138946001fs"></ZoomEndTime>
-      <Cursor1Time time="77125000fs"></Cursor1Time>
+      <ZoomEndTime time="675258fs"></ZoomEndTime>
+      <Cursor1Time time="0fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="165"></NameColumnWidth>
-      <ValueColumnWidth column_width="75"></ValueColumnWidth>
+      <ValueColumnWidth column_width="71"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="10" />
+   <WVObjectSize size="11" />
    <wvobject fp_name="/tb_GPUART/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -48,7 +48,6 @@
    <wvobject fp_name="group15" type="group">
       <obj_property name="label">intf</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/tb_GPUART/intf/clk" type="logic">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
@@ -158,7 +157,6 @@
    <wvobject fp_name="group76" type="group">
       <obj_property name="label">inputBuff</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/tb_GPUART/u_GP_UART/u_inputBuffer/clk" type="logic">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
@@ -210,7 +208,6 @@
    <wvobject fp_name="group163" type="group">
       <obj_property name="label">outputBuff</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/tb_GPUART/u_GP_UART/u_outputBuffer/clk" type="logic">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
@@ -265,6 +262,146 @@
          <obj_property name="ObjectShortName">mem[0:3][7:0]</obj_property>
          <obj_property name="label">outputbuffer</obj_property>
          <obj_property name="Radix">ASCIIRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group59" type="group">
+      <obj_property name="label">SLAVE _INTF</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/PCLK" type="logic">
+         <obj_property name="ElementShortName">PCLK</obj_property>
+         <obj_property name="ObjectShortName">PCLK</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/PRESET" type="logic">
+         <obj_property name="ElementShortName">PRESET</obj_property>
+         <obj_property name="ObjectShortName">PRESET</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/PADDR" type="array">
+         <obj_property name="ElementShortName">PADDR[3:0]</obj_property>
+         <obj_property name="ObjectShortName">PADDR[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/PWDATA" type="array">
+         <obj_property name="ElementShortName">PWDATA[31:0]</obj_property>
+         <obj_property name="ObjectShortName">PWDATA[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/PWRITE" type="logic">
+         <obj_property name="ElementShortName">PWRITE</obj_property>
+         <obj_property name="ObjectShortName">PWRITE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/PENABLE" type="logic">
+         <obj_property name="ElementShortName">PENABLE</obj_property>
+         <obj_property name="ObjectShortName">PENABLE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/PSEL" type="logic">
+         <obj_property name="ElementShortName">PSEL</obj_property>
+         <obj_property name="ObjectShortName">PSEL</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/PRDATA" type="array">
+         <obj_property name="ElementShortName">PRDATA[31:0]</obj_property>
+         <obj_property name="ObjectShortName">PRDATA[31:0]</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/PREADY" type="logic">
+         <obj_property name="ElementShortName">PREADY</obj_property>
+         <obj_property name="ObjectShortName">PREADY</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/tx_busy" type="logic">
+         <obj_property name="ElementShortName">tx_busy</obj_property>
+         <obj_property name="ObjectShortName">tx_busy</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/tx_done" type="logic">
+         <obj_property name="ElementShortName">tx_done</obj_property>
+         <obj_property name="ObjectShortName">tx_done</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/tx_full" type="logic">
+         <obj_property name="ElementShortName">tx_full</obj_property>
+         <obj_property name="ObjectShortName">tx_full</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/tx_empty" type="logic">
+         <obj_property name="ElementShortName">tx_empty</obj_property>
+         <obj_property name="ObjectShortName">tx_empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/rx_busy" type="logic">
+         <obj_property name="ElementShortName">rx_busy</obj_property>
+         <obj_property name="ObjectShortName">rx_busy</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/rx_done" type="logic">
+         <obj_property name="ElementShortName">rx_done</obj_property>
+         <obj_property name="ObjectShortName">rx_done</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/rx_full" type="logic">
+         <obj_property name="ElementShortName">rx_full</obj_property>
+         <obj_property name="ObjectShortName">rx_full</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/rx_empty" type="logic">
+         <obj_property name="ElementShortName">rx_empty</obj_property>
+         <obj_property name="ObjectShortName">rx_empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/uart_write" type="logic">
+         <obj_property name="ElementShortName">uart_write</obj_property>
+         <obj_property name="ObjectShortName">uart_write</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/uart_read" type="logic">
+         <obj_property name="ElementShortName">uart_read</obj_property>
+         <obj_property name="ObjectShortName">uart_read</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/TXD" type="array">
+         <obj_property name="ElementShortName">TXD[7:0]</obj_property>
+         <obj_property name="ObjectShortName">TXD[7:0]</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/RXD" type="array">
+         <obj_property name="ElementShortName">RXD[7:0]</obj_property>
+         <obj_property name="ObjectShortName">RXD[7:0]</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/state" type="array">
+         <obj_property name="ElementShortName">state[1:0]</obj_property>
+         <obj_property name="ObjectShortName">state[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/next" type="array">
+         <obj_property name="ElementShortName">next[1:0]</obj_property>
+         <obj_property name="ObjectShortName">next[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/wr_reg" type="logic">
+         <obj_property name="ElementShortName">wr_reg</obj_property>
+         <obj_property name="ObjectShortName">wr_reg</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/wr_next" type="logic">
+         <obj_property name="ElementShortName">wr_next</obj_property>
+         <obj_property name="ObjectShortName">wr_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/rd_reg" type="logic">
+         <obj_property name="ElementShortName">rd_reg</obj_property>
+         <obj_property name="ObjectShortName">rd_reg</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/rd_next" type="logic">
+         <obj_property name="ElementShortName">rd_next</obj_property>
+         <obj_property name="ObjectShortName">rd_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/slv_reg0" type="array">
+         <obj_property name="ElementShortName">slv_reg0[31:0]</obj_property>
+         <obj_property name="ObjectShortName">slv_reg0[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/slv_next0" type="array">
+         <obj_property name="ElementShortName">slv_next0[31:0]</obj_property>
+         <obj_property name="ObjectShortName">slv_next0[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/slv_reg1" type="array">
+         <obj_property name="ElementShortName">slv_reg1[31:0]</obj_property>
+         <obj_property name="ObjectShortName">slv_reg1[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/slv_next1" type="array">
+         <obj_property name="ElementShortName">slv_next1[31:0]</obj_property>
+         <obj_property name="ObjectShortName">slv_next1[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/slv_reg2" type="array">
+         <obj_property name="ElementShortName">slv_reg2[31:0]</obj_property>
+         <obj_property name="ObjectShortName">slv_reg2[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_GPUART/u_GP_UART/u_APB_UARTIntf/slv_reg3" type="array">
+         <obj_property name="ElementShortName">slv_reg3[31:0]</obj_property>
+         <obj_property name="ObjectShortName">slv_reg3[31:0]</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>
