@@ -20,11 +20,12 @@ module DHT11_Periph (
     output logic        sim_finish
 );
 
-  logic [7:0] rh_int, t_int;
-  logic finish_int;
+    logic [7:0] rh_int, t_int;
+    logic finish_int;
 
     assign sim_rh  = rh_int;  // 시뮬레이션을 위한 assign
     assign sim_t = t_int;  // 시뮬레이션을 위한 assign
+    assign sim_finish = finish_int;  // 시뮬레이션을 위한 assign
 
   APB_SlaveIntf_DHT11 U_APB_Intf (
       .PCLK      (PCLK),
@@ -104,6 +105,7 @@ module APB_SlaveIntf_DHT11 (
                         2'd2: PRDATA <= slv_reg2;
                         // 2'd3: PRDATA <= slv_reg3;
                         // 2'd3: PRDATA <= slv_reg3;
+                        // default: PRDATA <= 32'd0; //수정
                     endcase
                 end
             end else begin
