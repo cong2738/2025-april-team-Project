@@ -42,16 +42,14 @@ typedef struct{
     __IO uint32_t IDR;
 } HCSR04_TypeDef;
 
-#define APB_ADDR_GAP    0x1000
-
 #define APB_BASEADDR    0x10000000
-#define GPFND_BASEADDR  (APB_BASEADDR + APB_ADDR_GAP)
-#define GPUART_BASEADDR (GPFND_BASEADDR + APB_ADDR_GAP)
-#define HCSR04_BASEADDR (GPUART_BASEADDR + APB_ADDR_GAP)
+#define GPFND_BASEADDR  (APB_BASEADDR + 0x1000)
+#define GPUART_BASEADDR (APB_BASEADDR + 0x2000)
+#define HCSR04_BASEADDR (APB_BASEADDR + 0x3000)
 
 #define GPFND           ((GPFND_TypeDef *) GPFND_BASEADDR)
 #define GPUART          ((GPUART_TypeDef *) GPUART_BASEADDR)
-#define HCSR04          ((GPUART_TypeDef *) HCSR04_BASEADDR)
+#define HCSR04          ((HCSR04_TypeDef *) HCSR04_BASEADDR)
 
 void delay(int n);
 

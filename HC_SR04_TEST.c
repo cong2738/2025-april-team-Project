@@ -42,12 +42,10 @@ typedef struct{
     __IO uint32_t IDR;
 } HCSR04_TypeDef;
 
-#define APB_ADDR_GAP    0x1000
-
 #define APB_BASEADDR    0x10000000
-#define GPFND_BASEADDR  (APB_BASEADDR + APB_ADDR_GAP)
-#define GPUART_BASEADDR (GPFND_BASEADDR + APB_ADDR_GAP)
-#define HCSR04_BASEADDR (GPUART_BASEADDR + APB_ADDR_GAP)
+#define GPFND_BASEADDR  (APB_BASEADDR + 0x1000)
+#define GPUART_BASEADDR (APB_BASEADDR + 0x2000)
+#define HCSR04_BASEADDR (APB_BASEADDR + 0x3000)
 
 #define GPFND           ((GPFND_TypeDef *) GPFND_BASEADDR)
 #define GPUART          ((GPUART_TypeDef *) GPUART_BASEADDR)
@@ -76,10 +74,8 @@ int main(void)
     uint32_t readData = 0;
     while (1)
     {  
-        readData = UART_read(GPUART);
-        if(readData != 0) UART_trans(GPUART, readData);
-        FND_writeData(GPFND, HCSR04_READ(HCSR04),0xf);
-        delay(1000);
+        readData = HCSR04_READ(HCSR04);
+        FND_writeData(GPFND, readData,0xf);
     }
     
     return 0;
