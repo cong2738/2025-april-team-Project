@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module GP_HCSR04 (
+module GP_HCSR04 #(parameter MAX_COUNT = 100_000_000) (
     // global signal
     input  logic        PCLK,
     input  logic        PRESET,
@@ -13,8 +13,8 @@ module GP_HCSR04 (
     output logic [31:0] PRDATA,
     output logic        PREADY,
     // inport signals
-    input  logic [ 7:0] echo_data,
-    output logic [ 7:0] echo_start
+    input  logic        echo_data,
+    output logic        echo_start
 );
     logic [15:0] idr;
     logic [15:0] distance;
@@ -30,9 +30,18 @@ module GP_HCSR04 (
         .o_data  (idr)
     );
 
+    tick_generator #(
+        .MAX_COUNT(MAX_COUNT)
+    ) u_tick_generator (
+        .PCLK  (PCLK),
+        .PRESET(PRESET),
+        .tick  (start_trigger)
+    );
+
     HC_SR04_module u_HC_SR04_module (
         .clk          (PCLK),
         .reset        (PRESET),
+        .start_trigger(start_trigger),
         .data         (echo_data),
         .start_tick   (echo_start),
         .o_data       (distance),

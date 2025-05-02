@@ -88,6 +88,7 @@ module MCU (
     );
 
     GP_HCSR04 u_GP_HCSR04 (
+        .*,
         .PSEL     (PSEL[3]),
         .PRDATA   (PRDATA[3]),
         .PREADY   (PREADY[3]),

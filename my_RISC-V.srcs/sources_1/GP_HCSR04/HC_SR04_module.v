@@ -2,12 +2,13 @@
 // top_sensor.v
 // 초음파 센서와 fnd를 제어하는 상위 모듈
 module HC_SR04_module (
-    input         clk,
-    input         reset,
-    input         data,        // 초음파 센서 Echo 신호 입력
-    output        start_tick,
-    output [15:0] o_data,
-    output        done
+    input  clk,
+    input  reset,
+    input  start_trigger,  // 버튼 입력 (트리거 신호 생성)
+    input  data,           // 초음파 센서 Echo 신호 입력
+    output start_tick,
+    output[15:0] o_data,
+    output done
 );
     wire w_tick;  // 1us 주기 클럭 신호
 
@@ -28,14 +29,6 @@ module HC_SR04_module (
         .clk  (clk),
         .reset(reset),
         .tick (w_tick)
-    );
-
-    tick_gen_1us #(
-        .BAUD_COUNT(1_000_000)
-    ) U_auto_start (
-        .clk  (clk),
-        .reset(reset),
-        .tick (start_trigger)
     );
 
 endmodule
@@ -137,13 +130,13 @@ module HC_SR04_cu (
 endmodule
 
 // 1us 주기 클럭 생성기
-module tick_gen_1us #(
-    parameter BAUD_COUNT = 100
-) (
+module tick_gen_1us (
     input  clk,
     input  reset,
     output tick
 );
+
+    localparam BAUD_COUNT = 100;
     reg [$clog2(BAUD_COUNT)-1:0] count_reg, count_next;
 
     reg tick_reg, tick_next;
