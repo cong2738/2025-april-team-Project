@@ -75,9 +75,8 @@ int main(void)
     while (1)
     {  
         readData = UART_read(GPUART);
-        UART_trans(GPUART, readData);
-        if(readData != 0)
-            FND_writeData(GPFND, readData,0xf);
+        if(readData != 0) UART_trans(GPUART, readData);
+        FND_writeData(GPFND, readData,0xf);
         delay(1000);
     }
     
