@@ -13,23 +13,14 @@ module GP_HCSR04 (
     output logic [31:0] PRDATA,
     output logic        PREADY,
     // inport signals
-    input  logic [ 7:0] echo_data
+    input  logic [ 7:0] echo_data,
+    output logic [ 7:0] echo_start
 );
     logic [15:0] idr;
     logic [15:0] distance;
     logic        done;
 
     APB_HCSR04Intf U_APB_Intf_GPIO (.*);
-
-    clk_devider #(
-        .MAX_COUNT(100_000)
-    ) u_clk_devider (
-        .PCLK  (PCLK),
-        .PRESET(PRESET),
-        .en    (1),
-        .clear (0),
-        .tick  (start_tick)
-    );
 
     HCSR04_buffer u_HCSR04_buffer (
         .clk     (PCLK),
@@ -42,9 +33,8 @@ module GP_HCSR04 (
     HC_SR04_module u_HC_SR04_module (
         .clk          (PCLK),
         .reset        (PRESET),
-        .start_trigger(start_trigger),
         .data         (echo_data),
-        .start_tick   (start_tick),
+        .start_tick   (echo_start),
         .o_data       (distance),
         .done         (done)
     );
