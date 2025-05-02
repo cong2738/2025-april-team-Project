@@ -108,7 +108,8 @@ read_verilog -library xil_defaultlib -sv {
   D:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/fifo.sv
   D:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_FIFO.sv
   D:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv
-  D:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/clk_devider/clk_devider.sv
+  D:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_Timer/GP_Timer.sv
+  D:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/clk_devider/tick_generator.sv
 }
 read_verilog -library xil_defaultlib {
   D:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/fndController.v

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1746197852">
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1746200516">
   <File Type="BITSTR-BMM" Name="MCU_bd.bmm"/>
   <File Type="OPT-METHODOLOGY-DRC" Name="MCU_methodology_drc_opted.rpt"/>
   <File Type="INIT-TIMING" Name="MCU_timing_summary_init.rpt"/>
@@ -208,14 +208,21 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/clk_devider/clk_devider.sv">
+    <File Path="$PSRCDIR/sources_1/GP_HCSR04/HC_SR04_module.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/GP_HCSR04/HC_SR04_module.v">
+    <File Path="$PSRCDIR/sources_1/GP_Timer/GP_Timer.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/clk_devider/tick_generator.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
