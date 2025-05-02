@@ -44,7 +44,7 @@ module GP_UART #(parameter BAUD_RATE = 9600) (  //GPIO
 
     fifo #(
         .FIFO_UNIT(8),
-        .FIFO_CAP(2**2)
+        .FIFO_CAP(2**4)
     ) u_outputBuffer (
         .clk  (PCLK),
         .reset(PRESET),
@@ -57,7 +57,7 @@ module GP_UART #(parameter BAUD_RATE = 9600) (  //GPIO
     );
     fifo #(
         .FIFO_UNIT(8),
-        .FIFO_CAP(2**2)
+        .FIFO_CAP(2**4)
     ) u_inputBuffer (
         .clk  (PCLK),
         .reset(PRESET),
@@ -110,6 +110,7 @@ module APB_UARTIntf (
     logic [31:0] slv_reg1, slv_next1;
     logic [31:0] slv_reg2;
     logic [31:0] slv_reg3;
+    logic [31:0] PRDATA_next;
 
     assign uart_write = wr_reg;
     assign uart_read  = rd_reg;
@@ -124,11 +125,13 @@ module APB_UARTIntf (
             rd_reg   <= 0;
             wr_reg   <= 0;
             slv_reg0 <= 0;
+            PRDATA   <= 0;
         end else begin
             state    <= next;
             wr_reg   <= wr_next;
             rd_reg   <= rd_next;
             slv_reg0 <= slv_next0;
+            PRDATA <= PRDATA_next;
         end
     end
     always_comb begin : next_logic
@@ -138,6 +141,7 @@ module APB_UARTIntf (
         slv_next0 = slv_reg0;
         slv_next1 = slv_reg1;
         PREADY    = 0;
+        PRDATA_next = PRDATA;
         case (state)
             STOP: begin
                 wr_next = 0;
@@ -149,30 +153,36 @@ module APB_UARTIntf (
             READ: begin
                 if (PWRITE) begin
                     rd_next = 0;
+                    wr_next = 0;
                     case (PADDR[3:2])
                         2'd0: begin
-                            wr_next = ~tx_full;
-                            slv_next0 <= PWDATA[7:0];
+                            if(~tx_full) begin
+                                wr_next = 1;
+                                slv_next0 <= PWDATA[7:0];
+                            end
                         end
                         default: ;
                     endcase
                 end else begin
+                    rd_next = 0;
                     wr_next = 0;
-                    PRDATA  = 32'dx;
+                    PRDATA_next  = 32'dx;
                     case (PADDR[3:2])
-                        2'd0: PRDATA <= slv_reg0;
+                        2'd0: PRDATA_next <= slv_reg0;
                         2'd1: begin
-                            rd_next = ~rx_empty;
-                            PRDATA <= slv_reg1;
+                            if(~rx_empty) begin
+                                rd_next = 1;
+                                PRDATA_next <= slv_reg1;
+                            end
                         end
                     endcase
                 end
-                PREADY = 1;
                 next = SEND;
             end
             SEND: begin
                 wr_next = 0;
                 rd_next = 0;
+                PREADY = 1;
                 next = STOP;
             end
         endcase
