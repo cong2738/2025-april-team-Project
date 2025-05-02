@@ -49,7 +49,7 @@ typedef struct{
 
 #define GPFND           ((GPFND_TypeDef *) GPFND_BASEADDR)
 #define GPUART          ((GPUART_TypeDef *) GPUART_BASEADDR)
-#define HCSR04          ((GPUART_TypeDef *) HCSR04_BASEADDR)
+#define HCSR04          ((HCSR04_TypeDef *) HCSR04_BASEADDR)
 
 void delay(int n);
 
@@ -70,11 +70,11 @@ uint32_t HCSR04_READ(HCSR04_TypeDef* hc_sr04);
 
 int main(void)
 {
+    FND_init(GPFND, 1);
     uint32_t readData ='x';
     while (1)
     {
-        readData = UART_read(GPUART);
-        UART_trans(GPUART, readData);
+        FND_writeData(GPFND, HCSR04_READ(HCSR04), 0xf);
     }
     
     return 0;
