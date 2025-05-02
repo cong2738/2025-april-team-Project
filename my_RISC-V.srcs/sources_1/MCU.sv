@@ -8,9 +8,11 @@ module MCU (
     output logic       tx,
     input  logic       rx,
     output logic       tx_full,
-    tx_empty,
+    output logic       tx_empty,
     output logic       rx_full,
-    rx_empty
+    output logic       rx_empty,
+    input  logic       echo_data,
+    output logic       echo_start
 );
     logic        PCLK;
     logic        PRESET;
@@ -89,7 +91,8 @@ module MCU (
         .PSEL     (PSEL[3]),
         .PRDATA   (PRDATA[3]),
         .PREADY   (PREADY[3]),
-        .echo_data(echo_data)
+        .echo_data(echo_data),
+        .echo_start(echo_start)
     );
 
 endmodule
