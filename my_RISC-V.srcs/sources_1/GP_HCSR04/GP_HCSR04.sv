@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module GP_HCSR04 #(parameter TRIGGER_PERIOD = 1, BOARD_CLK_RATE = 100_000_000) (
+module GP_HCSR04 #(parameter MAX_COUNT = 100_000_000) (
     // global signal
     input  logic        PCLK,
     input  logic        PRESET,
@@ -21,8 +21,7 @@ module GP_HCSR04 #(parameter TRIGGER_PERIOD = 1, BOARD_CLK_RATE = 100_000_000) (
     APB_HCSR04Intf U_APB_Intf_GPIO (.*);
 
     HC_SR04_module #(
-        .TRIGGER_PERIOD(TRIGGER_PERIOD),
-        .BOARD_CLK_RATE(BOARD_CLK_RATE)
+        .MAX_COUNT(MAX_COUNT)
     ) u_HC_SR04_module (
         .clk          (PCLK),
         .reset        (PRESET),

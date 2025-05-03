@@ -2,7 +2,7 @@
 // top_sensor.v
 // 초음파 센서와 fnd를 제어하는 상위 모듈
 module HC_SR04_module #(
-    parameter TRIGGER_PERIOD = 1, BOARD_CLK_RATE = 100_000_000
+    parameter MAX_COUNT = 100_000_000
 ) (
     input  clk,
     input  reset,
@@ -35,7 +35,7 @@ module HC_SR04_module #(
 
     // trigger 생성기
     tick_generator #(
-        .MAX_COUNT(BOARD_CLK_RATE/TRIGGER_PERIOD)
+        .MAX_COUNT(MAX_COUNT)
     ) u_tick_generator (
         .clk  (clk),
         .reset(reset),
