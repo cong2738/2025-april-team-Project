@@ -52,7 +52,7 @@ module DHT11_module (
   //   localparam integer BIT_ONE_HIGH = 70_000;  // “1” -> ~70us high
   //   localparam integer BIT_ZERO_HIGH = 26_000;  // “0” -> ~26us high
 
-  // 시뮬 전용 타이밍 (모두 약 100× 줄임)
+  // 시뮬 전용 타이밍 (100× 줄임)
   localparam integer START_LOW_TIME = 200_000;  // 0.2 ms (200 us)
   localparam integer START_RELEASE = 2_000;  // 2 us
   localparam integer RESP_LOW = 8_000;  // 8 us
@@ -118,7 +118,12 @@ module tb_DHT11_notUVMst;
   // APB Interface Signals
   logic [3:0] PADDR;
 
-  // Timing parameters
+  
+  localparam logic [7:0] RH_BYTE = 8'hA5;
+  localparam logic [7:0] T_BYTE  = 8'h5A;
+
+
+
   //   localparam integer BIT_START_LOW = 50_000;
   //   localparam integer BIT_ZERO_HIGH = 26_000;  // “0” -> ~26us high
   //   localparam integer BIT_ONE_HIGH = 70_000;  // “1” -> ~70us high
@@ -144,6 +149,7 @@ module tb_DHT11_notUVMst;
   localparam logic [39:0] tb_expected = {8'hA5, 8'h00, 8'h5A, 8'h00, (8'hA5 + 8'h5A)};
   logic [39:0] tb_captured;
   int          tb_bitcnt;
+
 
   DHT11_Periph DUT (
       .PCLK      (PCLK),
@@ -195,11 +201,11 @@ module tb_DHT11_notUVMst;
       handshake_cnt++;
     end else if (tb_bitcnt < 40) begin
       #((BIT_ZERO_HIGH + BIT_ONE_HIGH) / 2);
-      tb_captured[tb_bitcnt] = DATA_IO;
+      //   tb_captured[tb_bitcnt] = DATA_IO;
+      tb_captured[39-tb_bitcnt] = DATA_IO;  // 해결
       tb_bitcnt++;
     end
   end
-
 
 
   // APB read
@@ -224,34 +230,66 @@ module tb_DHT11_notUVMst;
   endtask
 
   // 시나리오
-  initial begin
-    @(negedge PRESET);
-    #20;
+//   initial begin
+//     @(negedge PRESET);
+//     #20;
 
-    apb_read(4'h0);  // RH 레지스터 읽기
-    apb_read(4'h4);  // T 레지스터 읽기
-    apb_read(4'h8);  // finish 읽기
+//     apb_read(4'h0);  // RH 레지스터 읽기
+//     apb_read(4'h4);  // T 레지스터 읽기
+//     apb_read(4'h8);  // finish 읽기
 
-    // 40비트 모두 캡처될 때까지 대기
-    wait (tb_bitcnt == 40);
+//     // 40비트 모두 캡처될 때까지 대기
+//     wait (tb_bitcnt == 40);
 
-    if (tb_captured !== tb_expected) begin
-      $error("DHT11 protocol mismatch! expected=%h, got=%h", tb_expected, tb_captured);
-    end else begin
-      $display(">> DHT11 40-bit transfer OK !! (%h)", tb_captured);
+//     if (tb_captured !== tb_expected) begin
+//       $error("DHT11 protocol mismatch! expected=%h, got=%h", tb_expected, tb_captured);
+//     end else begin
+//       //   $display(">> DHT11 40-bit transfer OK !! (%h)", tb_captured);
+//       $display(
+//           ">>> DHT11 sensor read complete! Humidity=0x%0h, Temperature=0x%0h, tb_captured=0x%010h, Checksum OK",
+//           tb_captured[39:32], tb_captured[23:16], tb_captured);
+//     end
+
+
+//     #50;
+//     $finish;
+//   end
+
+// 시나리오
+    initial begin
+        @(negedge PRESET);
+        #20;
+
+        // 1. RH read
+        apb_read(4'h0);
+        if (sim_rh !== RH_BYTE) begin
+            $error("RH register mismatch! expected=0x%0h, got=0x%0h", RH_BYTE, sim_rh);
+        end else begin
+            $display(">> RH register OK: 0x%0h", sim_rh);
+        end
+
+        // 2. T read
+        apb_read(4'h4);
+        if (sim_t !== T_BYTE) begin
+            $error("T  register mismatch! expected=0x%0h, got=0x%0h", T_BYTE, sim_t);
+        end else begin
+            $display(">> T  register OK: 0x%0h", sim_t);
+        end
+
+        // 3. 최종
+        wait (tb_bitcnt == 40);
+        if (tb_captured !== tb_expected) begin
+            $error("DHT11 protocol mismatch! expected=0x%010h, got=0x%010h",
+                   tb_expected, tb_captured);
+        end else begin
+            $display(">> DHT11 full read OK!");
+            $display("Humidity   = 0x%0h", tb_captured[39:32]);
+            $display("Temperature= 0x%0h", tb_captured[23:16]);
+            $display("tb_captured= 0x%010h", tb_captured);
+        end
+
+        #50;
+        $finish;
     end
 
-    #50;
-    $finish;
-  end
-
 endmodule
-
-// 에러
-// [time=60000] READ @ 0x0 -> PRDATA=0xa5  (rh=0xa5, t=0x5a, finish=0)
-// [time=100000] READ @ 0x4 -> PRDATA=0x5a  (rh=0xa5, t=0x5a, finish=0)
-// [time=140000] READ @ 0x8 -> PRDATA=0x0  (rh=0xa5, t=0x5a, finish=0)
-// Error: DHT11 protocol mismatch! expected=a5005a00ff, got=ff005a00a5
-
-// got=ff005a00a5 -> 바이트 순서가 뒤집혀 나옴
-// 아직 타이밍이 어긋나서 첫 번째 데이터 비트를 놓치고 있다는 뜻?
