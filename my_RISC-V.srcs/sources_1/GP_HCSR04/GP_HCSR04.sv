@@ -16,19 +16,17 @@ module GP_HCSR04 #(parameter MAX_COUNT = 100_000_000) (
     input  logic        echo_data,
     output logic        echo_start
 );
-    logic [15:0] idr;
     logic [15:0] distance;
-    logic        done;
 
     APB_HCSR04Intf U_APB_Intf_GPIO (.*);
 
-    HCSR04_buffer u_HCSR04_buffer (
-        .clk     (PCLK),
-        .reset   (PRESET),
-        .done    (done),
-        .distance(distance),
-        .o_data  (idr)
-    );
+    // HCSR04_buffer u_HCSR04_buffer (
+    //     .clk     (PCLK),
+    //     .reset   (PRESET),
+    //     .done    (done),
+    //     .distance(distance),
+    //     .o_data  (idr)
+    // );
 
     tick_generator #(
         .MAX_COUNT(MAX_COUNT)
@@ -63,15 +61,14 @@ module APB_HCSR04Intf (
     output logic [31:0] PRDATA,
     output logic        PREADY,
     // internal signals
-    input  logic [15:0] idr
+    input  logic [15:0] distance
 );
     logic [31:0] slv_reg0;  // ,slv_reg3;
 
-    assign slv_reg0 = idr;
+    assign slv_reg0 = distance;
 
     always_ff @(posedge PCLK, posedge PRESET) begin
         if (PRESET) begin
-            slv_reg0 <= 0;
         end else begin
             if (PSEL && PENABLE) begin
                 PREADY <= 1'b1;
@@ -79,7 +76,6 @@ module APB_HCSR04Intf (
                     PRDATA <= 32'bx;
                     case (PADDR[3:2])
                         2'd0: PRDATA <= slv_reg0;
-                        default: ;
                     endcase
                 end
             end else begin

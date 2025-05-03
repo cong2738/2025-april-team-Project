@@ -75,7 +75,9 @@ int main(void)
     while (1)
     {  
         readData = HCSR04_READ(HCSR04);
-        FND_writeData(GPFND, readData,0xf);
+        FND_writeData(GPFND, readData, 0xf);
+        UART_trans(GPUART, readData);
+        delay(1000);
     }
     
     return 0;
