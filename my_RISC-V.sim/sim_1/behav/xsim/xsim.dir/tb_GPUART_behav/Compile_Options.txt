@@ -1,1 +1,0 @@
--wto "5bf14d21fa514446801ddada29bdc5de" --incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "uvm" -L "unisims_ver" -L "unimacro_ver" -L "secureip" --snapshot "tb_GPUART_behav" "xil_defaultlib.tb_GPUART" "xil_defaultlib.glbl" -log "elaborate.log" 

@@ -1,0 +1,17 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sat Apr 26 11:01:51 2025
+# Process ID: 44164
+# Current directory: D:/harman/HarmanSemiconAcademy_2025April_TeamProject
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent30096 D:\harman\HarmanSemiconAcademy_2025April_TeamProject\my_RISC-V.xpr
+# Log file: D:/harman/HarmanSemiconAcademy_2025April_TeamProject/vivado.log
+# Journal file: D:/harman/HarmanSemiconAcademy_2025April_TeamProject\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.xpr
+launch_simulation
+open_wave_config D:/harman/HarmanSemiconAcademy_2025April_TeamProject/tb_fifo_UVM_TEMPLET_behav.wcfg
+source tb_fifo_UVM_TEMPLET.tcl
+close_sim

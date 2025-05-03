@@ -2,8 +2,8 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Sun May  4 00:13:09 2025
-# Process ID: 19476
+# Start of session at: Sun May  4 00:53:07 2025
+# Process ID: 15668
 # Current directory: C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.runs/synth_1
 # Command line: vivado.exe -log MCU.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source MCU.tcl
 # Log file: C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.runs/synth_1/MCU.vds
@@ -17,9 +17,9 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 14652
+INFO: [Synth 8-7075] Helper process launched with PID 12440
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:03 . Memory (MB): peak = 1108.234 ; gain = 0.000
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1110.070 ; gain = 0.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'MCU' [C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/MCU.sv:3]
 INFO: [Synth 8-6157] synthesizing module 'rom' [C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/rom.sv:3]
@@ -163,18 +163,18 @@ INFO: [Synth 8-6155] done synthesizing module 'GP_HCSR04' (42#1) [C:/harman/Harm
 WARNING: [Synth 8-689] width (32) of port connection 'PADDR' does not match port width (4) of module 'GP_HCSR04' [C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/MCU.sv:90]
 INFO: [Synth 8-6155] done synthesizing module 'MCU' (43#1) [C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/MCU.sv:3]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:04 . Memory (MB): peak = 1157.398 ; gain = 49.164
+Finished RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:04 . Memory (MB): peak = 1159.105 ; gain = 49.035
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:01 ; elapsed = 00:00:04 . Memory (MB): peak = 1175.320 ; gain = 67.086
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:02 ; elapsed = 00:00:04 . Memory (MB): peak = 1159.105 ; gain = 49.035
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:01 ; elapsed = 00:00:04 . Memory (MB): peak = 1175.320 ; gain = 67.086
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:04 . Memory (MB): peak = 1159.105 ; gain = 49.035
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.034 . Memory (MB): peak = 1175.320 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.035 . Memory (MB): peak = 1159.105 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -185,26 +185,26 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/MCU_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1295.586 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1288.809 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1295.586 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1288.809 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:02 ; elapsed = 00:00:08 . Memory (MB): peak = 1295.586 ; gain = 187.352
+Finished Constraint Validation : Time (s): cpu = 00:00:04 ; elapsed = 00:00:08 . Memory (MB): peak = 1288.809 ; gain = 178.738
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:02 ; elapsed = 00:00:08 . Memory (MB): peak = 1295.586 ; gain = 187.352
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:04 ; elapsed = 00:00:08 . Memory (MB): peak = 1288.809 ; gain = 178.738
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:02 ; elapsed = 00:00:08 . Memory (MB): peak = 1295.586 ; gain = 187.352
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:04 ; elapsed = 00:00:08 . Memory (MB): peak = 1288.809 ; gain = 178.738
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'ControlUnit'
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'APB_Master'
@@ -277,7 +277,7 @@ WARNING: [Synth 8-327] inferring latch for variable 'temp_data_next_reg' [C:/har
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'HC_SR04_cu'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:09 . Memory (MB): peak = 1295.586 ; gain = 187.352
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:09 . Memory (MB): peak = 1288.809 ; gain = 178.738
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -452,7 +452,7 @@ CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin '
 CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:60]
 CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:60]
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:26 . Memory (MB): peak = 1295.586 ; gain = 187.352
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:26 . Memory (MB): peak = 1288.809 ; gain = 178.738
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -484,13 +484,13 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:30 . Memory (MB): peak = 1295.586 ; gain = 187.352
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:13 ; elapsed = 00:00:30 . Memory (MB): peak = 1288.809 ; gain = 178.738
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:12 ; elapsed = 00:00:34 . Memory (MB): peak = 1421.047 ; gain = 312.813
+Finished Timing Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:34 . Memory (MB): peak = 1409.809 ; gain = 299.738
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -521,7 +521,7 @@ Start Technology Mapping
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-7052] The timing for the instance U_RAM/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:12 ; elapsed = 00:00:34 . Memory (MB): peak = 1431.125 ; gain = 322.891
+Finished Technology Mapping : Time (s): cpu = 00:00:15 ; elapsed = 00:00:35 . Memory (MB): peak = 1419.879 ; gain = 309.809
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -539,37 +539,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:13 ; elapsed = 00:00:36 . Memory (MB): peak = 1431.125 ; gain = 322.891
+Finished IO Insertion : Time (s): cpu = 00:00:16 ; elapsed = 00:00:37 . Memory (MB): peak = 1419.879 ; gain = 309.809
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:13 ; elapsed = 00:00:36 . Memory (MB): peak = 1431.125 ; gain = 322.891
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:16 ; elapsed = 00:00:37 . Memory (MB): peak = 1419.879 ; gain = 309.809
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:13 ; elapsed = 00:00:37 . Memory (MB): peak = 1431.125 ; gain = 322.891
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:16 ; elapsed = 00:00:37 . Memory (MB): peak = 1419.879 ; gain = 309.809
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:13 ; elapsed = 00:00:37 . Memory (MB): peak = 1431.125 ; gain = 322.891
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:16 ; elapsed = 00:00:37 . Memory (MB): peak = 1419.879 ; gain = 309.809
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:37 . Memory (MB): peak = 1431.125 ; gain = 322.891
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:16 ; elapsed = 00:00:37 . Memory (MB): peak = 1419.879 ; gain = 309.809
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:13 ; elapsed = 00:00:37 . Memory (MB): peak = 1431.125 ; gain = 322.891
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:16 ; elapsed = 00:00:37 . Memory (MB): peak = 1419.879 ; gain = 309.809
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -605,18 +605,18 @@ Report Cell Usage:
 |18    |OBUF     |    18|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:13 ; elapsed = 00:00:37 . Memory (MB): peak = 1431.125 ; gain = 322.891
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:16 ; elapsed = 00:00:37 . Memory (MB): peak = 1419.879 ; gain = 309.809
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 96 critical warnings and 1 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:11 ; elapsed = 00:00:35 . Memory (MB): peak = 1431.125 ; gain = 202.625
-Synthesis Optimization Complete : Time (s): cpu = 00:00:13 ; elapsed = 00:00:37 . Memory (MB): peak = 1431.125 ; gain = 322.891
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:13 ; elapsed = 00:00:36 . Memory (MB): peak = 1419.879 ; gain = 180.105
+Synthesis Optimization Complete : Time (s): cpu = 00:00:16 ; elapsed = 00:00:38 . Memory (MB): peak = 1419.879 ; gain = 309.809
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.039 . Memory (MB): peak = 1433.957 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.041 . Memory (MB): peak = 1422.715 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 153 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1433.957 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1422.715 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 24 instances were transformed.
   LD => LDCE: 8 instances
@@ -625,8 +625,8 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 INFO: [Common 17-83] Releasing license: Synthesis
 132 Infos, 12 Warnings, 96 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:15 ; elapsed = 00:00:42 . Memory (MB): peak = 1433.957 ; gain = 325.723
+synth_design: Time (s): cpu = 00:00:18 ; elapsed = 00:00:43 . Memory (MB): peak = 1422.715 ; gain = 312.645
 INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
 INFO: [Common 17-1381] The checkpoint 'C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.runs/synth_1/MCU.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file MCU_utilization_synth.rpt -pb MCU_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sun May  4 00:13:55 2025...
+INFO: [Common 17-206] Exiting Vivado at Sun May  4 00:53:54 2025...
