@@ -57,12 +57,10 @@ module APB_HCSR04Intf (
     output logic [31:0] PRDATA,
     output logic        PREADY,
     // internal signals
-    input  logic [15:0] IDR,
-    output logic [7:0] INDEX
+    input  logic [15:0] IDR
 );
-    logic [31:0] slv_reg0, slv_reg1;
+    logic [31:0] slv_reg0;
     assign slv_reg0 = IDR;
-    assign INDEX = slv_reg1;
 
     always_ff @(posedge PCLK, posedge PRESET) begin
         if (PRESET) begin
@@ -70,16 +68,10 @@ module APB_HCSR04Intf (
         end else begin
             if (PSEL && PENABLE) begin
                 PREADY <= 1'b1;
-                if (PWRITE) begin
-                    case(PADDR[3:2]) 
-                        2'd0: ;
-                        2'd1: slv_reg1 <= PWRITE;
-                    endcase
-                end else begin
+                if (~PWRITE) begin
                     PRDATA <= 32'bx;
                     case (PADDR[3:2])
                         2'd0: PRDATA <= slv_reg0;
-                        default: ;
                     endcase
                 end
             end else begin

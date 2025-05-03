@@ -125,6 +125,7 @@ module HC_SR04_cu (
                 if (tick == 1) begin
                     data_next = data_reg + 1;
                     if (data_next == MAX_DISTANCE * 58) begin
+                        data_next = 64_438; // 1111*58
                         next = IDLE;  // 최대 거리 초과시 IDLE로 복귀
                     end
                 end
