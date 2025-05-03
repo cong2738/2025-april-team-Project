@@ -1,7 +1,9 @@
 `timescale 1ns / 1ps
 // top_sensor.v
 // 초음파 센서와 fnd를 제어하는 상위 모듈
-module HC_SR04_module (
+module HC_SR04_module #(
+    parameter TRIGGER_PERIOD = 1, BOARD_CLK_RATE = 100_000_000
+) (
     input  clk,
     input  reset,
     input  start_trigger,  // 버튼 입력 (트리거 신호 생성)
@@ -31,6 +33,14 @@ module HC_SR04_module (
         .tick (w_tick)
     );
 
+    // trigger 생성기
+    tick_generator #(
+        .MAX_COUNT(BOARD_CLK_RATE/TRIGGER_PERIOD)
+    ) u_tick_generator (
+        .clk  (clk),
+        .reset(reset),
+        .tick  (start_trigger)
+    );
 endmodule
 
 // 초음파 센서 FSM 제어 모듈

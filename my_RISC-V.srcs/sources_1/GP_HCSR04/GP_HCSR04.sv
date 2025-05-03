@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module GP_HCSR04 #(parameter MAX_COUNT = 100_000_000) (
+module GP_HCSR04 #(parameter TRIGGER_PERIOD = 1, BOARD_CLK_RATE = 100_000_000) (
     // global signal
     input  logic        PCLK,
     input  logic        PRESET,
@@ -20,15 +20,10 @@ module GP_HCSR04 #(parameter MAX_COUNT = 100_000_000) (
 
     APB_HCSR04Intf U_APB_Intf_GPIO (.*);
 
-    tick_generator #(
-        .MAX_COUNT(MAX_COUNT)
-    ) u_tick_generator (
-        .PCLK  (PCLK),
-        .PRESET(PRESET),
-        .tick  (start_trigger)
-    );
-
-    HC_SR04_module u_HC_SR04_module (
+    HC_SR04_module #(
+        .TRIGGER_PERIOD(TRIGGER_PERIOD),
+        .BOARD_CLK_RATE(BOARD_CLK_RATE)
+    ) u_HC_SR04_module (
         .clk          (PCLK),
         .reset        (PRESET),
         .start_trigger(start_trigger),
@@ -61,7 +56,6 @@ module APB_HCSR04Intf (
 
     always_ff @(posedge PCLK, posedge PRESET) begin
         if (PRESET) begin
-            slv_reg0 <= 0;
         end else begin
             if (PSEL && PENABLE) begin
                 PREADY <= 1'b1;
