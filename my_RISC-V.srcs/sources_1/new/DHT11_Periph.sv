@@ -73,9 +73,13 @@ module APB_SlaveIntf_DHT11 (
 
   logic [31:0] slv_reg0, slv_reg1, slv_reg2, slv_reg3;
 
-  assign slv_reg0[7:0] = rh_int;
-  assign slv_reg1[7:0] = t_int;
-  assign slv_reg2[0] = finish_int;
+//   assign slv_reg0[7:0] = rh_int;
+//   assign slv_reg1[7:0] = t_int;
+//   assign slv_reg2[0] = finish_int;
+
+  assign slv_reg0 = {24'd0, rh_int};
+  assign slv_reg1 = {24'd0, t_int};
+  assign slv_reg2 = {31'd0, finish_int};
   
 
   always_ff @(posedge PCLK, posedge PRESET) begin
@@ -98,7 +102,8 @@ module APB_SlaveIntf_DHT11 (
                         // 2'd3: slv_reg3 <= PWDATA;
                     endcase
                 end else begin
-                    PRDATA <= 32'bx;
+                    // PRDATA <= 32'bx;
+                    PRDATA <= 32'd0; //수정
                     case (PADDR[3:2])
                         2'd0: PRDATA <= slv_reg0;
                         2'd1: PRDATA <= slv_reg1;
