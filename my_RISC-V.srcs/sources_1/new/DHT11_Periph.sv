@@ -17,7 +17,7 @@ module DHT11_Periph (
     // 검증용
     output logic [7:0] sim_rh,
     output logic [7:0] sim_t,
-    output logic        sim_finish
+    output logic        sim_finish 
 );
 
     logic [7:0] rh_int, t_int;
