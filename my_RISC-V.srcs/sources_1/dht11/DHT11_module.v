@@ -287,7 +287,8 @@ module tick_10sec (
 );
 
   parameter BAUD_RATE = 9600;
-  localparam BAUD_COUNT = 1000_000_000;
+  // localparam BAUD_COUNT = 1000_000_000;
+  localparam BAUD_COUNT = 1000;  //검증용으로 줄여봄 -> 여전히 오류
   reg [$clog2(BAUD_COUNT)-1:0] count_reg, count_next;
 
   reg tick_reg, tick_next;

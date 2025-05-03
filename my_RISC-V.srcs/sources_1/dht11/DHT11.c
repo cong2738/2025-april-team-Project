@@ -28,7 +28,6 @@ typedef struct{
     __IO uint32_t rh_int;
     __IO uint32_t t_int;
     __IO uint32_t finish_int;
-    // __IO uint32_t comb;
 } DHT11_TypeDef;
 
 #define APB_BASEADDR    0x10000000
@@ -63,38 +62,33 @@ void FND_writeData(GPFND_TypeDef *fnd, uint32_t data, uint32_t dp);
 
 uint32_t dht11_read_RH(DHT11_TypeDef *dht11);
 uint32_t dht11_read_T(DHT11_TypeDef *dht11);
-uint32_t dht11_read_COMB(DHT11_TypeDef *dht11);
+uint32_t dht11_read_FINISH(DHT11_TypeDef *dht11);
 
 
 int main(void)
 {
-    uint32_t rh = 0;
-    uint32_t t  = 0;
-    // uint32_t comb = 0;
     FND_init(GPFND, FND_ON);
 
     while (1)
     {
-        
-        // uint32_t rh = dht11_read_RH(DHT11) & 0xFF;
-        // uint32_t t  = dht11_read_T (DHT11) & 0xFF;
-        // uint32_t comb = dht11_read_COMB(DHT11) & 0xFF;
-        // rh = dht11_read_RH(DHT11);
-        // t  = dht11_read_T (DHT11);
-        // disp = rh * 100 + t; -> 01.xx와 같은 이상한 값 출력됨
+        // 가끔 t가 00으로 나오는 경우가 있다.
+        uint32_t rh = dht11_read_RH(DHT11) & 0xFF;
+        uint32_t t  = dht11_read_T (DHT11) & 0xFF;
+        uint32_t comb = (rh<<6) + (rh<<5) + (rh<<2) +  t;
+        FND_writeData(GPFND, comb, 0xB);
+        delay(1);
 
-        // 온습도 각각 test -> 정상작동
-        // FND_writeData(GPFND, disp, 0xB);
-        // uint32_t t = dht11_read_T(DHT11) & 0xFF;
-        // FND_writeData(GPFND, t, 0xB);
-        // uint32_t rh = dht11_read_RH(DHT11) & 0xFF;
-        // FND_writeData(GPFND, rh, 0xB);
         
-        // 이게 문제
-        
+        // test: finish가 들어올때 read -> 실패 -> 측정 주기 매우 길어짐
+        // uint32_t finish = dht11_read_FINISH(DHT11) & 1;
+        // if (finish) {
+        //     uint32_t rh = dht11_read_RH(DHT11) & 0xFF;
+        //     uint32_t t  = dht11_read_T(DHT11)  & 0xFF;
+        //     uint32_t comb = (rh<<6) + (rh<<5) + (rh<<2) + t;
+        //     FND_writeData(GPFND, comb, 0xB);
+        // }
+        // delay(1);
 
-
-        delay(100);
     }
     return 0;
 }
@@ -149,8 +143,8 @@ uint32_t dht11_read_T(DHT11_TypeDef *dht11)
 {
     return dht11->t_int;
 }
-/*
-uint32_t dht11_read_COMB(DHT11_TypeDef *dht11)
+
+uint32_t dht11_read_FINISH(DHT11_TypeDef *dht11)
 {
-    return dht11->comb;
-}*/
+    return dht11->finish_int;
+}
