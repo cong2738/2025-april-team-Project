@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Sun May  4 11:53:06 2025
+| Date         : Sun May  4 12:39:08 2025
 | Host         : HYPC running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file MCU_control_sets_placed.rpt
 | Design       : MCU
@@ -74,13 +74,13 @@ Table of Contents
 |               Clock Signal               |                      Enable Signal                      | Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
 +------------------------------------------+---------------------------------------------------------+------------------+------------------+----------------+--------------+
 |  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/data_next[5]                      | reset_IBUF       |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/data_next[0]                      | reset_IBUF       |                1 |              1 |         1.00 |
 |  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/data_next[7]                      | reset_IBUF       |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/data_next[1]                      | reset_IBUF       |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/data_next[6]                      | reset_IBUF       |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/data_next[4]                      | reset_IBUF       |                1 |              1 |         1.00 |
 |  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/data_next[3]                      | reset_IBUF       |                1 |              1 |         1.00 |
 |  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/data_next[2]                      | reset_IBUF       |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/data_next[0]                      | reset_IBUF       |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/data_next[4]                      | reset_IBUF       |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/data_next[6]                      | reset_IBUF       |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/data_next[1]                      | reset_IBUF       |                1 |              1 |         1.00 |
 |  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Tx/tx_next                           | reset_IBUF       |                1 |              1 |         1.00 |
 |  clk_IBUF_BUFG                           |                                                         |                  |                2 |              3 |         1.50 |
 |  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Tx/data_count_next                   | reset_IBUF       |                1 |              4 |         4.00 |
@@ -88,19 +88,19 @@ Table of Contents
 |  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/tick_count_next                   | reset_IBUF       |                2 |              5 |         2.50 |
 |  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Tx/tick_count_next                   | reset_IBUF       |                2 |              5 |         2.50 |
 |  clk_IBUF_BUFG                           | u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/start_tick_next | reset_IBUF       |                2 |              7 |         3.50 |
+|  u_GP_UART/u_uart/U_Tx/temp_data_next__0 |                                                         |                  |                5 |              8 |         1.60 |
 |  clk_IBUF_BUFG                           | U_APB_Master/empty_reg_reg[0]                           | reset_IBUF       |                2 |              8 |         4.00 |
 |  clk_IBUF_BUFG                           | U_APB_Master/temp_addr_reg_reg[3]_1[0]                  | reset_IBUF       |                1 |              8 |         8.00 |
-|  u_GP_UART/u_uart/U_Tx/temp_data_next__0 |                                                         |                  |                5 |              8 |         1.60 |
-|  clk_IBUF_BUFG                           | U_APB_Master/FSM_onehot_state_reg[2]_5[0]               |                  |                3 |             11 |         3.67 |
 |  clk_IBUF_BUFG                           | u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/E[0]            | reset_IBUF       |                6 |             11 |         1.83 |
+|  clk_IBUF_BUFG                           | U_APB_Master/FSM_onehot_state_reg[2]_5[0]               |                  |                3 |             11 |         3.67 |
+|  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/rx_done_reg_0                     |                  |                2 |             16 |         8.00 |
 |  clk_IBUF_BUFG                           | u_GP_UART/u_APB_UARTIntf/I11                            |                  |                2 |             16 |         8.00 |
 |  clk_IBUF_BUFG                           | u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_next       | reset_IBUF       |                5 |             16 |         3.20 |
-|  clk_IBUF_BUFG                           | u_GP_UART/u_uart/U_Rx/rx_done_reg_0                     |                  |                2 |             16 |         8.00 |
 |  clk_IBUF_BUFG                           | U_Core/U_ControlUnit/E[0]                               | reset_IBUF       |               17 |             32 |         1.88 |
-|  clk_IBUF_BUFG                           | U_APB_Master/FSM_onehot_state_reg[2]_1[0]               | reset_IBUF       |                5 |             32 |         6.40 |
-|  clk_IBUF_BUFG                           | U_APB_Master/FSM_onehot_state_reg[2]_3[0]               | reset_IBUF       |                7 |             32 |         4.57 |
 |  clk_IBUF_BUFG                           | U_APB_Master/E[0]                                       |                  |               10 |             32 |         3.20 |
+|  clk_IBUF_BUFG                           | U_APB_Master/FSM_onehot_state_reg[2]_1[0]               | reset_IBUF       |                5 |             32 |         6.40 |
 |  clk_IBUF_BUFG                           | U_APB_Master/FSM_onehot_state_reg[2]_2[0]               | reset_IBUF       |                8 |             32 |         4.00 |
+|  clk_IBUF_BUFG                           | U_APB_Master/FSM_onehot_state_reg[2]_3[0]               | reset_IBUF       |                7 |             32 |         4.57 |
 |  clk_IBUF_BUFG                           | U_Core/U_ControlUnit/temp_addr_next                     | reset_IBUF       |               20 |             63 |         3.15 |
 |  clk_IBUF_BUFG                           | U_Core/U_ControlUnit/regFileWe                          |                  |               12 |             96 |         8.00 |
 |  clk_IBUF_BUFG                           |                                                         | reset_IBUF       |              113 |            334 |         2.96 |
