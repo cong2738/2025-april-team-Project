@@ -67,6 +67,7 @@ uint32_t TIM_readCounter(TIMER_TypeDef *tim);
 
 uint32_t LED_DataSet(uint32_t sw,uint32_t* en0,uint32_t* en1,uint32_t* en2,uint32_t* en3,uint32_t*preCnt0,uint32_t*preCnt1,uint32_t*preCnt2,uint32_t*preCnt3,uint32_t* dtime,uint32_t* ledData);
 void LED_ctrl(uint32_t arr_max, uint32_t en, uint32_t* preCnt, uint32_t* indicator, uint32_t Ontime, uint32_t led_num);
+uint32_t count_ctrl(uint32_t max_count, uint32_t* preCnt, uint32_t Ontime);
 
 int main(void)
 {
@@ -231,4 +232,13 @@ void LED_ctrl(uint32_t max_count, uint32_t en, uint32_t* preCnt, uint32_t* indic
     }
     *indicator ^= 1<<led_num;
     *preCnt = currCnt;
+}
+
+uint32_t count_ctrl(uint32_t max_count, uint32_t* preCnt, uint32_t Ontime) {
+    uint32_t currCnt = TIM_readCounter(TIMER);
+    uint32_t gap = currCnt - *preCnt;
+    if(gap < 0) gap = max_count + gap;
+    if(gap < Ontime) return 0;
+    *preCnt = currCnt;
+    return 1;
 }
