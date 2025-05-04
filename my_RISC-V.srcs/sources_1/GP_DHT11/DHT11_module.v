@@ -5,10 +5,8 @@ module DHT11_module (
     input reset,
     inout data,
     // input start_trigger,
-    output [15:0] rh,
-    output [15:0] rh_p,
-    output [15:0] t,
-    output [15:0] t_p,
+    output [7:0] rh,
+    output [7:0] t,
     output w_finish_tick
 );
     wire [39:0] w_o_data;
@@ -17,11 +15,8 @@ module DHT11_module (
     wire data_in, data_out, data_t;
     wire [5:0] data_count;
 
-    assign rh     = w_o_data[39:32];
-    assign rh_p   = w_o_data[31:24];
-    assign t      = w_o_data[23:16];
-    assign t_p    = w_o_data[15:8];
-
+    assign rh = w_o_data[39:32];
+    assign t  = w_o_data[23:16];
     IOBUF uIO (
         .I (data_out),
         .O (data_in),
@@ -144,37 +139,32 @@ module DHT11_cu (
                     real_count_next = 0;
                     o_data_next = 0;
                 end
-
             end
             START:
             if (tick == 1) begin
                 data_next = 0;
-                tick_count_next = tick_count + 1;
-                if (tick_count_next == 18000) begin
+                if (tick_count == 18000) begin
                     next = WAIT;
                     data_next = 1;
                     tick_count_next = 0;
-                end
+                end else tick_count_next = tick_count + 1;
             end
             WAIT:
             if (tick == 1) begin
-                tick_count_next = tick_count + 1;
-                if (tick_count_next == 15) begin
+                if (tick_count == 15) begin
                     next = WAIT2;
                     tick_count_next = 0;
                     io_state_next = 0;
-                end
+                end else tick_count_next = tick_count + 1;
             end
             WAIT2: begin
                 if (tick == 1) begin
-                    tick_count_next = tick_count + 1;
-                    if (tick_count_next == 50) begin
+                    if (tick_count == 50) begin
                         tick_count_next = 0;
                         if (data_in == 1) begin
                             next = WAIT3;
                         end
-                    end
-
+                    end else tick_count_next = tick_count + 1;
                 end
             end
             WAIT3: begin
@@ -188,28 +178,25 @@ module DHT11_cu (
                     data_count_next = 0;
                     next = PAR;
                 end else if (data_in == 1) begin
-                    real_count_next = real_count + 1;
-                    if (real_count_next == 100) begin
+                    if (real_count == 100) begin
                         next = DATA;
                         tick_count_next = 0;
                         real_count_next = 0;
-                    end
-
+                    end else real_count_next = real_count + 1;
                 end
             end
             DATA: begin
                 if (data_in == 1 && tick == 1) begin
-                    tick_count_next = tick_count + 1;
-                    if (tick_count_next > 200) begin
+                    if (tick_count == 200) begin
                         tick_count_next = 0;
                         next = IDLE;
-                    end
+                    end else tick_count_next = tick_count + 1;
                 end else if (data_in == 0) begin
                     next = DATA2;
                 end
             end
             DATA2: begin
-                if (tick_count_next < 50) begin
+                if (tick_count < 50) begin
                     next = SYNC;
                     o_data_next[39-data_count] = 0;
                     data_count_next = data_count + 1;
@@ -226,12 +213,12 @@ module DHT11_cu (
                 if (tick == 1) begin
                     tick_count_next = tick_count + 1;
                 end
-                if (tick_count_next == 50) begin
+                if (tick_count == 50) begin
                     data_next = 1;
                     tick_count_next = 0;
                     next = IDLE;
                 end
-                if( o_data_reg[39:32] + o_data_reg[31:24] + o_data_reg[23:16] +o_data_reg[15:8] != o_data_reg[7:0])
+                if(o_data_reg[39:32] + o_data_reg[31:24] + o_data_reg[23:16] +o_data_reg[15:8] != o_data_reg[7:0])
                     begin
                     led_next = 1;
                     finish_tick_next = 1;
