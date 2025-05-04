@@ -68,6 +68,10 @@ class generator;
   endtask
 endclass
 
+// 원인? 지피티 검색 
+// 이렇게 인터페이스 안의 tri 넷을 procedural 영역(클래스 태스크)에서 강제구조(force)로 제어하면, 
+// Vivado XSIM에서는 종종 내부 상태가 꼬여서 복구 불가능한 예외가 발생합니다.
+
 
 class driver;
   virtual DHT11_if       ifc;
@@ -229,7 +233,7 @@ module tb_DHT11;
       .PCLK   (ifc.PCLK),
       .PRESET (ifc.PRESET),
       .PADDR  (ifc.PADDR),
-      .PWDATA (  /*unused*/),
+      .PWDATA (),
       .PWRITE (ifc.PWRITE),
       .PENABLE(ifc.PENABLE),
       .PSEL   (ifc.PSEL),
