@@ -2,11 +2,11 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Fri May  2 13:58:22 2025
-# Process ID: 5344
-# Current directory: C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.runs/synth_1
+# Start of session at: Sun May  4 18:57:46 2025
+# Process ID: 26932
+# Current directory: C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.runs/synth_1
 # Command line: vivado.exe -log MCU.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source MCU.tcl
-# Log file: C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.runs/synth_1/MCU.vds
-# Journal file: C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.runs/synth_1\vivado.jou
+# Log file: C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.runs/synth_1/MCU.vds
+# Journal file: C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
 source MCU.tcl -notrace

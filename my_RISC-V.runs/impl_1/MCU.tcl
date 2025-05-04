@@ -17,7 +17,7 @@ proc create_report { reportName command } {
   }
 }
 namespace eval ::optrace {
-  variable script "C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.runs/impl_1/MCU.tcl"
+  variable script "C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.runs/impl_1/MCU.tcl"
   variable category "vivado_impl"
 }
 
@@ -123,22 +123,21 @@ set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
   set_param chipscope.maxJobs 4
-  set_param xicom.use_bs_reader 1
 OPTRACE "create in-memory project" START { }
   create_project -in_memory -part xc7a35tcpg236-1
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
 OPTRACE "create in-memory project" END { }
 OPTRACE "set parameters" START { }
-  set_property webtalk.parent_dir {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.cache/wt} [current_project]
-  set_property parent.project_path {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.xpr} [current_project]
-  set_property ip_output_repo {{C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.cache/ip}} [current_project]
+  set_property webtalk.parent_dir C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.cache/wt [current_project]
+  set_property parent.project_path C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.xpr [current_project]
+  set_property ip_output_repo C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
-  add_files -quiet {{C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.runs/synth_1/MCU.dcp}}
+  add_files -quiet C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.runs/synth_1/MCU.dcp
 OPTRACE "read constraints: implementation" START { }
-  read_xdc {{C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/constrs_1/imports/working/MY_Basys-3-Master.xdc}}
+  read_xdc C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/constrs_1/imports/working/MY_Basys-3-Master.xdc
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "add files" END { }
 OPTRACE "link_design" START { }
