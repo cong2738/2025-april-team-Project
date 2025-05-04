@@ -16,7 +16,10 @@ module fifo #(
     logic [$clog2(FIFO_CAP)-1:0] wr_ptr;
     logic [$clog2(FIFO_CAP)-1:0] rd_ptr;
 
-    fifo_ram u_fifo_ram (
+    fifo_ram #(
+        .FIFO_UNIT(FIFO_UNIT),
+        .FIFO_CAP(FIFO_CAP)
+    ) u_fifo_ram (
         .clk   (clk),
         .wr_ptr(wr_ptr),
         .wData (wData),
@@ -25,7 +28,10 @@ module fifo #(
         .rData (rData)
     );
 
-    fifo_CU u_fifo_CU (.*);
+    fifo_CU #(
+        .FIFO_UNIT(FIFO_UNIT),
+        .FIFO_CAP(FIFO_CAP)
+    ) u_fifo_CU (.*);
 
 
 endmodule
