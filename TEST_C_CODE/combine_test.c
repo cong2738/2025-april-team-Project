@@ -84,6 +84,8 @@ uint32_t time_ctrl(uint32_t max_count, uint32_t* preCnt, uint32_t Ontime);
 
 void set_cal(GPCAL_TypeDef* calculator, uint32_t mod, uint32_t data, uint32_t opdata);
 uint32_t cal_result(GPCAL_TypeDef* calculator);
+
+void convertData(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string);
     
 int main(void)
 {
@@ -91,14 +93,14 @@ int main(void)
     LED_init(LED);
     Switch_init(SWITCH);
     FND_init(GPFND, 1, 0xf);
-    // TIM_init(TIMER,psc,arr);
+    TIM_init(TIMER,psc,arr);
+    TIM_start(TIMER);
     uint32_t readData = 0;
     while (1)
     {  
-        set_cal(GPCAL,'%',11,10);
-        FND_writeData(GPFND,cal_result(GPCAL),0xf);
-        delay(1000);
-        FND_writeData(GPFND,1111,0xf);
+        uint32_t data[4];
+        convertData(GPCAL,readData,data);
+        FND_writeData(GPFND,readData,0xf);
         delay(1000);
     }
     
@@ -237,5 +239,18 @@ void set_cal(GPCAL_TypeDef* calculator, uint32_t mod, uint32_t data, uint32_t op
 }
 uint32_t cal_result(GPCAL_TypeDef* calculator) {
     return calculator->RESULT;
+}
+///////////////////////////////////////////////////////////////////////////////
+
+/* convertData function */
+void convertData(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string) {
+    for (int i = 0; i < 4; i++)
+    {
+        set_cal(calculator,'%',data,10);
+        string[i] = cal_result(calculator) + '0';
+        
+        set_cal(calculator,'/',data,10);
+        data = cal_result(calculator);
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
