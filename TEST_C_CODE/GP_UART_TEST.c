@@ -4,25 +4,9 @@
 
 typedef struct{
     __IO uint32_t MODER;
-    __IO uint32_t ODR;
-} GPO_TypeDef;
-
-typedef struct{
-    __IO uint32_t MODER;
-    __IO uint32_t IDR;
-} GPI_TypeDef;
-
-typedef struct{
-    __IO uint32_t MODER;
     __IO uint32_t IDR;
     __IO uint32_t ODR;
 } GPIO_TypeDef;
-
-typedef struct{
-    __IO uint32_t FCR;
-    __IO uint32_t FDR;
-    __IO uint32_t DP;
-} GPFND_TypeDef;
 
 typedef struct{
     __IO uint32_t TCR;
@@ -30,6 +14,12 @@ typedef struct{
     __IO uint32_t PSC;
     __IO uint32_t ARR;
 } TIMER_TypeDef;
+
+typedef struct{
+    __IO uint32_t FCR;
+    __IO uint32_t FDR;
+    __IO uint32_t DP;
+} GPFND_TypeDef;
 
 typedef struct{
     __IO uint32_t TXD;
@@ -42,14 +32,29 @@ typedef struct{
     __IO uint32_t IDR;
 } HCSR04_TypeDef;
 
-#define APB_BASEADDR    0x10000000
-#define GPFND_BASEADDR  (APB_BASEADDR + 0x1000)
-#define GPUART_BASEADDR (APB_BASEADDR + 0x2000)
-#define HCSR04_BASEADDR (APB_BASEADDR + 0x3000)
+typedef struct{
+    __IO uint32_t MOD;
+    __IO uint32_t DATA;
+    __IO uint32_t OPDATA;
+    __IO uint32_t RESULT;
+} GPCAL_TypeDef;
 
-#define GPFND           ((GPFND_TypeDef *) GPFND_BASEADDR)
-#define GPUART          ((GPUART_TypeDef *) GPUART_BASEADDR)
-#define HCSR04          ((HCSR04_TypeDef *) HCSR04_BASEADDR)
+#define APB_BASEADDR     0x10000000
+#define SWITCH_BASEADDR  (APB_BASEADDR + 0x1000)
+#define LED_BASEADDR     (APB_BASEADDR + 0x2000)
+#define TIMER_BASEADDR   (APB_BASEADDR + 0x3000)
+#define GPFND_BASEADDR   (APB_BASEADDR + 0x4000)
+#define GPUART_BASEADDR  (APB_BASEADDR + 0x5000)
+#define HCSR04_BASEADDR  (APB_BASEADDR + 0x6000)
+#define GPCAL_BASEADDR   (APB_BASEADDR + 0x7000)
+
+#define SWITCH           ((GPIO_TypeDef *) SWITCH_BASEADDR)
+#define LED              ((GPIO_TypeDef *) LED_BASEADDR)
+#define TIMER            ((TIMER_TypeDef *) TIMER_BASEADDR)
+#define GPFND            ((GPFND_TypeDef *) GPFND_BASEADDR)
+#define GPUART           ((GPUART_TypeDef *) GPUART_BASEADDR)
+#define HCSR04           ((HCSR04_TypeDef *) HCSR04_BASEADDR)
+#define GPCAL            ((GPCAL_TypeDef *) GPCAL_BASEADDR)
 
 void delay(int n);
 

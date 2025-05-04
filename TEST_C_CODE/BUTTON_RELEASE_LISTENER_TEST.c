@@ -4,25 +4,9 @@
 
 typedef struct{
     __IO uint32_t MODER;
-    __IO uint32_t ODR;
-} GPO_TypeDef;
-
-typedef struct{
-    __IO uint32_t MODER;
-    __IO uint32_t IDR;
-} GPI_TypeDef;
-
-typedef struct{
-    __IO uint32_t MODER;
     __IO uint32_t IDR;
     __IO uint32_t ODR;
 } GPIO_TypeDef;
-
-typedef struct{
-    __IO uint32_t FCR;
-    __IO uint32_t FDR;
-    __IO uint32_t DP;
-} GPFND_TypeDef;
 
 typedef struct{
     __IO uint32_t TCR;
@@ -31,20 +15,46 @@ typedef struct{
     __IO uint32_t ARR;
 } TIMER_TypeDef;
 
-#define APB_BASEADDR    0x10000000
-#define GPOA_BASEADDR   (APB_BASEADDR + 0x1000)
-#define GPIB_BASEADDR   (APB_BASEADDR + 0x2000)
-#define GPIOC_BASEADDR  (APB_BASEADDR + 0x3000)
-#define GPIOD_BASEADDR  (APB_BASEADDR + 0x4000)
-#define GPFND_BASEADDR  (APB_BASEADDR + 0x5000)
-#define TIMER_BASEADDR  (APB_BASEADDR + 0x6000)
+typedef struct{
+    __IO uint32_t FCR;
+    __IO uint32_t FDR;
+    __IO uint32_t DP;
+} GPFND_TypeDef;
 
-#define GPOA            ((GPO_TypeDef *) GPOA_BASEADDR)
-#define GPIB            ((GPI_TypeDef *) GPIB_BASEADDR)
-#define GPIOC           ((GPIO_TypeDef *) GPIOC_BASEADDR)
-#define GPIOD           ((GPIO_TypeDef *) GPIOD_BASEADDR)
-#define GPFND           ((GPFND_TypeDef *) GPFND_BASEADDR)
-#define TIMER           ((TIMER_TypeDef *) TIMER_BASEADDR)
+typedef struct{
+    __IO uint32_t TXD;
+    __IO uint32_t RXD;
+    __IO uint32_t tx_full;
+    __IO uint32_t rx_empty;
+} GPUART_TypeDef;
+
+typedef struct{
+    __IO uint32_t IDR;
+} HCSR04_TypeDef;
+
+typedef struct{
+    __IO uint32_t MOD;
+    __IO uint32_t DATA;
+    __IO uint32_t OPDATA;
+    __IO uint32_t RESULT;
+} GPCAL_TypeDef;
+
+#define APB_BASEADDR     0x10000000
+#define SWITCH_BASEADDR  (APB_BASEADDR + 0x1000)
+#define LED_BASEADDR     (APB_BASEADDR + 0x2000)
+#define TIMER_BASEADDR   (APB_BASEADDR + 0x3000)
+#define GPFND_BASEADDR   (APB_BASEADDR + 0x4000)
+#define GPUART_BASEADDR  (APB_BASEADDR + 0x5000)
+#define HCSR04_BASEADDR  (APB_BASEADDR + 0x6000)
+#define GPCAL_BASEADDR   (APB_BASEADDR + 0x7000)
+
+#define SWITCH           ((GPIO_TypeDef *) SWITCH_BASEADDR)
+#define LED              ((GPIO_TypeDef *) LED_BASEADDR)
+#define TIMER            ((TIMER_TypeDef *) TIMER_BASEADDR)
+#define GPFND            ((GPFND_TypeDef *) GPFND_BASEADDR)
+#define GPUART           ((GPUART_TypeDef *) GPUART_BASEADDR)
+#define HCSR04           ((HCSR04_TypeDef *) HCSR04_BASEADDR)
+#define GPCAL            ((GPCAL_TypeDef *) GPCAL_BASEADDR)
 
 void delay(int n);
 
@@ -73,8 +83,8 @@ void ButtonReleaseEvent(uint32_t sw, uint32_t swNum, uint32_t *push, uint32_t *r
     
 int main(void)
 {
-    LED_init(GPIOC);
-    Switch_init(GPIOD);
+    LED_init(LED);
+    Switch_init(SWITCH);
     TIM_init(TIMER,100000-1,3000-1);
     FND_init(GPFND,1);
 
@@ -84,7 +94,7 @@ int main(void)
     TIM_start(TIMER);
     while(1)
     {
-        uint32_t sw = Switch_read(GPIOD);
+        uint32_t sw = Switch_read(SWITCH);
         FND_writeData(GPFND,TIM_readCounter(TIMER),0xf);
         ButtonReleaseEvent(sw,0,&stateBtn0,&releaseBtn0,&led_data);
         ButtonReleaseEvent(sw,1,&stateBtn0,&releaseBtn0,&led_data);
@@ -193,7 +203,7 @@ void ButtonReleaseEvent(uint32_t sw, uint32_t swNum, uint32_t *push, uint32_t *r
     if(*release) {
         *led_data ^= (1<<swNum);
         *release = 0;
-        LED_write(GPIOC, *led_data);
+        LED_write(LED, *led_data);
     }
 }
 
