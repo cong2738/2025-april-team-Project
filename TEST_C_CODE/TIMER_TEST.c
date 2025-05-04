@@ -223,7 +223,7 @@ uint32_t LED_DataSet(uint32_t sw,uint32_t* en0,uint32_t* en1,uint32_t* en2,uint3
 
 void LED_ctrl(uint32_t max_count, uint32_t en, uint32_t* preCnt, uint32_t* indicator, uint32_t Ontime, uint32_t led_num) {
     uint32_t currCnt = TIM_readCounter(TIMER);
-    uint32_t gap = currCnt - *preCnt;
+    int32_t gap = currCnt - *preCnt;
     if(gap < 0) gap = max_count + gap;
     if(gap < Ontime) return;
     if(!en) {
