@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Sun May  4 22:49:56 2025
+| Date             : Sun May  4 22:57:13 2025
 | Host             : HYPC running 64-bit major release  (build 9200)
 | Command          : report_power -file MCU_power_routed.rpt -pb MCU_power_summary_routed.pb -rpx MCU_power_routed.rpx
 | Design           : MCU
@@ -53,14 +53,14 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.006 |        3 |       --- |             --- |
-| Slice Logic              |     0.010 |     4634 |       --- |             --- |
-|   LUT as Logic           |     0.009 |     2311 |     20800 |           11.11 |
+| Slice Logic              |     0.010 |     4639 |       --- |             --- |
+|   LUT as Logic           |     0.009 |     2310 |     20800 |           11.11 |
 |   LUT as Distributed RAM |    <0.001 |      144 |      9600 |            1.50 |
 |   CARRY4                 |    <0.001 |      195 |      8150 |            2.39 |
-|   Register               |    <0.001 |     1307 |     41600 |            3.14 |
+|   Register               |    <0.001 |     1305 |     41600 |            3.14 |
 |   F7/F8 Muxes            |    <0.001 |      153 |     32600 |            0.47 |
 |   Others                 |     0.000 |       61 |       --- |             --- |
-| Signals                  |     0.011 |     3535 |       --- |             --- |
+| Signals                  |     0.011 |     3532 |       --- |             --- |
 | Block RAM                |    <0.001 |        1 |        50 |            2.00 |
 | I/O                      |     0.004 |       23 |       106 |           21.70 |
 | Static Power             |     0.072 |          |           |                 |
@@ -145,7 +145,7 @@ Table of Contents
 +----------------------+-----------+
 | MCU                  |     0.030 |
 |   U_Core             |     0.016 |
-|     U_ControlUnit    |     0.003 |
+|     U_ControlUnit    |     0.004 |
 |     U_DataPath       |     0.013 |
 |       U_DecReg_RFRD1 |     0.007 |
 |       U_PC           |     0.002 |
