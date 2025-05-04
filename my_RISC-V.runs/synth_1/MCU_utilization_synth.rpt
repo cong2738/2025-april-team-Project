@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Sun May  4 18:58:53 2025
+| Date         : Sun May  4 23:52:37 2025
 | Host         : BOOK-CTJOQLMG70 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file MCU_utilization_synth.rpt -pb MCU_utilization_synth.pb
 | Design       : MCU
@@ -30,8 +30,8 @@ Table of Contents
 +----------------------------+------+-------+-----------+-------+
 |          Site Type         | Used | Fixed | Available | Util% |
 +----------------------------+------+-------+-----------+-------+
-| Slice LUTs*                | 1633 |     0 |     20800 |  7.85 |
-|   LUT as Logic             | 1585 |     0 |     20800 |  7.62 |
+| Slice LUTs*                | 1617 |     0 |     20800 |  7.77 |
+|   LUT as Logic             | 1569 |     0 |     20800 |  7.54 |
 |   LUT as Memory            |   48 |     0 |      9600 |  0.50 |
 |     LUT as Distributed RAM |   48 |     0 |           |       |
 |     LUT as Shift Register  |    0 |     0 |           |       |
@@ -153,12 +153,12 @@ Table of Contents
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
 | FDCE     |  774 |        Flop & Latch |
-| LUT6     |  748 |                 LUT |
-| LUT5     |  342 |                 LUT |
-| LUT4     |  324 |                 LUT |
-| LUT2     |  196 |                 LUT |
+| LUT6     |  730 |                 LUT |
+| LUT5     |  344 |                 LUT |
+| LUT4     |  316 |                 LUT |
+| LUT2     |  192 |                 LUT |
 | FDRE     |  175 |        Flop & Latch |
-| LUT3     |  162 |                 LUT |
+| LUT3     |  174 |                 LUT |
 | CARRY4   |   86 |          CarryLogic |
 | RAMD32   |   72 |  Distributed Memory |
 | LUT1     |   60 |                 LUT |

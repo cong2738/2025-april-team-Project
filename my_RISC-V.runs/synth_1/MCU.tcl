@@ -101,7 +101,6 @@ read_verilog -library xil_defaultlib -sv {
   C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/ram.sv
   C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/new/fifo.sv
   C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/new/DHT11_Periph.sv
-  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/new/tb_DHT11_UVMst.sv
 }
 read_verilog -library xil_defaultlib {
   C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/fndController.v
