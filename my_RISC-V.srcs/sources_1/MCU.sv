@@ -62,11 +62,34 @@ module MCU (
         .PREADY(PREADY[0])
     );
 
+    GPIO_Periph u_switchPeriph (
+        .*,
+        .PSEL     (PSEL[1]),
+        .PRDATA   (PRDATA[1]),
+        .PREADY   (PREADY[1]),
+        .inoutPort(btn)
+    );
+
+    GPIO_Periph u_ledPeriph (
+        .*,
+        .PSEL     (PSEL[2]),
+        .PRDATA   (PRDATA[2]),
+        .PREADY   (PREADY[2]),
+        .inoutPort(led)
+    );
+
+    GP_Timer u_GP_Timer (
+        .*,
+        .PSEL  (PSEL[3]),
+        .PRDATA(PRDATA[3]),
+        .PREADY(PREADY[3])
+    );
+
     fnd_Periph u_fnd_pp (
         .*,
-        .PSEL   (PSEL[1]),
-        .PRDATA (PRDATA[1]),
-        .PREADY (PREADY[1]),
+        .PSEL   (PSEL[4]),
+        .PRDATA (PRDATA[4]),
+        .PREADY (PREADY[4]),
         .fndFont(fndFont),
         .fndCom (fndCom)
     );
@@ -75,9 +98,9 @@ module MCU (
         .BAUD_RATE(9600)
     ) u_GP_UART (
         .*,
-        .PSEL    (PSEL[2]),
-        .PRDATA  (PRDATA[2]),
-        .PREADY  (PREADY[2]),
+        .PSEL    (PSEL[5]),
+        .PRDATA  (PRDATA[5]),
+        .PREADY  (PREADY[5]),
         .rx      (rx),
         .tx      (tx),
         .tx_full (tx_full),
@@ -89,11 +112,19 @@ module MCU (
 
     GP_HCSR04 u_GP_HCSR04 (
         .*,
-        .PSEL     (PSEL[3]),
-        .PRDATA   (PRDATA[3]),
-        .PREADY   (PREADY[3]),
-        .echo_data(echo_data),
+        .PSEL      (PSEL[6]),
+        .PRDATA    (PRDATA[6]),
+        .PREADY    (PREADY[6]),
+        .echo_data (echo_data),
         .echo_start(echo_start)
     );
+
+    GP_calculator u_GP_calculator (
+        .*,
+        .PSEL  (PSEL[7]),
+        .PRDATA(PRDATA[7]),
+        .PREADY(PREADY[7])
+    );
+
 
 endmodule

@@ -110,6 +110,7 @@ read_verilog -library xil_defaultlib -sv {
   C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv
   C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_Timer/GP_Timer.sv
   C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/clk_devider/tick_generator.sv
+  C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv
 }
 read_verilog -library xil_defaultlib {
   C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/fndController.v
