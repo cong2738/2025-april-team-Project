@@ -90,6 +90,7 @@ module calculator (
         RESULT = DATA;
         case (MOD)
             37: RESULT = DATA % OPDATA; // '%'
+            42: RESULT = DATA * OPDATA; // '*'
             47: RESULT = DATA / OPDATA; // '/'
         endcase
     end
