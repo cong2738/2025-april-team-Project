@@ -74,6 +74,15 @@ class driver;
   mailbox #(transaction) mb;
   event                  done_evt;
 
+  localparam integer START_LOW = 200_000;  // 200 us
+  localparam integer START_REL = 2_000;  //   2 us
+  localparam integer RESP_LOW = 8_000;  //   8 us
+  localparam integer RESP_HIGH = 8_000;  //   8 us
+  localparam integer BIT_START = 5_000;  //   5 us
+  localparam integer BIT_ONE_H = 7_000;  //   7 us
+  localparam integer BIT_ZERO_H = 2_600;  // 2.6 us
+  localparam integer BIT_POST = 2_600;  // 2.6 us
+
   function new(virtual DHT11_if ifc_i, mailbox#(transaction) mb_i, event done_evt_i);
     ifc      = ifc_i;
     mb       = mb_i;
@@ -102,14 +111,6 @@ class driver;
   //   ifc.drive_en = 0;
   // endtask
 
-  localparam integer START_LOW = 200_000;  // 200 µs
-  localparam integer START_REL = 2_000;  //   2 µs
-  localparam integer RESP_LOW = 8_000;  //   8 µs
-  localparam integer RESP_HIGH = 8_000;  //   8 µs
-  localparam integer BIT_START = 5_000;  //   5 µs
-  localparam integer BIT_ONE_H = 7_000;  //   7 µs
-  localparam integer BIT_ZERO_H = 2_600;  // 2.6 µs
-  localparam integer BIT_POST = 2_600;  // 2.6 µs
 
   // 센서 구현
   task sensor_behave(logic [7:0] H, logic [7:0] T);
@@ -164,19 +165,25 @@ class driver;
       ifc.drive_data = 0;
       sensor_behave(tr.humidity, tr.temperature);
       ifc.drive_en = 0;
+      $display("[DRV] Sensor done, issuing APB read for PADDR=%0h @%0t", tr.PADDR, $realtime);
+
 
       @(posedge ifc.PCLK);
       ifc.PSEL    <= 1;
       ifc.PWRITE  <= 0;
       ifc.PADDR   <= tr.PADDR;
       ifc.PENABLE <= 0;
+      $display("[DRV] APB Address phase: PADDR=%0h @%0t", tr.PADDR, $realtime);
 
       @(posedge ifc.PCLK);
       ifc.PENABLE <= 1;
+      $display("[DRV] APB Enable phase @%0t", $realtime);
 
       @(posedge ifc.PREADY);
       tr.PRDATA = ifc.PRDATA;
       tr.PREADY = ifc.PREADY;
+      $display("[DRV] APB Read complete: PRDATA=%0h PREADY=%0b @%0t", 
+               tr.PRDATA, tr.PREADY, $realtime);
       ->done_evt;
 
       ifc.PSEL    <= 0;
@@ -204,6 +211,8 @@ class monitor;
       tr = new();
       tr.PRDATA = ifc.PRDATA;
       tr.PREADY = ifc.PREADY;
+      $display("[MON] Captured PRDATA=%0h PREADY=%0b @%0t", 
+               tr.PRDATA, tr.PREADY, $realtime);
       mb.put(tr);
     end
   endtask
@@ -232,6 +241,8 @@ class scoreboard;
         4'h8: if (tr.PRDATA[0] == (tr.humidity + tr.temperature)) pass++;
  else fail++;
       endcase
+      $display("[SCB] PADDR=%0h PRDATA=%0h HUM=%0d TEMP=%0d PASS=%0d FAIL=%0d @%0t",
+               tr.PADDR, tr.PRDATA, tr.humidity, tr.temperature, pass, fail, $realtime);
       ->done_evt;
     end
     $display("=== Result: PASS=%0d, FAIL=%0d ===", pass, fail);
@@ -317,6 +328,7 @@ module tb_DHT11 ();
     environment = new(ifc, N);
     environment.run();
     #100;
+    $display("finished!");
     $finish;
   end
 endmodule
