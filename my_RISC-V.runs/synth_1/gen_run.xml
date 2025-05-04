@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1746347998">
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1746366472">
   <File Type="PA-TCL" Name="MCU.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="MCU_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="MCU_reports.tcl"/>
@@ -164,6 +164,20 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/GP_calculator/GP_calculator.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/GP_DHT11/DHT11_Periph.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/GP_DHT11/DHT11_module.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>

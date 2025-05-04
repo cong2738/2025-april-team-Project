@@ -71,7 +71,6 @@ proc create_report { reportName command } {
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 3
-set_param synth.incrementalSynthesisCache C:/Users/cong/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-22612-HYPC/incrSyn
 set_param xicom.use_bs_reader 1
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
@@ -111,11 +110,13 @@ read_verilog -library xil_defaultlib -sv {
   C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_Timer/GP_Timer.sv
   C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/clk_devider/tick_generator.sv
   C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv
+  C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv
 }
 read_verilog -library xil_defaultlib {
   C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/fndController.v
   C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/MyUART_source/uart.v
   C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_HCSR04/HC_SR04_module.v
+  C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being

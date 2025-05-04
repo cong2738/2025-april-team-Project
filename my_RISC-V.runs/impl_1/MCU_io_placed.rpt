@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date                      : Sun May  4 17:41:33 2025
+| Date                      : Sun May  4 22:49:29 2025
 | Host                      : HYPC running 64-bit major release  (build 9200)
 | Command                   : report_io -file MCU_io_placed.rpt
 | Design                    : MCU
@@ -25,7 +25,7 @@ Table of Contents
 +---------------+
 | Total User IO |
 +---------------+
-|            22 |
+|            23 |
 +---------------+
 
 
@@ -160,7 +160,7 @@ Table of Contents
 | K18        |             | High Range | IO_L8N_T1_D12_14             | User IO       |             |      14 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | K19        |             | High Range | IO_L6P_T0_FCS_B_14           | User IO       |             |      14 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | L1         |             | High Range | IO_L6N_T0_VREF_35            | User IO       |             |      35 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
-| L2         |             | High Range | IO_L5N_T0_AD13N_35           | User IO       |             |      35 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
+| L2         | DATA_IO     | High Range | IO_L5N_T0_AD13N_35           | BIDIR         | LVCMOS33    |      35 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | L3         |             | High Range | IO_L8P_T1_AD14P_35           | User IO       |             |      35 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | L7         |             | High Range | VCCO_35                      | VCCO          |             |      35 |            |      |                     |                      |    3.30 |            |           |          |      |                  |              |                   |              |
 | L8         |             |            | GND                          | GND           |             |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |              |                   |              |
