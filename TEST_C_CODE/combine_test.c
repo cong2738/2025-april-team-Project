@@ -39,6 +39,11 @@ typedef struct{
     __IO uint32_t RESULT;
 } GPCAL_TypeDef;
 
+typedef struct{
+    __IO uint32_t RH;
+    __IO uint32_t TEM;
+} DHT11_TypeDef;
+
 #define APB_BASEADDR     0x10000000
 #define SWITCH_BASEADDR  (APB_BASEADDR + 0x1000)
 #define LED_BASEADDR     (APB_BASEADDR + 0x2000)
@@ -47,6 +52,7 @@ typedef struct{
 #define GPUART_BASEADDR  (APB_BASEADDR + 0x5000)
 #define HCSR04_BASEADDR  (APB_BASEADDR + 0x6000)
 #define GPCAL_BASEADDR   (APB_BASEADDR + 0x7000)
+#define DHT11_BASEADDR   (APB_BASEADDR + 0x8000)
 
 #define SWITCH           ((GPIO_TypeDef *) SWITCH_BASEADDR)
 #define LED              ((GPIO_TypeDef *) LED_BASEADDR)
@@ -55,6 +61,7 @@ typedef struct{
 #define GPUART           ((GPUART_TypeDef *) GPUART_BASEADDR)
 #define HCSR04           ((HCSR04_TypeDef *) HCSR04_BASEADDR)
 #define GPCAL            ((GPCAL_TypeDef *) GPCAL_BASEADDR)
+#define DHT11            ((DHT11_TypeDef *) DHT11_BASEADDR)
 
 void delay(int n);
 
@@ -80,14 +87,20 @@ void TIM_writePresacler(TIMER_TypeDef *tim, uint32_t psc);
 void TIM_writeAutoReload(TIMER_TypeDef *tim, uint32_t arr);
 void TIM_clear(TIMER_TypeDef *tim);
 uint32_t TIM_readCounter(TIMER_TypeDef *tim);
-uint32_t time_ctrl(uint32_t max_count, uint32_t* preCnt, uint32_t Ontime);
+uint32_t time_ctrl(TIMER_TypeDef* timer,uint32_t max_count, uint32_t* preCnt, uint32_t Ontime);
 
 void set_cal(GPCAL_TypeDef* calculator, uint32_t mod, uint32_t data, uint32_t opdata);
 uint32_t cal_result(GPCAL_TypeDef* calculator);
 
-void convertData(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string);
-
+void convertData(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string, uint32_t length);
 void transString(GPUART_TypeDef* uart, uint32_t* string, uint32_t length);
+
+uint32_t dht11_readRH(DHT11_TypeDef* dht11);
+uint32_t dht11_readTEM(DHT11_TypeDef* dht11);
+
+uint16_t combineData(uint32_t data1, uint32_t data2, uint32_t sep);
+
+void printRes(uint32_t* distance_data, uint32_t* RH_data, uint32_t* TEM_data);
 
 /* main */
 int main(void)
@@ -98,15 +111,23 @@ int main(void)
     FND_init(GPFND, 1, 0xf);
     TIM_init(TIMER,psc,arr);
     TIM_start(TIMER);
-    uint32_t readData = 0;
+    uint32_t preCnt = 0;
     while (1)
     {  
-        uint32_t data[4];
-        readData = HCSR04_READ(HCSR04);
-        convertData(GPCAL,readData,data);
-        FND_writeData(GPFND,readData,0xf);
-        transString(GPUART,data,4);
-        delay(1000);
+        uint32_t distance = HCSR04_READ(HCSR04);
+        uint32_t RH = dht11_readRH(DHT11);
+        uint32_t TEM = dht11_readTEM(DHT11);
+
+        uint32_t T_RH = combineData(TEM,RH,100);
+        
+        uint32_t distance_data[3];
+        uint32_t TEM_data[3];
+        uint32_t RH_data[3];
+        convertData(GPCAL,distance,distance_data,3);
+        convertData(GPCAL,RH,RH_data,3);
+        convertData(GPCAL,TEM,TEM_data,3);
+
+        if(time_ctrl(TIMER, arr, &preCnt, 500)) printRes(distance_data,RH_data,TEM_data);
     }
     
     return 0;
@@ -227,8 +248,8 @@ uint32_t TIM_readCounter(TIMER_TypeDef *tim)
     return tim->TCNT;
 }
 
-uint32_t time_ctrl(uint32_t max_count, uint32_t* preCnt, uint32_t Ontime) {
-    uint32_t currCnt = TIM_readCounter(TIMER);
+uint32_t time_ctrl(TIMER_TypeDef* timer,uint32_t max_count, uint32_t* preCnt, uint32_t Ontime) {
+    uint32_t currCnt = TIM_readCounter(timer);
     uint32_t gap = currCnt - *preCnt;
     if(gap < 0) gap = max_count + gap;
     if(gap < Ontime) return 0;
@@ -249,8 +270,8 @@ uint32_t cal_result(GPCAL_TypeDef* calculator) {
 ///////////////////////////////////////////////////////////////////////////////
 
 /* convertData function */
-void convertData(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string) {
-    for (int i = 0; i < 4; i++)
+void convertData(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string, uint32_t length) {
+    for (int i = 0; i < length; i++)
     {
         set_cal(calculator,'%',data,10);
         string[i] = cal_result(calculator) + '0';
@@ -269,6 +290,46 @@ void transString(GPUART_TypeDef* uart, uint32_t* string, uint32_t length) {
         i--;
         UART_trans(uart, string[i]);
     }
-    UART_trans(uart, '\n');
 }
 ///////////////////////////////////////////////////////////////////////////////
+
+/* dht11 function */
+uint32_t dht11_readRH(DHT11_TypeDef* dht11) {
+    uint32_t data[4];
+    return dht11->RH;
+}
+uint32_t dht11_readTEM(DHT11_TypeDef* dht11) {
+    uint32_t data[4];
+    return dht11->TEM;
+}
+///////////////////////////////////////////////////////////////////////////////
+
+uint16_t combineData(uint32_t data1, uint32_t data2, uint32_t sep) {
+    set_cal(GPCAL,data1,'*',sep);
+    return cal_result(GPCAL) + data2;
+}
+
+void printRes(uint32_t* distance_data, uint32_t* RH_data, uint32_t* TEM_data){
+    UART_trans(GPUART,'D');
+    UART_trans(GPUART,'I');
+    UART_trans(GPUART,'S');
+    UART_trans(GPUART,':');
+    UART_trans(GPUART,' ');
+    transString(GPUART,distance_data,3);
+    UART_trans(GPUART,'\n');
+    UART_trans(GPUART,'R');
+    UART_trans(GPUART,'H');
+    UART_trans(GPUART,' ');
+    UART_trans(GPUART,':');
+    UART_trans(GPUART,' ');
+    transString(GPUART,RH_data,3);
+    UART_trans(GPUART,'\n');
+    UART_trans(GPUART,'T');
+    UART_trans(GPUART,'E');
+    UART_trans(GPUART,'M');
+    UART_trans(GPUART,':');
+    UART_trans(GPUART,' ');
+    transString(GPUART,TEM_data,3);
+    UART_trans(GPUART,'\n');
+    UART_trans(GPUART,'\n');
+}
