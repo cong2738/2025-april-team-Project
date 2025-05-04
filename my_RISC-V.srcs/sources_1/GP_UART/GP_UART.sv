@@ -107,7 +107,7 @@ module APB_UARTIntf (
     logic wr_reg, wr_next;
     logic rd_reg, rd_next;
     logic [31:0] slv_reg0, slv_next0;
-    logic [31:0] slv_reg1, slv_next1;
+    logic [31:0] slv_reg1;
     logic [31:0] slv_reg2;
     logic [31:0] slv_reg3;
     logic [31:0] PRDATA_next;
@@ -125,7 +125,6 @@ module APB_UARTIntf (
             rd_reg   <= 0;
             wr_reg   <= 0;
             slv_reg0 <= 0;
-            PRDATA   <= 0;
         end else begin
             state    <= next;
             wr_reg   <= wr_next;
@@ -139,7 +138,6 @@ module APB_UARTIntf (
         wr_next   = wr_reg;
         rd_next   = rd_reg;
         slv_next0 = slv_reg0;
-        slv_next1 = slv_reg1;
         PREADY    = 0;
         PRDATA_next = PRDATA;
         case (state)
@@ -175,6 +173,8 @@ module APB_UARTIntf (
                                 PRDATA_next <= slv_reg1;
                             end
                         end
+                        2'd2: PRDATA_next <= slv_reg2;
+                        2'd3: PRDATA_next <= slv_reg3;
                     endcase
                 end
                 next = SEND;
