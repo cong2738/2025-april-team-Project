@@ -44,7 +44,7 @@ module GP_UART #(parameter BAUD_RATE = 9600) (  //GPIO
 
     fifo #(
         .FIFO_UNIT(8),
-        .FIFO_CAP(2**4)
+        .FIFO_CAP(2**8)
     ) u_outputBuffer (
         .clk  (PCLK),
         .reset(PRESET),
@@ -57,7 +57,7 @@ module GP_UART #(parameter BAUD_RATE = 9600) (  //GPIO
     );
     fifo #(
         .FIFO_UNIT(8),
-        .FIFO_CAP(2**4)
+        .FIFO_CAP(2**8)
     ) u_inputBuffer (
         .clk  (PCLK),
         .reset(PRESET),
