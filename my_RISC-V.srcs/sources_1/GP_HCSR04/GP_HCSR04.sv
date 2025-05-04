@@ -64,7 +64,6 @@ module APB_HCSR04Intf (
 
     always_ff @(posedge PCLK, posedge PRESET) begin
         if (PRESET) begin
-            slv_reg1 <= 0;
         end else begin
             if (PSEL && PENABLE) begin
                 PREADY <= 1'b1;
