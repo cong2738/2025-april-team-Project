@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Sun May  4 16:52:52 2025
+| Date         : Sun May  4 17:42:00 2025
 | Host         : HYPC running 64-bit major release  (build 9200)
 | Command      : report_methodology -file MCU_methodology_drc_routed.rpt -pb MCU_methodology_drc_routed.pb -rpx MCU_methodology_drc_routed.rpx
 | Design       : MCU
@@ -23,11 +23,11 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 46
+             Violations found: 49
 +-----------+----------+-------------------------------+------------+
 | Rule      | Severity | Description                   | Violations |
 +-----------+----------+-------------------------------+------------+
-| TIMING-16 | Warning  | Large setup violation         | 17         |
+| TIMING-16 | Warning  | Large setup violation         | 20         |
 | TIMING-18 | Warning  | Missing input or output delay | 21         |
 | TIMING-20 | Warning  | Non-clocked latch             | 8          |
 +-----------+----------+-------------------------------+------------+
@@ -36,87 +36,102 @@ Table of Contents
 -----------------
 TIMING-16#1 Warning
 Large setup violation  
-There is a large setup violation of -1.032 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[3]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.003 ns between U_Core/U_DataPath/U_PC/q_reg[3]/C (clocked by sys_clk_pin) and U_DataPath/U_RegFile/RegFile_reg_r2_0_31_24_29/RAMC_D1/I (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#2 Warning
 Large setup violation  
-There is a large setup violation of -1.081 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[3]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[0]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.072 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[6]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[10]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#3 Warning
 Large setup violation  
-There is a large setup violation of -1.150 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[3]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[6]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.138 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[6]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[5]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#4 Warning
 Large setup violation  
-There is a large setup violation of -1.207 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[3]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[10]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.143 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[6]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[2]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#5 Warning
 Large setup violation  
-There is a large setup violation of -1.321 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[3]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[5]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.201 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[6]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[7]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#6 Warning
 Large setup violation  
-There is a large setup violation of -1.552 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[3]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[9]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.248 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[6]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[6]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#7 Warning
 Large setup violation  
-There is a large setup violation of -1.556 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[3]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[8]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.324 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[6]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#8 Warning
 Large setup violation  
-There is a large setup violation of -1.681 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[3]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[3]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.376 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[6]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[0]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#9 Warning
 Large setup violation  
-There is a large setup violation of -1.834 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[3]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[4]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.656 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[6]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[9]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#10 Warning
 Large setup violation  
-There is a large setup violation of -5.840 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]_replica/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[3]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.027 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[6]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[8]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#11 Warning
 Large setup violation  
-There is a large setup violation of -5.850 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]_replica/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[2]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.101 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[6]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[4]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#12 Warning
 Large setup violation  
-There is a large setup violation of -5.975 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]_replica/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.108 ns between u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg_reg[6]/C (clocked by sys_clk_pin) and u_GP_HCSR04/u_HCSR04_buffer/o_data_reg[3]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#13 Warning
 Large setup violation  
-There is a large setup violation of -6.054 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]_replica/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[4]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -5.703 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[0]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#14 Warning
 Large setup violation  
-There is a large setup violation of -6.111 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]_replica/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[0]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -5.754 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[3]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#15 Warning
 Large setup violation  
-There is a large setup violation of -6.251 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]_replica/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[7]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -5.784 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[2]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#16 Warning
 Large setup violation  
-There is a large setup violation of -6.255 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]_replica/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[6]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -5.891 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#17 Warning
 Large setup violation  
-There is a large setup violation of -6.388 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]_replica/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[5]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -5.980 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[6]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#18 Warning
+Large setup violation  
+There is a large setup violation of -5.988 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[4]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#19 Warning
+Large setup violation  
+There is a large setup violation of -5.991 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[7]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#20 Warning
+Large setup violation  
+There is a large setup violation of -6.003 ns between u_GP_calculator/U_APB_Intf/slv_reg2_reg[6]/C (clocked by sys_clk_pin) and u_GP_calculator/U_APB_Intf/PRDATA_reg[5]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-18#1 Warning

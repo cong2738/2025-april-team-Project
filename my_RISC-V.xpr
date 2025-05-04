@@ -201,14 +201,14 @@
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/GP_HCSR04/GP_HCSR04.sv">
-        <FileInfo>
+        <FileInfo RelPath="GP_HCSR04.sv">
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/GP_HCSR04/HC_SR04_module.v">
-        <FileInfo>
+        <FileInfo RelPath="HC_SR04_module.v">
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>

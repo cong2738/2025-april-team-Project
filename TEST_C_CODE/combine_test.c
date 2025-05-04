@@ -86,7 +86,10 @@ void set_cal(GPCAL_TypeDef* calculator, uint32_t mod, uint32_t data, uint32_t op
 uint32_t cal_result(GPCAL_TypeDef* calculator);
 
 void convertData(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string);
-    
+
+void transString(GPUART_TypeDef* uart, uint32_t* string, uint32_t length);
+
+/* main */
 int main(void)
 {
     uint32_t psc = 100000-1, arr = 10000-1;
@@ -99,13 +102,16 @@ int main(void)
     while (1)
     {  
         uint32_t data[4];
+        readData = HCSR04_READ(HCSR04);
         convertData(GPCAL,readData,data);
         FND_writeData(GPFND,readData,0xf);
+        transString(GPUART,data,4);
         delay(1000);
     }
     
     return 0;
 }
+///////////////////////////////////////////////////////////////////////////////
 
 /* delay function */
 void delay(int n)
@@ -252,5 +258,17 @@ void convertData(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string) {
         set_cal(calculator,'/',data,10);
         data = cal_result(calculator);
     }
+}
+///////////////////////////////////////////////////////////////////////////////
+
+/* transString function */
+void transString(GPUART_TypeDef* uart, uint32_t* string, uint32_t length) {
+    int i = length;
+    while (i != 0)
+    {
+        i--;
+        UART_trans(uart, string[i]);
+    }
+    UART_trans(uart, '\n');
 }
 ///////////////////////////////////////////////////////////////////////////////
