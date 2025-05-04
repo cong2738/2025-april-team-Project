@@ -12,7 +12,8 @@ module MCU (
     output logic       rx_full,
     output logic       rx_empty,
     input  logic       echo_data,
-    output logic       echo_start
+    output logic       echo_start,
+    inout  logic       DATA_IO
 );
     logic        PCLK;
     logic        PRESET;
@@ -124,6 +125,14 @@ module MCU (
         .PSEL  (PSEL[7]),
         .PRDATA(PRDATA[7]),
         .PREADY(PREADY[7])
+    );
+
+    DHT11_Periph u_DHT11_Periph (
+        .*,
+        .PSEL   (PSEL[8]),
+        .PRDATA (PRDATA[8]),
+        .PREADY (PREADY[8]),
+        .DATA_IO(DATA_IO)
     );
 
 
