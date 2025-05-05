@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Mon May  5 23:24:58 2025
+| Date             : Mon May  5 23:54:57 2025
 | Host             : HYPC running 64-bit major release  (build 9200)
 | Command          : report_power -file MCU_power_routed.rpt -pb MCU_power_summary_routed.pb -rpx MCU_power_routed.rpx
 | Design           : MCU
@@ -53,14 +53,14 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.007 |        3 |       --- |             --- |
-| Slice Logic              |     0.023 |     8453 |       --- |             --- |
-|   LUT as Logic           |     0.019 |     4935 |     20800 |           23.73 |
+| Slice Logic              |     0.023 |     8501 |       --- |             --- |
+|   LUT as Logic           |     0.019 |     4950 |     20800 |           23.80 |
 |   CARRY4                 |     0.003 |      764 |      8150 |            9.37 |
 |   LUT as Distributed RAM |    <0.001 |      144 |      9600 |            1.50 |
-|   Register               |    <0.001 |     1631 |     41600 |            3.92 |
+|   Register               |    <0.001 |     1665 |     41600 |            4.00 |
 |   F7/F8 Muxes            |    <0.001 |      339 |     32600 |            1.04 |
 |   Others                 |     0.000 |       76 |       --- |             --- |
-| Signals                  |     0.028 |     6918 |       --- |             --- |
+| Signals                  |     0.028 |     6964 |       --- |             --- |
 | Block RAM                |    <0.001 |        1 |        50 |            2.00 |
 | DSPs                     |     0.002 |        3 |        90 |            3.33 |
 | I/O                      |     0.004 |       35 |       106 |           33.02 |

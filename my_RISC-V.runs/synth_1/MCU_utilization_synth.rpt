@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Mon May  5 23:23:18 2025
+| Date         : Mon May  5 23:52:49 2025
 | Host         : HYPC running 64-bit major release  (build 9200)
 | Command      : report_utilization -file MCU_utilization_synth.rpt -pb MCU_utilization_synth.pb
 | Design       : MCU
@@ -38,8 +38,8 @@ Table of Contents
 | Slice Registers            | 1607 |     0 |     41600 |  3.86 |
 |   Register as Flip Flop    | 1599 |     0 |     41600 |  3.84 |
 |   Register as Latch        |    8 |     0 |     41600 |  0.02 |
-| F7 Muxes                   |  265 |     0 |     16300 |  1.63 |
-| F8 Muxes                   |   74 |     0 |      8150 |  0.91 |
+| F7 Muxes                   |  263 |     0 |     16300 |  1.61 |
+| F8 Muxes                   |   76 |     0 |      8150 |  0.93 |
 +----------------------------+------+-------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
 
@@ -153,18 +153,18 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT3     | 2447 |                 LUT |
-| LUT6     | 1678 |                 LUT |
+| LUT3     | 2449 |                 LUT |
+| LUT6     | 1676 |                 LUT |
 | FDCE     | 1376 |        Flop & Latch |
 | CARRY4   |  764 |          CarryLogic |
 | LUT4     |  416 |                 LUT |
-| LUT5     |  410 |                 LUT |
-| LUT2     |  319 |                 LUT |
-| MUXF7    |  265 |               MuxFx |
+| LUT5     |  414 |                 LUT |
+| LUT2     |  314 |                 LUT |
+| MUXF7    |  263 |               MuxFx |
 | LUT1     |  209 |                 LUT |
 | FDRE     |  205 |        Flop & Latch |
 | RAMD64E  |   96 |  Distributed Memory |
-| MUXF8    |   74 |               MuxFx |
+| MUXF8    |   76 |               MuxFx |
 | RAMD32   |   72 |  Distributed Memory |
 | RAMS32   |   24 |  Distributed Memory |
 | OBUF     |   18 |                  IO |
