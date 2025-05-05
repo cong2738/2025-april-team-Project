@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.runs/synth_1/MCU.tcl"
+  variable script "C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.runs/synth_1/MCU.tcl"
   variable category "vivado_synth"
 }
 
@@ -70,44 +70,42 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 4
-set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.cache/wt} [current_project]
-set_property parent.project_path {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.xpr} [current_project]
+set_property webtalk.parent_dir C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.cache/wt [current_project]
+set_property parent.project_path C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_output_repo {c:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.cache/ip} [current_project]
+set_property ip_output_repo c:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_verilog {{C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/defines.sv}}
-set_property file_type "Verilog Header" [get_files {{C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/defines.sv}}]
-read_mem {{C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/code.mem}}
+read_verilog C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/defines.sv
+set_property file_type "Verilog Header" [get_files C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/defines.sv]
+read_mem C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/code.mem
 read_verilog -library xil_defaultlib -sv {
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/DataPath.sv}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/rom.sv}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/gpi.sv}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/APB_Master.sv}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/APB_Slave.sv}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/gpio.sv}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/RV32I_Core.sv}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/ControlUnit.sv}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/MCU.sv}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/GP_fnd.sv}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/ram.sv}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/new/fifo.sv}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/new/DHT11_Periph.sv}
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/DataPath.sv
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/rom.sv
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/gpi.sv
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/APB_Master.sv
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/APB_Slave.sv
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/gpio.sv
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/RV32I_Core.sv
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/ControlUnit.sv
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/MCU.sv
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/GP_fnd.sv
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/ram.sv
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/new/fifo.sv
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/new/DHT11_Periph.sv
 }
 read_verilog -library xil_defaultlib {
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/fndController.v}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/dht11/DHT11_module.v}
-  {C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/sources_1/imports/sources_1/fndController.v}
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/fndController.v
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/dht11/DHT11_module.v
+  C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/sources_1/imports/sources_1/fndController.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -118,8 +116,8 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc {{C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/constrs_1/imports/working/MY_Basys-3-Master.xdc}}
-set_property used_in_implementation false [get_files {{C:/Users/kccistc/Desktop/april PJ/2025-april-team-Project/my_RISC-V.srcs/constrs_1/imports/working/MY_Basys-3-Master.xdc}}]
+read_xdc C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/constrs_1/imports/working/MY_Basys-3-Master.xdc
+set_property used_in_implementation false [get_files C:/harmanSA/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.srcs/constrs_1/imports/working/MY_Basys-3-Master.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]

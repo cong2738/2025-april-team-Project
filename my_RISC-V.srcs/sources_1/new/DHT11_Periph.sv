@@ -13,19 +13,11 @@ module DHT11_Periph (
     input  logic        PSEL,
     output logic [31:0] PRDATA,
     output logic        PREADY,
-    inout  logic        DATA_IO,
-    // 검증용
-    output logic [7:0] sim_rh,
-    output logic [7:0] sim_t,
-    output logic        sim_finish
+    inout  logic        DATA_IO
 );
 
     logic [7:0] rh_int, t_int;
     logic finish_int;
-
-    assign sim_rh  = rh_int;  // 시뮬레이션을 위한 assign
-    assign sim_t = t_int;  // 시뮬레이션을 위한 assign
-    assign sim_finish = finish_int;  // 시뮬레이션을 위한 assign
 
   APB_SlaveIntf_DHT11 U_APB_Intf (
       .PCLK      (PCLK),
@@ -71,11 +63,15 @@ module APB_SlaveIntf_DHT11 (
 );
   
 
-  logic [31:0] slv_reg0, slv_reg1, slv_reg2, slv_reg3;
+  logic [31:0] slv_reg0, slv_reg1;
 
-  assign slv_reg0[7:0] = rh_int;
-  assign slv_reg1[7:0] = t_int;
-  assign slv_reg2[0] = finish_int;
+//   assign slv_reg0[7:0] = rh_int;
+//   assign slv_reg1[7:0] = t_int;
+//   assign slv_reg2[0] = finish_int;
+
+  assign slv_reg0 = {24'd0, rh_int};
+  assign slv_reg1 = {24'd0, t_int};
+  assign slv_reg2 = {31'd0, finish_int};
   
 
   always_ff @(posedge PCLK, posedge PRESET) begin
@@ -98,7 +94,8 @@ module APB_SlaveIntf_DHT11 (
                         // 2'd3: slv_reg3 <= PWDATA;
                     endcase
                 end else begin
-                    PRDATA <= 32'bx;
+                    // PRDATA <= 32'bx;
+                    PRDATA <= 32'd0; //수정
                     case (PADDR[3:2])
                         2'd0: PRDATA <= slv_reg0;
                         2'd1: PRDATA <= slv_reg1;
