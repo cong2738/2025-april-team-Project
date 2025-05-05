@@ -106,6 +106,7 @@ void set_cal(GPCAL_TypeDef* calculator, uint32_t mod, uint32_t data, uint32_t op
 uint32_t cal_result(GPCAL_TypeDef* calculator);
 
 void convertData(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string, uint32_t length);
+void transDigit(GPUART_TypeDef* uart, uint32_t* string, uint32_t length);
 void transString(GPUART_TypeDef* uart, uint32_t* string, uint32_t length);
 
 uint32_t dht11_readRH(DHT11_TypeDef* dht11);
@@ -183,12 +184,12 @@ int main(void)
             if(readIdx == 6) { // if string is full
                 if(RxDataCheck(rxString)) {
                     fndData = StringToInt(rxString);
+                    transString(GPUART,rxString,6);
                     UART_trans(GPUART,'\n');
                 } else {
                     delay(10);
                     while(!UART_isEMPTY(GPUART)) UART_read(GPUART); //flush buffer
                 }
-                transString(GPUART,rxString,6);
                 readIdx = 0; // reset idx
             }
         }
@@ -350,14 +351,21 @@ void convertData(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string, uin
 }
 ///////////////////////////////////////////////////////////////////////////////
 
-/* transString function */
-void transString(GPUART_TypeDef* uart, uint32_t* string, uint32_t length) {
+/* trans function */
+void transDigit(GPUART_TypeDef* uart, uint32_t* string, uint32_t length) {
     int i = length;
     while (i != 0)
     {
         i--;
         UART_trans(uart, string[i]);
     }
+}
+void transString(GPUART_TypeDef* uart, uint32_t* string, uint32_t length) {
+    for (int i = 0; i < length; i++)
+    {
+        UART_trans(uart, string[i]);
+    }
+    
 }
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -386,21 +394,21 @@ void printRes(uint32_t* distance_data, uint32_t* RH_data, uint32_t* TEM_data){
     UART_trans(GPUART,'S');
     UART_trans(GPUART,':');
     UART_trans(GPUART,' ');
-    transString(GPUART,distance_data,3);
+    transDigit(GPUART,distance_data,3);
     UART_trans(GPUART,'\n');
     UART_trans(GPUART,'R');
     UART_trans(GPUART,'H');
     UART_trans(GPUART,' ');
     UART_trans(GPUART,':');
     UART_trans(GPUART,' ');
-    transString(GPUART,RH_data,3);
+    transDigit(GPUART,RH_data,3);
     UART_trans(GPUART,'\n');
     UART_trans(GPUART,'T');
     UART_trans(GPUART,'E');
     UART_trans(GPUART,'M');
     UART_trans(GPUART,':');
     UART_trans(GPUART,' ');
-    transString(GPUART,TEM_data,3);
+    transDigit(GPUART,TEM_data,3);
     UART_trans(GPUART,'\n');
     UART_trans(GPUART,'\n');
 }
@@ -410,11 +418,11 @@ void printTime(uint32_t* hour_data, uint32_t* min_data, uint32_t* sec_data){
     UART_trans(GPUART,'M');
     UART_trans(GPUART,'E');
     UART_trans(GPUART,'-');
-    transString(GPUART,hour_data,2);
+    transDigit(GPUART,hour_data,2);
     UART_trans(GPUART,':');
-    transString(GPUART,min_data,2);
+    transDigit(GPUART,min_data,2);
     UART_trans(GPUART,':');
-    transString(GPUART,sec_data,2);
+    transDigit(GPUART,sec_data,2);
     UART_trans(GPUART,'\n');
 }
 ///////////////////////////////////////////////////////////////////////////////
