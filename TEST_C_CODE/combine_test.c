@@ -44,8 +44,19 @@ typedef struct{
     __IO uint32_t TEM;
 } DHT11_TypeDef;
 
+typedef struct{
+    __IO uint32_t msec;
+    __IO uint32_t sec;
+    __IO uint32_t min;
+    __IO uint32_t hour;
+    __IO uint32_t set_msec;
+    __IO uint32_t set_sec;
+    __IO uint32_t set_min;
+    __IO uint32_t set_hour;
+} WATCH_TypeDef;
+
 #define APB_BASEADDR     0x10000000
-#define SWITCH_BASEADDR  (APB_BASEADDR + 0x1000)
+#define GPI_BASEADDR     (APB_BASEADDR + 0x1000)
 #define LED_BASEADDR     (APB_BASEADDR + 0x2000)
 #define TIMER_BASEADDR   (APB_BASEADDR + 0x3000)
 #define GPFND_BASEADDR   (APB_BASEADDR + 0x4000)
@@ -53,8 +64,9 @@ typedef struct{
 #define HCSR04_BASEADDR  (APB_BASEADDR + 0x6000)
 #define GPCAL_BASEADDR   (APB_BASEADDR + 0x7000)
 #define DHT11_BASEADDR   (APB_BASEADDR + 0x8000)
+#define WATCH_BASEADDR   (APB_BASEADDR + 0x9000)
 
-#define SWITCH           ((GPIO_TypeDef *) SWITCH_BASEADDR)
+#define GPI              ((GPIO_TypeDef *) GPI_BASEADDR)
 #define LED              ((GPIO_TypeDef *) LED_BASEADDR)
 #define TIMER            ((TIMER_TypeDef *) TIMER_BASEADDR)
 #define GPFND            ((GPFND_TypeDef *) GPFND_BASEADDR)
@@ -62,6 +74,7 @@ typedef struct{
 #define HCSR04           ((HCSR04_TypeDef *) HCSR04_BASEADDR)
 #define GPCAL            ((GPCAL_TypeDef *) GPCAL_BASEADDR)
 #define DHT11            ((DHT11_TypeDef *) DHT11_BASEADDR)
+#define WATCH            ((WATCH_TypeDef *) WATCH_BASEADDR)
 
 void delay(int n);
 
@@ -101,33 +114,103 @@ uint32_t dht11_readTEM(DHT11_TypeDef* dht11);
 uint16_t combineData(uint32_t data1, uint32_t data2, uint32_t sep);
 
 void printRes(uint32_t* distance_data, uint32_t* RH_data, uint32_t* TEM_data);
+void printTime(uint32_t* hour_data, uint32_t* min_data, uint32_t* sec_data);
+
+uint32_t RxDataCheck(uint32_t* receiveData);
+uint32_t TimeStringInit(uint32_t* rxString);
+
+uint32_t ButtonRead(GPIO_TypeDef* button);
+void ButtonInit(GPIO_TypeDef* button);
+void ButtonPush(uint32_t sw, uint32_t swNum, uint32_t *push);
+void ButtonRelease(uint32_t sw, uint32_t swNum, uint32_t *push, uint32_t *release);
+void ButtonReleaseEvent(uint32_t sw, uint32_t swNum, uint32_t *push, uint32_t *release, uint32_t *led_data);
+
+void getTime(WATCH_TypeDef*watch, uint32_t* msec, uint32_t* sec, uint32_t* min, uint32_t* hour);
+void TimeSet(WATCH_TypeDef* watch, uint32_t* time);
 
 /* main */
 int main(void)
 {
-    uint32_t psc = 100000-1, arr = 10000-1;
+    uint32_t psc = 100000-1, arr = 10000-1; // 단위시간 100_000/100_000_000 = 1msec, maxcount: 9999
     LED_init(LED);
-    Switch_init(SWITCH);
-    FND_init(GPFND, 1, 0xf);
+    ButtonInit(GPI);
+    FND_init(GPFND, 1, 0x0);
     TIM_init(TIMER,psc,arr);
     TIM_start(TIMER);
-    uint32_t preCnt = 0;
+    uint32_t fnd_mode = 0;
+    uint32_t fndData = 0;
+    uint32_t watchPreCnt = 0;
+    uint32_t printResPreCnt = 0;
+    uint32_t rxPreCnt = 0;
+    uint32_t readIdx = 0;
+    uint32_t rxString[9]; // S00:00:00
+    TimeStringInit(rxString);
+    uint32_t push = 0, release = 0;
+    uint32_t distance_data[3];
+    uint32_t TEM_data[3];
+    uint32_t RH_data[3];
+    uint32_t hour_data[2];
+    uint32_t min_data[2];
+    uint32_t sec_data[2];
+    uint32_t msec, sec, min, hour;
     while (1)
     {  
+        getTime(WATCH,&msec,&sec,&min,&hour);
+
         uint32_t distance = HCSR04_READ(HCSR04);
         uint32_t RH = dht11_readRH(DHT11);
         uint32_t TEM = dht11_readTEM(DHT11);
 
+        uint32_t h_m = combineData(hour,min,100);
+        uint32_t s_m = combineData(sec,msec,100);
         uint32_t T_RH = combineData(TEM,RH,100);
         
-        uint32_t distance_data[3];
-        uint32_t TEM_data[3];
-        uint32_t RH_data[3];
         convertData(GPCAL,distance,distance_data,3);
         convertData(GPCAL,RH,RH_data,3);
         convertData(GPCAL,TEM,TEM_data,3);
+        
+        convertData(GPCAL,hour,hour_data,2);
+        convertData(GPCAL,min,min_data,2);
+        convertData(GPCAL,sec,sec_data,2);
 
-        if(time_ctrl(TIMER, arr, &preCnt, 500)) printRes(distance_data,RH_data,TEM_data);
+        if(time_ctrl(TIMER, arr, &printResPreCnt, 500)) {
+            printTime(hour_data,min_data,sec_data);
+            printRes(distance_data,RH_data,TEM_data);
+        }
+        if(!UART_isEMPTY(GPUART)) {
+            rxString[readIdx] = UART_read(GPUART); // read from input buffer
+            readIdx = readIdx + 1;
+            if(readIdx == 9) { // if string is full
+                if(RxDataCheck(rxString)) {
+                    TimeSet(WATCH,rxString);
+                    transString(GPUART,rxString,9);
+                    UART_trans(GPUART,'\n');
+                } else {
+                    delay(10);
+                    while(!UART_isEMPTY(GPUART)) UART_read(GPUART); //flush buffer
+                }
+                readIdx = 0; // reset idx
+            }
+        }
+
+        uint32_t bt = ButtonRead(GPI);
+        ButtonReleaseEvent(bt,0,&push,&release,&fnd_mode);
+        switch (fnd_mode)
+        {
+        case 0:
+            fndData = s_m;
+            break;
+        case 1:
+            fndData = h_m;
+            break;
+        case 2:
+            fndData = T_RH;
+            break;
+        case 3:
+            fndData = distance;
+            break;
+        }
+        FND_writeData(GPFND,fndData,0b1111);
     }
     
     return 0;
@@ -304,11 +387,14 @@ uint32_t dht11_readTEM(DHT11_TypeDef* dht11) {
 }
 ///////////////////////////////////////////////////////////////////////////////
 
+/* combineData function */
 uint16_t combineData(uint32_t data1, uint32_t data2, uint32_t sep) {
-    set_cal(GPCAL,data1,'*',sep);
+    set_cal(GPCAL,'*',data1,sep);
     return cal_result(GPCAL) + data2;
 }
+///////////////////////////////////////////////////////////////////////////////
 
+/* print function */
 void printRes(uint32_t* distance_data, uint32_t* RH_data, uint32_t* TEM_data){
     UART_trans(GPUART,'D');
     UART_trans(GPUART,'I');
@@ -333,3 +419,95 @@ void printRes(uint32_t* distance_data, uint32_t* RH_data, uint32_t* TEM_data){
     UART_trans(GPUART,'\n');
     UART_trans(GPUART,'\n');
 }
+void printTime(uint32_t* hour_data, uint32_t* min_data, uint32_t* sec_data){
+    UART_trans(GPUART,'T');
+    UART_trans(GPUART,'I');
+    UART_trans(GPUART,'M');
+    UART_trans(GPUART,'E');
+    UART_trans(GPUART,'-');
+    transString(GPUART,hour_data,2);
+    UART_trans(GPUART,':');
+    transString(GPUART,min_data,2);
+    UART_trans(GPUART,':');
+    transString(GPUART,sec_data,2);
+    UART_trans(GPUART,'\n');
+}
+///////////////////////////////////////////////////////////////////////////////
+
+/* readString function */
+uint32_t RxDataCheck(uint32_t* receiveData){
+    if(!(receiveData[0] == 'S')) return 0;
+    if(!((receiveData[1] >= '0') & (receiveData[1] <= '9'))) return 0;
+    if(!((receiveData[2] >= '0') & (receiveData[2] <= '9'))) return 0;
+    if(!(receiveData[3] == ':')) return 0;
+    if(!((receiveData[4] >= '0') & (receiveData[4] <= '9'))) return 0;
+    if(!((receiveData[5] >= '0') & (receiveData[5] <= '9'))) return 0;
+    if(!(receiveData[6] == ':')) return 0;
+    if(!((receiveData[7] >= '0') & (receiveData[7] <= '9'))) return 0;
+    if(!((receiveData[8] >= '0') & (receiveData[8] <= '9'))) return 0;
+    return 1;
+}
+///////////////////////////////////////////////////////////////////////////////
+
+/* readString function */
+uint32_t TimeStringInit(uint32_t* rxString){
+    rxString[0] = 'S';
+    rxString[1] = '0';
+    rxString[2] = '0';
+    rxString[3] = ':';
+    rxString[4] = '0';
+    rxString[5] = '0';
+    rxString[6] = ':';
+    rxString[7] = '0';
+    rxString[8] = '0';
+    rxString[9] = 'E';
+}
+///////////////////////////////////////////////////////////////////////////////
+
+/* button function */
+void ButtonInit(GPIO_TypeDef* button) {
+    button->MODER = 0x00;
+}
+
+uint32_t ButtonRead(GPIO_TypeDef* button) {
+    return button->IDR;
+}
+
+void ButtonPush(uint32_t sw, uint32_t swNum, uint32_t *push){
+    if(sw & (1<<swNum)){
+        *push = 1;
+    }
+}
+
+void ButtonRelease(uint32_t sw, uint32_t swNum, uint32_t *push, uint32_t *release){
+    if(*push & ~(sw & (1<<swNum))){
+        *release = 1;
+        *push = 0;
+    }
+}
+
+void ButtonReleaseEvent(uint32_t sw, uint32_t swNum, uint32_t *push, uint32_t *release, uint32_t *mode){
+    ButtonPush(sw,swNum,push);
+    ButtonRelease(sw,swNum,push,release);
+    if(*release) {
+        *mode += 1;
+        if(mode == 5) mode = 0;
+        *release = 0;
+    }
+}
+///////////////////////////////////////////////////////////////////////////////
+
+void getTime(WATCH_TypeDef*watch, uint32_t* msec, uint32_t* sec, uint32_t* min, uint32_t* hour) {
+    *msec = watch->msec;
+    *sec = watch->sec;
+    *min = watch->min;
+    *hour = watch->hour;
+}
+
+/* watch function */
+void TimeSet(WATCH_TypeDef* watch, uint32_t* time){    
+    watch->set_hour = combineData(time[1]-'0',time[2]-'0',10);
+    watch->set_min = combineData(time[4]-'0',time[5]-'0',10);
+    watch->set_sec = combineData(time[7]-'0',time[8]-'0',10);
+}
+///////////////////////////////////////////////////////////////////////////////
