@@ -1,10 +1,10 @@
 `timescale 1ns / 1ps
 // DHT11_module.v
-module DHT11_module (
+module DHT11_module_real (
     input clk,
     input reset,
     inout data,
-    // input start_trigger,
+    input start_trigger,
     output [7:0] rh,
     output [7:0] t,
     output w_finish_tick
@@ -29,7 +29,8 @@ module DHT11_module (
         .clk(clk),
         .reset(reset),
         .tick(w_tick),
-        .start_trigger(w_tick10sec),
+        // .start_trigger(w_tick10sec),
+        .start_trigger(w_tick10sec | start_trigger),
         .finish_tick(w_finish_tick),
         .o_data(w_o_data),
         .data_in(data_in),
@@ -279,8 +280,8 @@ module tick_10sec (
 );
 
     parameter BAUD_RATE = 9600;
-    localparam BAUD_COUNT = 1000_000_000;
-    // localparam BAUD_COUNT = 1000;  //검증용으로 줄여봄 -> 여전히 오류
+    localparam BAUD_COUNT = 1000_000_000;    // 실제 구동할때
+    // localparam BAUD_COUNT = 100_000; //100 k clk → 100 k×10 ns = 1 ms //검증용으로 줄임 
     reg [$clog2(BAUD_COUNT)-1:0] count_reg, count_next;
 
     reg tick_reg, tick_next;

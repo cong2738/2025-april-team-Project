@@ -16,9 +16,12 @@
   <File Type="BITSTR-BMM" Name="MCU_bd.bmm"/>
   <File Type="ROUTE-METHODOLOGY-DRC" Name="MCU_methodology_drc_routed.rpt"/>
   <File Type="BITSTR-MMI" Name="MCU.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="MCU_methodology_drc_routed.pb"/>
   <File Type="BITSTR-SYSDEF" Name="MCU.sysdef"/>
+  <File Type="ROUTE-DRC-RPX" Name="MCU_drc_routed.rpx"/>
   <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
   <File Type="BITSTR-LTX" Name="MCU.ltx"/>
+  <File Type="RCFI_FILE" Name="MCU.rcfi"/>
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <File Type="OPT-DRC" Name="MCU_drc_opted.rpt"/>
   <File Type="OPT-HWDEF" Name="MCU.hwdef"/>
@@ -48,11 +51,8 @@
   <File Type="PHYSOPT-DCP" Name="MCU_physopt.dcp"/>
   <File Type="POSTROUTE-PHYSOPT-DCP" Name="MCU_postroute_physopt.dcp"/>
   <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="MCU_postroute_physopt_bb.dcp"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="MCU_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-DRC-RPX" Name="MCU_drc_routed.rpx"/>
   <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="MCU_methodology_drc_routed.rpx"/>
   <File Type="PDI-FILE" Name="MCU.pdi"/>
-  <File Type="RCFI_FILE" Name="MCU.rcfi"/>
   <File Type="CFI_FILE" Name="MCU.cfi"/>
   <File Type="RNPI_FILE" Name="MCU.rnpi"/>
   <File Type="NPI_FILE" Name="MCU.npi"/>

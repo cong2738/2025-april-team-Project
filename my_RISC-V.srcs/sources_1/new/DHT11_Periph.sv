@@ -13,7 +13,8 @@ module DHT11_Periph (
     input  logic        PSEL,
     output logic [31:0] PRDATA,
     output logic        PREADY,
-    inout  logic        DATA_IO
+    inout  logic        DATA_IO,
+    input  logic        start_trigger
 );
 
     logic [7:0] rh_int, t_int;
@@ -34,10 +35,11 @@ module DHT11_Periph (
       .finish_int(finish_int)
   );
   
-  DHT11_module U_DHT11_IP (
+  DHT11_module_real U_DHT11_IP (
       .clk          (PCLK),
       .reset        (PRESET),
       .data         (DATA_IO),
+      .start_trigger(start_trigger),
       .rh           (rh_int),
       .t            (t_int),
       .w_finish_tick(finish_int)
@@ -63,7 +65,7 @@ module APB_SlaveIntf_DHT11 (
 );
   
 
-  logic [31:0] slv_reg0, slv_reg1;
+  logic [31:0] slv_reg0, slv_reg1, slv_reg2;
 
 //   assign slv_reg0[7:0] = rh_int;
 //   assign slv_reg1[7:0] = t_int;

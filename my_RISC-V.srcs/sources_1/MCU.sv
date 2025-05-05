@@ -105,10 +105,8 @@ module MCU (
       .PSEL   (PSEL[6]),
       .PRDATA (PRDATA[6]),
       .PREADY (PREADY[6]),
-      .DATA_IO(DHT11_DATA)
-    //   .sim_rh (),
-    //   .sim_t  (),
-    //   .sim_finish()
+      .DATA_IO(DHT11_DATA),
+      .start_trigger(start_trigger)
   );
 
 endmodule

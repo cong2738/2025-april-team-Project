@@ -1,314 +1,307 @@
 `timescale 1ns / 1ps
 
-class transaction;
-  rand logic [ 3:0] PADDR;
-  logic             PWRITE       = 1'b0;
-  logic             PENABLE;
-  logic             PSEL;
-  logic      [31:0] PRDATA;
-  logic             PREADY;
-  rand logic [ 7:0] humidity;
-  rand logic [ 7:0] temperature;
+interface dht_interface;
+  logic clk;
+  logic reset;
+  logic start_trigger;
 
-  constraint c_addr {
-    PADDR dist {
-      4'h0 := 45,
-      4'h4 := 45,
-      4'h8 := 10
-    };
-  }
-  constraint c_h {humidity inside {[20 : 90]};}
-  constraint c_t {temperature inside {[0 : 50]};}
+  // DHT IO lines
+  wire dht_io;
+  logic io_oe;      // 1: drive output, 0: input
+  logic dht_data;   // data to drive
+  int rand_width;   // random width for sensor bits
 
-  task display(string name);
-    $display("[%s] PADDR=%h HUM=%0d TEMP=%0d PRDATA=%h", name, PADDR, humidity, temperature,
-             PRDATA);
-  endtask
-endclass
-
-
-interface DHT11_if;
-  logic        PCLK;
-  logic        PRESET;
-  logic [ 3:0] PADDR;
+  // APB bus signals
+  logic [3:0]  PADDR;
+  logic [31:0] PWDATA;
   logic        PWRITE;
   logic        PENABLE;
   logic        PSEL;
   logic [31:0] PRDATA;
   logic        PREADY;
 
-  // Drive signals for inout DATA_IO // tri로 하면 오류가 뜸 
-  logic        drive_en;
-  logic        drive_data;
-  
-  tri1 DATA_IO;
-  // pullup pul1 (DATA_IO);
-  // wire         DATA_IO = drive_en ? drive_data : 1'bz;
-  assign DATA_IO = drive_en ? drive_data : 1'bz;
-endinterface
+  assign dht_io = io_oe ? 1'bz : dht_data;
 
-
-class generator;
-  mailbox #(transaction) gen2drv_mbox;
-  event                  gen_done_evt;
-
-  function new(mailbox#(transaction) m, event e);
-    gen2drv_mbox = m;  
-    gen_done_evt = e;
-  endfunction
-
-  task run(int N);
-    transaction tr;
-    repeat (N) begin
-      tr = new();
-      if (!tr.randomize()) begin
-        $error("Randomize failed");
-        $finish;
-      end
-      tr.display("GEN");
-      gen2drv_mbox.put(tr);
-      @(gen_done_evt);
-    end
-  endtask
-endclass
-
-
-class driver;
-  virtual DHT11_if       ifc;
-  mailbox #(transaction) gen2drv_mbox; // from generator
-  // mailbox #(transaction) mon_mb; // to monitor
-  event                  drv_done_evt;
-
-  // DHT11 timing parameters (data sheet)
-  localparam integer START_LOW = 18_000_000; // 18 ms
-  localparam integer START_REL = 20_000;     // 20 us // 대기
-  localparam integer RESP_LOW  = 80_000;     // 80 us
-  localparam integer RESP_HIGH = 80_000;     // 80 us
-  localparam integer BIT_START  = 50_000;    // 50 us
-  localparam integer BIT_ONE_H  = 70_000;    // 70 us
-  localparam integer BIT_ZERO_H = 26_000;    // 26 us
-
-  function new(virtual DHT11_if ifc_i, mailbox#(transaction) m_i, event e_i);
-    ifc            = ifc_i;
-    gen2drv_mbox   = m_i;
-    drv_done_evt   = e_i;
-  endfunction
-
-  task sensor_behave(logic [7:0] H, logic [7:0] T);
-    bit [39:0] bits = {H, 8'h00, T, 8'h00, H + T};
-
-    wait (ifc.DATA_IO === 1'b0);
-    #START_LOW;
-    
-    ifc.drive_en = 0;        
-    #START_REL;              
-
-    ifc.drive_en   = 1;      
-    ifc.drive_data = 0;
-    #RESP_LOW;
-    ifc.drive_data = 1;
-    #RESP_HIGH;
-
-    // 40bit
-    for (int i = 39; i >= 0; i--) begin
-      ifc.drive_data = 0;
-      #BIT_START;
-      ifc.drive_data = bits[i];
-      if (bits[i])
-        #BIT_ONE_H;
-      else
-        #BIT_ZERO_H;
-    end
-
-    ifc.drive_en = 0;
-  endtask
-
-
-
-  task run();
-    transaction tr;
-    forever begin
-      gen2drv_mbox.get(tr);
-      
-      // ifc.drive_en   = 1;
-      // ifc.drive_data = 0;
-      // sensor_behave(tr.humidity, tr.temperature);
-      fork
-        sensor_behave(tr.humidity, tr.temperature);
-      join_none
-      
-      // ifc.drive_en = 0;
-      $display("[DRV] Sensor done, issuing APB read for PADDR=%0h @%0t", tr.PADDR, $realtime);
-      @(posedge ifc.PCLK);
-      ifc.PSEL    <= 1;
-      ifc.PWRITE  <= 0;
-      ifc.PADDR   <= tr.PADDR;
-      ifc.PENABLE <= 0;
-      $display("[DRV] APB Address phase: PADDR=%0h @%0t", tr.PADDR, $realtime);
-      @(posedge ifc.PCLK);
-      ifc.PENABLE <= 1;
-      $display("[DRV] APB Enable phase @%0t", $realtime);
-      @(posedge ifc.PREADY);
-      
-      tr.PRDATA = ifc.PRDATA;
-      tr.PREADY = ifc.PREADY;
-      $display("[DRV] APB Read complete: PRDATA=%0h PREADY=%0b @%0t", 
-               tr.PRDATA, tr.PREADY, $realtime);
-      #1 ->drv_done_evt;
-
-      ifc.PSEL    <= 0;
-      ifc.PENABLE <= 0;
-    end
-  endtask
-endclass
-
-
-class monitor;
- 
-  virtual DHT11_if       ifc;
-  mailbox #(transaction) mon2scb_mbox;
-  // event                  done_evt;
-  event                  drv_done_evt;
-  event                  mon_done_evt;
-
-  function new(mailbox#(transaction) in_mb_i, mailbox#(transaction) m_i, event drv_done_evt_i, event mon_done_evt_i, virtual DHT11_if ifc_i);
-    ifc            = ifc_i;
-    mon2scb_mbox   = m_i;
-    drv_done_evt   = drv_evt;
-    mon_done_evt   = mon_evt;
-  endfunction
-
-  task run();
-    transaction tr;
-    forever begin
-      @(drv_done_evt);
-      if (ifc.PSEL && ifc.PENABLE && ifc.PREADY) begin
-        tr.PRDATA = ifc.PRDATA;
-        tr.PREADY = ifc.PREADY;
-      end
-      $display("[MON] Captured PRDATA=%0h PREADY=%0b @%0t", 
-               tr.PRDATA, tr.PREADY, $realtime);
-      mon2scb_mbox.put(tr);
-      #1 ->mon_done_evt;
-    end
-  endtask
-endclass
-
-
-class scoreboard;
-  mailbox #(transaction) mon2scb_mbox;
-  event                  mon_done_evt;
-  event                  gen_done_evt;
-  int                    pass = 0, fail = 0;
-
-  function new(mailbox#(transaction) m_i, event mon_evt, event gen_evt);
-    mon2scb_mbox = m_i;
-    mon_done_evt = mon_evt;
-    gen_done_evt = gen_evt;
-  endfunction
-
-  task run(int total);
-    transaction tr;
-    repeat (total) begin
-      @(mon_done_evt);
-      mon2scb_mbox.get(tr);
-      case (tr.PADDR)
-        4'h0: if (tr.PRDATA[7:0] == tr.humidity) pass++; else fail++;
-        4'h4: if (tr.PRDATA[7:0] == tr.temperature) pass++; else fail++;
-        // 4'h8: if (tr.PRDATA[0] == (tr.humidity + tr.temperature)) pass++; else fail++;
-        4'h8: if (tr.PRDATA[0] == 1) pass++; else fail++;
-      endcase
-      $display("[SCB] PADDR=%0h PRDATA=%0h HUM=%0d TEMP=%0d PASS=%0d FAIL=%0d @%0t",
-               tr.PADDR, tr.PRDATA, tr.humidity, tr.temperature, pass, fail, $realtime);
-      #1 ->gen_done_evt;
-    end
-    $display("=== Result: PASS=%0d, FAIL=%0d ===", pass, fail);
-  endtask
-endclass
-
-// 여기서부터 수정 
-class env;
-  virtual DHT11_if       ifc;
-  mailbox #(transaction) gen2drv, drv2mon, mon2scb;
-  event evt_drv_done, evt_mon_done, evt_gen_done;
-  generator              gen;
-  driver                 drv;
-  monitor                mon;
-  scoreboard             sb;
-  int                    N;
-
-
-  function new(virtual DHT11_if ifc_i, int N_i);
-    ifc     = ifc_i;
-    N       = N_i;
-    gen2drv = new();
-    drv2mon = new();
-    mon2scb = new();
-
-    gen = new(gen2drv,   evt_gen_done);
-    drv = new(ifc, gen2drv, drv2mon, evt_drv_done);
-    mon = new(drv2mon, mon2scb, evt_drv_done, evt_mon_done);
-    sb  = new(mon2scb,   evt_mon_done, evt_gen_done);
-  endfunction
-
-
-  task run();
-    fork
-      gen.run(N);
-      drv.run();
-      mon.run();
-      sb.run(N);
-    join
-    ;
-  endtask
-endclass
-
-
-module tb_DHT11 ();
-  // parameter N = 50;
-  parameter N = 10;  // 줄여봄
-  DHT11_if ifc ();
-  pullup pul1 (ifc.DATA_IO);
-  env environment;
-
-  DHT11_Periph dut (
-      .PCLK   (ifc.PCLK),
-      .PRESET (ifc.PRESET),
-      .PADDR  (ifc.PADDR),
-      .PWDATA (),
-      .PWRITE (ifc.PWRITE),
-      .PENABLE(ifc.PENABLE),
-      .PSEL   (ifc.PSEL),
-      .PRDATA (ifc.PRDATA),
-      .PREADY (ifc.PREADY),
-      .DATA_IO(ifc.DATA_IO)
+  // Modports for components
+  modport drv_mport (
+    output PADDR, PWDATA, PWRITE, PENABLE, PSEL,
+    input  PRDATA, PREADY,
+    inout dht_io
   );
 
-  initial begin
-    ifc.PCLK = 0;
-    forever #5 ifc.PCLK = ~ifc.PCLK;
+  modport mon_mport (
+    output PADDR, PWDATA, PWRITE, PENABLE, PSEL,
+    input  PRDATA, PREADY, dht_io, rand_width
+  );
+
+  modport dut_mport (
+    input  PADDR, PWDATA, PWRITE, PENABLE, PSEL, start_trigger,
+    output PRDATA, PREADY,
+    inout  dht_io
+  );
+endinterface
+
+class transaction;
+  rand int rand_width;
+  logic [3:0]  PADDR;
+  logic        PWRITE;
+  logic        PENABLE;
+  logic        PSEL;
+  logic [31:0] PRDATA;
+  logic        PREADY;
+  logic [31:0] data_out;
+  logic [31:0] checksum;
+
+  constraint odata { rand_width dist { 70 := 40, 30 := 60 }; }
+
+  task display(string name);
+    $display("[%s] rand_width=%0d PRDATA=0x%0h checksum=0x%0h",
+      name, rand_width, data_out, checksum);
+  endtask
+endclass
+
+class generator;
+  mailbox #(transaction) GenToDrvMon_mbox;
+  event               rand_width_require, rand_width_accept, scb_end;
+
+  function new(
+    mailbox#(transaction) m,
+    event           wr_req, wr_acc, scb_ev
+  );
+    this.GenToDrvMon_mbox   = m;
+    this.rand_width_require = wr_req;
+    this.rand_width_accept  = wr_acc;
+    this.scb_end            = scb_ev;
+  endfunction
+
+  task run(int repeat_count, int total_count);
+    transaction tr = new();
+    repeat (total_count) begin
+      repeat (repeat_count) begin
+        -> rand_width_require;
+        if (!tr.randomize()) $error("Randomize failed");
+        tr.display("GEN");
+        GenToDrvMon_mbox.put(tr);
+        -> rand_width_accept;
+        #10;
+      end
+      @(scb_end);
+    end
+  endtask
+endclass
+
+class driver;
+  virtual dht_interface.drv_mport intf;
+  mailbox #(transaction)    GenToDrvMon_mbox;
+  event                     rand_width_require, rand_width_accept, drv_end, scb_end;
+
+  function new(
+    mailbox#(transaction) m,
+    virtual dht_interface.drv_mport f,
+    event wr_req, wr_acc, drv_ev, scb_ev
+  );
+    this.GenToDrvMon_mbox   = m;
+    this.intf                = f;
+    this.rand_width_require = wr_req;
+    this.rand_width_accept  = wr_acc;
+    this.drv_end            = drv_ev;
+    this.scb_end            = scb_ev;
+  endfunction
+
+  task start_trigger_pulse();
+    intf.start_trigger = 1;
+    @(posedge intf.clk);
+    intf.start_trigger = 0;
+  endtask
+
+  task run(int repeat_count);
+    transaction tr;
+    forever begin
+      start_trigger_pulse();
+      @(intf.dht_io === 0);
+      @(intf.dht_io === 1);
+      #1000;
+      intf.io_oe   = 0; 
+      #35000;
+      intf.io_oe   = 1;
+      for (int i = 0; i < repeat_count; i++) begin
+        -> rand_width_require;
+        GenToDrvMon_mbox.get(tr);
+        intf.rand_width = tr.rand_width;
+        intf.dht_data = 1;
+        repeat (tr.rand_width) @(posedge intf.clk);
+        intf.dht_data = 0;
+        -> rand_width_accept;
+      end
+      #100;
+      -> drv_end;
+      @(scb_end);
+    end
+  endtask
+endclass
+
+class monitor;
+  virtual dht_interface.mon_mport intf;
+  mailbox #(transaction)     MonToSCB_mbox;
+  event                      drv_end, mon_end, rand_width_accept;
+
+  function new(
+    mailbox#(transaction) m,
+    virtual dht_interface.mon_mport f,
+    event drv_ev, mon_ev, wr_acc
+  );
+    this.MonToSCB_mbox     = m;
+    this.intf               = f;
+    this.drv_end           = drv_ev;
+    this.mon_end           = mon_ev;
+    this.rand_width_accept = wr_acc;
+  endfunction
+
+  task run(int repeat_count);
+    transaction tr = new();
+    forever begin
+      repeat (repeat_count) begin
+        @(rand_width_accept);
+        tr.rand_width = intf.rand_width;
+        MonToSCB_mbox.put(tr);
+      end
+      
+      @(drv_end);
+      // read humidity/temp
+      intf.mon_mport.PADDR   = 4'h4;          
+      intf.mon_mport.PWRITE  = 0;             
+      intf.mon_mport.PSEL    = 1;            
+      @(posedge intf.clk);          
+      intf.mon_mport.PENABLE = 1;             
+      @(posedge intf.clk);
+      intf.mon_mport.PSEL    = 0;
+      intf.mon_mport.PENABLE = 0;
+      tr.data_out  = intf.mon_mport.PRDATA;   
+
+      // read checksum
+      intf.mon_mport.PADDR   = 4'h8;
+      intf.mon_mport.PWRITE  = 0;
+      intf.mon_mport.PSEL    = 1;
+      @(posedge intf.clk);
+      intf.mon_mport.PENABLE = 1;
+      @(posedge intf.clk);
+      intf.mon_mport.PSEL    = 0;
+      intf.mon_mport.PENABLE = 0;
+      tr.checksum  = intf.mon_mport.PRDATA;   
+      MonToSCB_mbox.put(tr);
+      -> mon_end;
+    end
+  endtask
+endclass
+
+class scoreboard;
+  mailbox #(transaction)      MonToSCB_mbox;
+  event                       rand_width_accept, mon_end, scb_end;
+  int                         pass = 0, fail = 0;
+  logic [39:0]                ref_data;
+  logic                       ref_chk;
+
+  function new(
+    mailbox#(transaction) m,
+    event wr_acc, mon_ev, scb_ev
+  );
+    this.MonToSCB_mbox     = m;
+    this.rand_width_accept = wr_acc;
+    this.mon_end           = mon_ev;
+    this.scb_end           = scb_ev;
+  endfunction
+
+  task report();
+  begin
+    $display("=== TEST SUMMARY ===");
+    $display("PASS : %0d", pass);
+    $display("FAIL : %0d", fail);
+    $display("====================");
   end
+  endtask
+
+  task run(int repeat_count);
+    transaction tr;
+    forever begin
+      int idx = 0;
+      // build reference bits
+      repeat (repeat_count) begin
+        @(rand_width_accept);
+        MonToSCB_mbox.get(tr);
+        ref_data[39-idx] = (tr.rand_width > 50);
+        idx++;
+      end
+      ref_chk = ((ref_data[39:32] + ref_data[31:24] + ref_data[23:16] + ref_data[15:8]) == ref_data[7:0]);
+      // wait monitor
+      @(mon_end);
+      MonToSCB_mbox.get(tr);
+      if (tr.data_out != ref_data[39:8]) fail++; else pass++;
+      MonToSCB_mbox.get(tr);
+      if (tr.checksum[0] != ref_chk) fail++; else pass++;
+      -> scb_end;
+    end
+  endtask
+endclass
+
+class environment;
+  mailbox #(transaction) GenToDrvMon_mbox;
+  mailbox #(transaction) MonToSCB_mbox;
+  generator     gen;
+  driver        drv;
+  monitor       mon;
+  scoreboard    scb;
+  event         wr_req, wr_acc, drv_end, mon_end, scb_end;
+
+  function new(virtual dht_interface intf);
+    GenToDrvMon_mbox = new();
+    MonToSCB_mbox    = new();
+    gen = new(GenToDrvMon_mbox, wr_req, wr_acc, scb_end);
+    drv = new(GenToDrvMon_mbox, intf.drv_mport, wr_req, wr_acc, drv_end, scb_end);
+    mon = new(MonToSCB_mbox, intf.mon_mport, drv_end, mon_end, wr_acc);
+    scb = new(MonToSCB_mbox, wr_acc, mon_end, scb_end);
+  endfunction
+
+  task run(int repeat_count, int total_count);
+    fork
+      gen.run(repeat_count, total_count);
+      drv.run(repeat_count);
+      mon.run(repeat_count);
+      scb.run(repeat_count);
+    join_any
+    scb.report();
+  endtask
+endclass
+
+module tb_DHT11;
+  dht_interface intf();
+  environment   env;
+
+  // Instantiate DUT
+  DHT11_Periph dut (
+    .PCLK         (intf.clk),
+    .PRESET       (intf.reset),
+    .PADDR        (intf.dut_mport.PADDR),
+    .PWDATA       (intf.dut_mport.PWDATA),
+    .PWRITE       (intf.dut_mport.PWRITE),
+    .PENABLE      (intf.dut_mport.PENABLE),
+    .PSEL         (intf.dut_mport.PSEL),
+    .PRDATA       (intf.dut_mport.PRDATA),
+    .PREADY       (intf.dut_mport.PREADY),
+    .DATA_IO      (intf.dut_mport.dht_io),
+    .start_trigger(intf.dut_mport.start_trigger)
+  );
+
+  always #5 intf.clk = ~intf.clk;
 
   initial begin
-    ifc.PRESET = 1;
-    #20;
-    ifc.PRESET = 0;
-  end
+    intf.clk   = 0;
+    intf.reset = 1;
+    intf.io_oe = 1;
+    intf.dht_data = 1;
+    #20 intf.reset = 0;
 
-  initial begin
-    ifc.PADDR      = 4'h0;
-    ifc.PWRITE     = 1'b0;
-    ifc.PENABLE    = 1'b0;
-    ifc.PSEL       = 1'b0;
-    ifc.drive_en   = 1'b0;
-    ifc.drive_data = 1'b0;
-  end
-
-  initial begin
-    environment = new(ifc, N);
-    environment.run();
-    #100;
-    $display("finished!");
-    $finish;
+    env = new(intf);
+    env.run(40, 20);
+    #50 $finish;
   end
 endmodule
