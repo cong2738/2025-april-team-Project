@@ -80,8 +80,8 @@ module APB_SlaveIntf_DHT11 (
             //slv_reg1 <= 0;
             //slv_reg2 <= 0;
             // slv_reg3 <= 0;
-            // PREADY <= 1'b0;
-            // PRDATA <= 32'd0;
+            PREADY <= 1'b0; //추가
+            PRDATA <= 32'd0;    //추가
         end else begin
             if (PSEL && PENABLE) begin
                 PREADY <= 1'b1;
@@ -95,14 +95,14 @@ module APB_SlaveIntf_DHT11 (
                     endcase
                 end else begin
                     // PRDATA <= 32'bx;
-                    PRDATA <= 32'd0; //수정
+                    // PRDATA <= 32'd0; //원본
                     case (PADDR[3:2])
                         2'd0: PRDATA <= slv_reg0;
                         2'd1: PRDATA <= slv_reg1;
                         2'd2: PRDATA <= slv_reg2;
                         // 2'd3: PRDATA <= slv_reg3;
                         // 2'd3: PRDATA <= slv_reg3;
-                        // default: PRDATA <= 32'd0; //수정
+                        default: PRDATA <= 32'd0; //추가
                     endcase
                 end
             end else begin

@@ -131,11 +131,14 @@ class driver;
     forever begin
       gen_mb.get(tr);
       
-      ifc.drive_en   = 1;
-      ifc.drive_data = 0;
-      sensor_behave(tr.humidity, tr.temperature);
+      // ifc.drive_en   = 1;
+      // ifc.drive_data = 0;
+      // sensor_behave(tr.humidity, tr.temperature);
+      fork
+        sensor_behave(tr.humidity, tr.temperature);
+      join_none
       
-      ifc.drive_en = 0;
+      // ifc.drive_en = 0;
       $display("[DRV] Sensor done, issuing APB read for PADDR=%0h @%0t", tr.PADDR, $realtime);
       @(posedge ifc.PCLK);
       ifc.PSEL    <= 1;
