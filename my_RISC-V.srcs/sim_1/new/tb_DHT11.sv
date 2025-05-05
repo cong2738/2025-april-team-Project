@@ -39,7 +39,7 @@ interface dht_interface;
     output PRDATA, PREADY,
     inout  dht_io
   );
-endinterface
+endinterface 
 
 class transaction;
   rand int rand_width;
