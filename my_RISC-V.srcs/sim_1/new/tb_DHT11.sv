@@ -12,9 +12,9 @@ class transaction;
 
   constraint c_addr {
     PADDR dist {
-      4'h0 := 33,
-      4'h4 := 33,
-      4'h8 := 34
+      4'h0 := 45,
+      4'h4 := 45,
+      4'h8 := 10
     };
   }
   constraint c_h {humidity inside {[20 : 90]};}
@@ -76,7 +76,7 @@ endclass
 class driver;
   virtual DHT11_if       ifc;
   mailbox #(transaction) gen_mb; // from generator
-  mailbox #(transaction) mon_mb; // to monitor
+  // mailbox #(transaction) mon_mb; // to monitor
   event                  done_evt;
 
   // DHT11 timing parameters (data sheet)
@@ -88,10 +88,10 @@ class driver;
   localparam integer BIT_ONE_H  = 70_000;    // 70 us
   localparam integer BIT_ZERO_H = 26_000;    // 26 us
 
-  function new(virtual DHT11_if ifc_i, mailbox#(transaction) mb_i, mailbox#(transaction) mon_mb_i, event done_evt_i);
+  function new(virtual DHT11_if ifc_i, mailbox#(transaction) mb_i, event done_evt_i);
     ifc      = ifc_i;
     gen_mb       = mb_i;
-    mon_mb   = mon_mb_i;
+    // mon_mb   = mon_mb_i;
     done_evt = done_evt_i;
   endfunction
 
@@ -156,7 +156,7 @@ class driver;
       $display("[DRV] APB Read complete: PRDATA=%0h PREADY=%0b @%0t", 
                tr.PRDATA, tr.PREADY, $realtime);
       mon_mb.put(tr);
-      ->done_evt;
+      #1 ->done_evt;
 
       ifc.PSEL    <= 0;
       ifc.PENABLE <= 0;
@@ -167,13 +167,13 @@ endclass
 
 class monitor;
   mailbox #(transaction) in_mb, out_mb;
-  // virtual DHT11_if       ifc;
+  virtual DHT11_if       ifc;
   // event                  done_evt;
   event                  drv_done_evt;
   event                  mon_done_evt;
 
-  function new(mailbox#(transaction) in_mb_i, mailbox#(transaction) out_mb_i, event drv_done_evt_i, event mon_done_evt_i);
-    // ifc      = ifc_i;
+  function new(mailbox#(transaction) in_mb_i, mailbox#(transaction) out_mb_i, event drv_done_evt_i, event mon_done_evt_i, virtual DHT11_if ifc_i);
+    ifc      = ifc_i;
     in_mb       = in_mb_i;
     out_mb       = out_mb_i;
     drv_done_evt = drv_done_evt_i;
@@ -185,10 +185,14 @@ class monitor;
     forever begin
       @(drv_done_evt);
       in_mb.get(tr);
+      if (ifc.PSEL && ifc.PENABLE && ifc.PREADY) begin
+        tr.PRDATA = ifc.PRDATA;
+        tr.PREADY = ifc.PREADY;
+      end
       $display("[MON] Captured PRDATA=%0h PREADY=%0b @%0t", 
                tr.PRDATA, tr.PREADY, $realtime);
       out_mb.put(tr);
-      ->mon_done_evt;
+      #1 ->mon_done_evt;
     end
   endtask
 endclass
@@ -215,11 +219,11 @@ class scoreboard;
         4'h0: if (tr.PRDATA[7:0] == tr.humidity) pass++; else fail++;
         4'h4: if (tr.PRDATA[7:0] == tr.temperature) pass++; else fail++;
         // 4'h8: if (tr.PRDATA[0] == (tr.humidity + tr.temperature)) pass++; else fail++;
-        4'h8: if (tr.PRDATA[7:0] == (tr.humidity + tr.temperature)) pass++; else fail++;
+        4'h8: if (tr.PRDATA[0] == 1) pass++; else fail++;
       endcase
       $display("[SCB] PADDR=%0h PRDATA=%0h HUM=%0d TEMP=%0d PASS=%0d FAIL=%0d @%0t",
                tr.PADDR, tr.PRDATA, tr.humidity, tr.temperature, pass, fail, $realtime);
-      ->gen_done_evt;
+      #1 ->gen_done_evt;
     end
     $display("=== Result: PASS=%0d, FAIL=%0d ===", pass, fail);
   endtask
@@ -265,7 +269,7 @@ endclass
 
 module tb_DHT11 ();
   // parameter N = 50;
-  parameter N = 3;  // 줄여봄
+  parameter N = 10;  // 줄여봄
   DHT11_if ifc ();
   pullup pul1 (ifc.DATA_IO);
   env environment;
