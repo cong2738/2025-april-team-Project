@@ -3,6 +3,8 @@
 module MCU (
     input  logic       clk,
     input  logic       reset,
+    output logic [3:0] btn,
+    output logic [7:0] led,
     output logic [3:0] fndCom,
     output logic [7:0] fndFont,
     output logic       tx,
@@ -135,5 +137,11 @@ module MCU (
         .DATA_IO(DATA_IO)
     );
 
+    GP_Watch u_GP_watch (
+        .*,
+        .PSEL   (PSEL[9]),
+        .PRDATA (PRDATA[9]),
+        .PREADY (PREADY[9])
+    );
 
 endmodule
