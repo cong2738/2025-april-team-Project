@@ -126,7 +126,7 @@ void ButtonRelease(uint32_t sw, uint32_t swNum, uint32_t *push, uint32_t *releas
 void ButtonReleaseEvent(uint32_t sw, uint32_t swNum, uint32_t *push, uint32_t *release, uint32_t *led_data);
 
 void getTime(WATCH_TypeDef*watch, uint32_t* msec, uint32_t* sec, uint32_t* min, uint32_t* hour);
-void TimeSet(WATCH_TypeDef* watch, uint32_t* time);
+uint32_t StringToInt(uint32_t* time);
 
 /* main */
 int main(void)
@@ -143,7 +143,7 @@ int main(void)
     uint32_t printResPreCnt = 0;
     uint32_t rxPreCnt = 0;
     uint32_t readIdx = 0;
-    uint32_t rxString[9]; // S00:00:00
+    uint32_t rxString[5]; // S00:00:00
     TimeStringInit(rxString);
     uint32_t push = 0, release = 0;
     uint32_t distance_data[3];
@@ -180,10 +180,10 @@ int main(void)
         if(!UART_isEMPTY(GPUART)) {
             rxString[readIdx] = UART_read(GPUART); // read from input buffer
             readIdx = readIdx + 1;
-            if(readIdx == 9) { // if string is full
+            if(readIdx == 5) { // if string is full
                 if(RxDataCheck(rxString)) {
-                    TimeSet(WATCH,rxString);
-                    transString(GPUART,rxString,9);
+                    fndData = StringToInt(rxString);
+                    transString(GPUART,rxString,5);
                     UART_trans(GPUART,'\n');
                 } else {
                     delay(10);
@@ -195,21 +195,6 @@ int main(void)
 
         uint32_t bt = ButtonRead(GPI);
         ButtonReleaseEvent(bt,0,&push,&release,&fnd_mode);
-        switch (fnd_mode)
-        {
-        case 0:
-            fndData = s_m;
-            break;
-        case 1:
-            fndData = h_m;
-            break;
-        case 2:
-            fndData = T_RH;
-            break;
-        case 3:
-            fndData = distance;
-            break;
-        }
         FND_writeData(GPFND,fndData,0b1111);
     }
     
@@ -439,12 +424,9 @@ uint32_t RxDataCheck(uint32_t* receiveData){
     if(!(receiveData[0] == 'S')) return 0;
     if(!((receiveData[1] >= '0') & (receiveData[1] <= '9'))) return 0;
     if(!((receiveData[2] >= '0') & (receiveData[2] <= '9'))) return 0;
-    if(!(receiveData[3] == ':')) return 0;
+    if(!((receiveData[3] >= '0') & (receiveData[3] <= '9'))) return 0;
     if(!((receiveData[4] >= '0') & (receiveData[4] <= '9'))) return 0;
-    if(!((receiveData[5] >= '0') & (receiveData[5] <= '9'))) return 0;
-    if(!(receiveData[6] == ':')) return 0;
-    if(!((receiveData[7] >= '0') & (receiveData[7] <= '9'))) return 0;
-    if(!((receiveData[8] >= '0') & (receiveData[8] <= '9'))) return 0;
+    if(!(receiveData[5] == 'E')) return 0;
     return 1;
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -454,13 +436,9 @@ uint32_t TimeStringInit(uint32_t* rxString){
     rxString[0] = 'S';
     rxString[1] = '0';
     rxString[2] = '0';
-    rxString[3] = ':';
+    rxString[3] = '0';
     rxString[4] = '0';
-    rxString[5] = '0';
-    rxString[6] = ':';
-    rxString[7] = '0';
-    rxString[8] = '0';
-    rxString[9] = 'E';
+    rxString[4] = 'E';
 }
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -497,17 +475,20 @@ void ButtonReleaseEvent(uint32_t sw, uint32_t swNum, uint32_t *push, uint32_t *r
 }
 ///////////////////////////////////////////////////////////////////////////////
 
+/* watch function */
 void getTime(WATCH_TypeDef*watch, uint32_t* msec, uint32_t* sec, uint32_t* min, uint32_t* hour) {
     *msec = watch->msec;
     *sec = watch->sec;
     *min = watch->min;
     *hour = watch->hour;
 }
-
-/* watch function */
-void TimeSet(WATCH_TypeDef* watch, uint32_t* time){    
-    watch->set_hour = combineData(time[1]-'0',time[2]-'0',10);
-    watch->set_min = combineData(time[4]-'0',time[5]-'0',10);
-    watch->set_sec = combineData(time[7]-'0',time[8]-'0',10);
-}
 ///////////////////////////////////////////////////////////////////////////////
+
+uint32_t StringToInt(uint32_t* time){    
+    uint32_t data = 0;
+    data = combineData(data,time[1]-'0',10);
+    data = combineData(data,time[2]-'0',10);
+    data = combineData(data,time[3]-'0',10);
+    data = combineData(data,time[4]-'0',10);
+    return data;
+}
