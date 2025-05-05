@@ -137,7 +137,6 @@ module DHT11_cu (
                     next = START;
                     data_count_next = 0;
                     real_count_next = 0;
-                    o_data_next = 0;
                 end
             end
             START:
@@ -198,7 +197,6 @@ module DHT11_cu (
             DATA2: begin
                 if (tick_count < 50) begin
                     next = SYNC;
-                    o_data_next[39-data_count] = 0;
                     data_count_next = data_count + 1;
                     tick_count_next = 0;
                 end else begin
