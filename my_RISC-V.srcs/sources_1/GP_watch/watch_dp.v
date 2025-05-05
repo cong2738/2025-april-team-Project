@@ -131,10 +131,10 @@ module watch_counter_tick #(
 ) (
     input clk,
     input reset,
+    input add_time,
     input tick,
     input setSig,
     input [31:0]set_data,
-    input add_time,
     output [31 : 0] counter,
     output o_tick
 );
@@ -149,10 +149,8 @@ module watch_counter_tick #(
     always @(posedge clk, posedge reset) begin
         if (reset) begin
             counter_reg <= 0;
-        end else begin            
-            if(setSig) begin
-                counter_reg <= set_data;
-            end else if (counter_reg == TICK_COUNT) begin
+        end else begin      
+            if (counter_reg == TICK_COUNT) begin
                 counter_reg <= 0;
             end else counter_reg <= counter_next + add_time;
         end
@@ -160,9 +158,11 @@ module watch_counter_tick #(
 
     // next
     always @(*) begin
-        counter_next = counter_reg;
         r_tick = 1'b0;
-        if (tick == 1'b1) begin  // tick count
+        counter_next = counter_reg;
+        if(setSig) begin
+            counter_next = set_data;
+        end else if (tick == 1'b1) begin  // tick count
             if (counter_reg == TICK_COUNT - 1) begin
                 counter_next = 0;
                 r_tick = 1'b1;
