@@ -14,9 +14,9 @@ module GP_calculator(
     output logic        PREADY
 );
     logic [7:0] MOD;
-    logic [7:0] DATA;
-    logic [7:0] OPDATA;
-    logic [7:0] RESULT;
+    logic [31:0] DATA;
+    logic [31:0] OPDATA;
+    logic [31:0] RESULT;
 
     APB_calculatorIntf U_APB_Intf (.*);
     calculator U_calculator (.*);
@@ -36,16 +36,16 @@ module APB_calculatorIntf (
     output logic        PREADY,
     // internal signals
     output  logic [7:0] MOD,
-    output  logic [7:0] DATA,
-    output  logic [7:0] OPDATA,
-    input   logic [7:0] RESULT
+    output  logic [31:0] DATA,
+    output  logic [31:0] OPDATA,
+    input   logic [31:0] RESULT
 );
     logic [31:0] slv_reg0, slv_reg1, slv_reg2, slv_reg3;  // ,slv_reg3;
 
-    assign MOD         = slv_reg0[7:0];
-    assign DATA          = slv_reg1[7:0];
-    assign OPDATA       = slv_reg2[7:0];
-    assign slv_reg3[7:0] = RESULT;
+    assign MOD      = slv_reg0[7:0];
+    assign DATA     = slv_reg1;
+    assign OPDATA   = slv_reg2;
+    assign slv_reg3 = RESULT;
 
     always_ff @(posedge PCLK, posedge PRESET) begin
         if (PRESET) begin
@@ -82,9 +82,9 @@ endmodule
 
 module calculator (
     input  logic [7:0] MOD,
-    input  logic [7:0] DATA,
-    input  logic [7:0] OPDATA,
-    output logic [7:0] RESULT
+    input  logic [31:0] DATA,
+    input  logic [31:0] OPDATA,
+    output logic [31:0] RESULT
 );
     always_comb begin : CAL
         RESULT = DATA;
