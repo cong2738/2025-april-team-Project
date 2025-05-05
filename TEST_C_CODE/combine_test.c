@@ -143,7 +143,7 @@ int main(void)
     uint32_t printResPreCnt = 0;
     uint32_t rxPreCnt = 0;
     uint32_t readIdx = 0;
-    uint32_t rxString[5]; // S00:00:00
+    uint32_t rxString[6]; // S00:00:00
     TimeStringInit(rxString);
     uint32_t push = 0, release = 0;
     uint32_t distance_data[3];
@@ -180,15 +180,15 @@ int main(void)
         if(!UART_isEMPTY(GPUART)) {
             rxString[readIdx] = UART_read(GPUART); // read from input buffer
             readIdx = readIdx + 1;
-            if(readIdx == 5) { // if string is full
+            if(readIdx == 6) { // if string is full
                 if(RxDataCheck(rxString)) {
                     fndData = StringToInt(rxString);
-                    transString(GPUART,rxString,5);
                     UART_trans(GPUART,'\n');
                 } else {
                     delay(10);
                     while(!UART_isEMPTY(GPUART)) UART_read(GPUART); //flush buffer
                 }
+                transString(GPUART,rxString,6);
                 readIdx = 0; // reset idx
             }
         }
