@@ -2,7 +2,4 @@
 |       Launch Clock       |      Capture Clock       |                                                 Pin                                                      |
 +--------------------------+--------------------------+----------------------------------------------------------------------------------------------------------+
 |              sys_clk_pin |              sys_clk_pin |                                                                u_GP_calculator/U_APB_Intf/PRDATA_reg[5]/D|
-|              sys_clk_pin |              sys_clk_pin |                                                            U_Core/U_DataPath/U_ExeReg_PCSrcMux/q_reg[2]/D|
-|              sys_clk_pin |              sys_clk_pin |                                                            U_Core/U_DataPath/U_ExeReg_PCSrcMux/q_reg[0]/D|
-|              sys_clk_pin |              sys_clk_pin |                                                            U_Core/U_DataPath/U_ExeReg_PCSrcMux/q_reg[1]/D|
 +--------------------------+--------------------------+----------------------------------------------------------------------------------------------------------+
