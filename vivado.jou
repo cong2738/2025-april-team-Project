@@ -275,3 +275,24 @@ relaunch_sim
 run all
 save_wave_config {C:/harman/HarmanSemiconAcademy_2025April_TeamProject/tb_fifo_UVM_TEMPLET_behav.wcfg}
 save_wave_config {C:/harman/HarmanSemiconAcademy_2025April_TeamProject/tb_fifo_UVM_TEMPLET_behav.wcfg}
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top tb_GPUART [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+relaunch_sim
+run all
+launch_simulation
+close_sim
+launch_simulation
+open_wave_config C:/harman/HarmanSemiconAcademy_2025April_TeamProject/tb_fifo_UVM_TEMPLET_behav.wcfg
+source tb_GPUART.tcl
+relaunch_sim
+run all
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
