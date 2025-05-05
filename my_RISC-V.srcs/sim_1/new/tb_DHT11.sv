@@ -49,12 +49,12 @@ endinterface
 
 
 class generator;
-  mailbox #(transaction) mb;
-  event                  done_evt;
+  mailbox #(transaction) gen2drv_mbox;
+  event                  gen_done_evt;
 
-  function new(mailbox#(transaction) mb_i, event done_evt_i);
-    mb       = mb_i;
-    done_evt = done_evt_i;
+  function new(mailbox#(transaction) m, event e);
+    gen2drv_mbox = m;  
+    gen_done_evt = e;
   endfunction
 
   task run(int N);
@@ -66,8 +66,8 @@ class generator;
         $finish;
       end
       tr.display("GEN");
-      mb.put(tr);
-      @(done_evt);
+      gen2drv_mbox.put(tr);
+      @(gen_done_evt);
     end
   endtask
 endclass
@@ -75,9 +75,9 @@ endclass
 
 class driver;
   virtual DHT11_if       ifc;
-  mailbox #(transaction) gen_mb; // from generator
+  mailbox #(transaction) gen2drv_mbox; // from generator
   // mailbox #(transaction) mon_mb; // to monitor
-  event                  done_evt;
+  event                  drv_done_evt;
 
   // DHT11 timing parameters (data sheet)
   localparam integer START_LOW = 18_000_000; // 18 ms
@@ -88,11 +88,10 @@ class driver;
   localparam integer BIT_ONE_H  = 70_000;    // 70 us
   localparam integer BIT_ZERO_H = 26_000;    // 26 us
 
-  function new(virtual DHT11_if ifc_i, mailbox#(transaction) mb_i, event done_evt_i);
-    ifc      = ifc_i;
-    gen_mb       = mb_i;
-    // mon_mb   = mon_mb_i;
-    done_evt = done_evt_i;
+  function new(virtual DHT11_if ifc_i, mailbox#(transaction) m_i, event e_i);
+    ifc            = ifc_i;
+    gen2drv_mbox   = m_i;
+    drv_done_evt   = e_i;
   endfunction
 
   task sensor_behave(logic [7:0] H, logic [7:0] T);
@@ -129,7 +128,7 @@ class driver;
   task run();
     transaction tr;
     forever begin
-      gen_mb.get(tr);
+      gen2drv_mbox.get(tr);
       
       // ifc.drive_en   = 1;
       // ifc.drive_data = 0;
@@ -155,8 +154,7 @@ class driver;
       tr.PREADY = ifc.PREADY;
       $display("[DRV] APB Read complete: PRDATA=%0h PREADY=%0b @%0t", 
                tr.PRDATA, tr.PREADY, $realtime);
-      mon_mb.put(tr);
-      #1 ->done_evt;
+      #1 ->drv_done_evt;
 
       ifc.PSEL    <= 0;
       ifc.PENABLE <= 0;
@@ -166,32 +164,31 @@ endclass
 
 
 class monitor;
-  mailbox #(transaction) in_mb, out_mb;
+ 
   virtual DHT11_if       ifc;
+  mailbox #(transaction) mon2scb_mbox;
   // event                  done_evt;
   event                  drv_done_evt;
   event                  mon_done_evt;
 
-  function new(mailbox#(transaction) in_mb_i, mailbox#(transaction) out_mb_i, event drv_done_evt_i, event mon_done_evt_i, virtual DHT11_if ifc_i);
-    ifc      = ifc_i;
-    in_mb       = in_mb_i;
-    out_mb       = out_mb_i;
-    drv_done_evt = drv_done_evt_i;
-    mon_done_evt = mon_done_evt_i;
+  function new(mailbox#(transaction) in_mb_i, mailbox#(transaction) m_i, event drv_done_evt_i, event mon_done_evt_i, virtual DHT11_if ifc_i);
+    ifc            = ifc_i;
+    mon2scb_mbox   = m_i;
+    drv_done_evt   = drv_evt;
+    mon_done_evt   = mon_evt;
   endfunction
 
   task run();
     transaction tr;
     forever begin
       @(drv_done_evt);
-      in_mb.get(tr);
       if (ifc.PSEL && ifc.PENABLE && ifc.PREADY) begin
         tr.PRDATA = ifc.PRDATA;
         tr.PREADY = ifc.PREADY;
       end
       $display("[MON] Captured PRDATA=%0h PREADY=%0b @%0t", 
                tr.PRDATA, tr.PREADY, $realtime);
-      out_mb.put(tr);
+      mon2scb_mbox.put(tr);
       #1 ->mon_done_evt;
     end
   endtask
@@ -199,22 +196,22 @@ endclass
 
 
 class scoreboard;
-  mailbox #(transaction) mb;
+  mailbox #(transaction) mon2scb_mbox;
   event                  mon_done_evt;
   event                  gen_done_evt;
   int                    pass = 0, fail = 0;
 
-  function new(mailbox#(transaction) mb_i, event mon_done_evt_i, event gen_done_evt_i);
-    mb       = mb_i;
-    mon_done_evt = mon_done_evt_i;
-    gen_done_evt = gen_done_evt_i;
+  function new(mailbox#(transaction) m_i, event mon_evt, event gen_evt);
+    mon2scb_mbox = m_i;
+    mon_done_evt = mon_evt;
+    gen_done_evt = gen_evt;
   endfunction
 
   task run(int total);
     transaction tr;
     repeat (total) begin
       @(mon_done_evt);
-      mb.get(tr);
+      mon2scb_mbox.get(tr);
       case (tr.PADDR)
         4'h0: if (tr.PRDATA[7:0] == tr.humidity) pass++; else fail++;
         4'h4: if (tr.PRDATA[7:0] == tr.temperature) pass++; else fail++;
@@ -229,7 +226,7 @@ class scoreboard;
   endtask
 endclass
 
-
+// 여기서부터 수정 
 class env;
   virtual DHT11_if       ifc;
   mailbox #(transaction) gen2drv, drv2mon, mon2scb;
