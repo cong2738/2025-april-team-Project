@@ -49,8 +49,6 @@ module APB_Master_CU (
     output logic [31:0] PWDATA,
     output logic        PWRITE,
     output logic        PENABLE,
-    input  logic [31:0] PRDATA  [0:15],
-    input  logic [15:0] PREADY,
     // Internal Interface Signals
     input  logic        transfer,        // trigger signal
     input  logic        ready,
