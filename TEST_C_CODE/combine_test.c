@@ -105,7 +105,7 @@ uint32_t time_ctrl(TIMER_TypeDef* timer,uint32_t max_count, uint32_t* preCnt, ui
 void set_cal(GPCAL_TypeDef* calculator, uint32_t mod, uint32_t data, uint32_t opdata);
 uint32_t cal_result(GPCAL_TypeDef* calculator);
 
-void convertData(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string, uint32_t length);
+void intToString(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string, uint32_t length);
 void transDigit(GPUART_TypeDef* uart, uint32_t* string, uint32_t length);
 void transString(GPUART_TypeDef* uart, uint32_t* string, uint32_t length);
 
@@ -138,21 +138,13 @@ int main(void)
     FND_init(GPFND, 1, 0x0);
     TIM_init(TIMER,psc,arr);
     TIM_start(TIMER);
-    uint32_t fnd_mode = 0;
-    uint32_t fndData = 0;
-    uint32_t watchPreCnt = 0;
-    uint32_t printResPreCnt = 0;
-    uint32_t rxPreCnt = 0;
+    uint32_t watchPreCnt = 0,printResPreCnt = 0,rxPreCnt = 0;
+    uint32_t fnd_mode = 0, fndData = 0;
     uint32_t readIdx = 0;
     uint32_t rxString[6]; // S00:00:00
     TimeStringInit(rxString);
     uint32_t push = 0, release = 0;
-    uint32_t distance_data[3];
-    uint32_t TEM_data[3];
-    uint32_t RH_data[3];
-    uint32_t hour_data[2];
-    uint32_t min_data[2];
-    uint32_t sec_data[2];
+    uint32_t distance_data[3], TEM_data[3], RH_data[3], hour_data[2], min_data[2], sec_data[2];
     uint32_t msec, sec, min, hour;
     while (1)
     {  
@@ -166,13 +158,12 @@ int main(void)
         uint32_t s_m = combineData(sec,msec,100);
         uint32_t T_RH = combineData(TEM,RH,100);
         
-        convertData(GPCAL,distance,distance_data,3);
-        convertData(GPCAL,RH,RH_data,3);
-        convertData(GPCAL,TEM,TEM_data,3);
-        
-        convertData(GPCAL,hour,hour_data,2);
-        convertData(GPCAL,min,min_data,2);
-        convertData(GPCAL,sec,sec_data,2);
+        intToString(GPCAL,distance,distance_data,3);
+        intToString(GPCAL,RH,RH_data,3);
+        intToString(GPCAL,TEM,TEM_data,3);
+        intToString(GPCAL,hour,hour_data,2);
+        intToString(GPCAL,min,min_data,2);
+        intToString(GPCAL,sec,sec_data,2);
 
         if(time_ctrl(TIMER, arr, &printResPreCnt, 500)) {
             printTime(hour_data,min_data,sec_data);
@@ -193,9 +184,6 @@ int main(void)
                 readIdx = 0; // reset idx
             }
         }
-
-        uint32_t bt = ButtonRead(GPI);
-        ButtonReleaseEvent(bt,0,&push,&release,&fnd_mode);
         FND_writeData(GPFND,fndData,0b1111);
     }
     
@@ -338,8 +326,8 @@ uint32_t cal_result(GPCAL_TypeDef* calculator) {
 }
 ///////////////////////////////////////////////////////////////////////////////
 
-/* convertData function */
-void convertData(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string, uint32_t length) {
+/* intToString function */
+void intToString(GPCAL_TypeDef* calculator, uint32_t data, uint32_t* string, uint32_t length) {
     for (int i = 0; i < length; i++)
     {
         set_cal(calculator,'%',data,10);
