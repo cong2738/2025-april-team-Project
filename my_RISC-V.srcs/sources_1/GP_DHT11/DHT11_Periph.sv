@@ -16,10 +16,11 @@ module DHT11_Periph (
     inout  logic        DATA_IO
 );
     logic [39:0] DHT11_data;
+    logic [39:0] buff_out;
     logic [7:0] rh_int, t_int;
     logic finish_int;
-    assign rh_int = DHT11_data[39:32];
-    assign t_int = DHT11_data[23:16];
+    assign rh_int = buff_out[39:32];
+    assign t_int = buff_out[23:16];
 
   APB_SlaveIntf_DHT11 U_APB_Intf (
       .PCLK      (PCLK),
@@ -35,6 +36,15 @@ module DHT11_Periph (
       .t_int     (t_int),
       .finish_int(finish_int)
   );
+
+  DHT11_buffer u_DHT11_buffer(
+      .clk    (PCLK    ),
+      .reset  (PRESET  ),
+      .done   (finish_int   ),
+      .i_data (DHT11_data ),
+      .o_data (buff_out )
+  );
+  
   
   DHT11_module U_DHT11_IP (
       .clk          (PCLK),
@@ -110,5 +120,18 @@ module APB_SlaveIntf_DHT11 (
                 PREADY <= 1'b0;
             end
         end
+    end
+endmodule
+
+module DHT11_buffer (
+    input  logic        clk,
+    input  logic        reset,
+    input  logic        done,
+    input  logic [39:0] i_data,
+    output logic [39:0] o_data
+);
+    always_ff @(posedge clk, posedge reset) begin : BUFFER
+        if (reset) o_data <= 0;
+        else if (done) o_data <= i_data;
     end
 endmodule
