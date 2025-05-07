@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Wed May  7 12:34:04 2025
+| Date             : Wed May  7 16:16:40 2025
 | Host             : DESKTOP-7CFQ9ND running 64-bit major release  (build 9200)
 | Command          : report_power -file MCU_power_routed.rpt -pb MCU_power_summary_routed.pb -rpx MCU_power_routed.rpx
 | Design           : MCU
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.136        |
+| Total On-Chip Power (W)  | 0.135        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.064        |
+| Dynamic (W)              | 0.063        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.3         |
@@ -53,19 +53,19 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.008 |        3 |       --- |             --- |
-| Slice Logic              |     0.023 |     8590 |       --- |             --- |
-|   LUT as Logic           |     0.019 |     4945 |     20800 |           23.77 |
-|   CARRY4                 |     0.003 |      764 |      8150 |            9.37 |
+| Slice Logic              |     0.023 |     8574 |       --- |             --- |
+|   LUT as Logic           |     0.019 |     5006 |     20800 |           24.07 |
+|   CARRY4                 |     0.003 |      766 |      8150 |            9.40 |
 |   LUT as Distributed RAM |    <0.001 |      144 |      9600 |            1.50 |
-|   Register               |    <0.001 |     1760 |     41600 |            4.23 |
+|   Register               |    <0.001 |     1671 |     41600 |            4.02 |
 |   F7/F8 Muxes            |    <0.001 |      339 |     32600 |            1.04 |
 |   Others                 |     0.000 |       76 |       --- |             --- |
-| Signals                  |     0.028 |     7050 |       --- |             --- |
+| Signals                  |     0.028 |     7006 |       --- |             --- |
 | Block RAM                |    <0.001 |        1 |        50 |            2.00 |
 | DSPs                     |     0.002 |        3 |        90 |            3.33 |
-| I/O                      |     0.004 |       35 |       106 |           33.02 |
+| I/O                      |     0.003 |       35 |       106 |           33.02 |
 | Static Power             |     0.072 |          |           |                 |
-| Total                    |     0.136 |          |           |                 |
+| Total                    |     0.135 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.070 |       0.061 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.070 |       0.060 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.002 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -144,20 +144,20 @@ Table of Contents
 +----------------------+-----------+
 | Name                 | Power (W) |
 +----------------------+-----------+
-| MCU                  |     0.064 |
+| MCU                  |     0.063 |
 |   U_Core             |     0.020 |
 |     U_ControlUnit    |     0.005 |
 |     U_DataPath       |     0.016 |
-|       U_DecReg_RFRD1 |     0.007 |
+|       U_DecReg_RFRD1 |     0.008 |
 |       U_PC           |     0.005 |
 |   u_DHT11_Periph     |     0.004 |
 |     U_DHT11_IP       |     0.004 |
 |       uIO            |     0.003 |
 |   u_GP_Timer         |     0.001 |
 |   u_GP_UART          |     0.001 |
-|   u_GP_calculator    |     0.031 |
-|     U_APB_Intf       |     0.002 |
-|     U_calculator     |     0.029 |
+|   u_GP_calculator    |     0.029 |
+|     U_APB_Intf       |     0.001 |
+|     U_calculator     |     0.028 |
 |   u_GP_watch         |     0.002 |
 |     u_watch_dp       |     0.001 |
 +----------------------+-----------+
