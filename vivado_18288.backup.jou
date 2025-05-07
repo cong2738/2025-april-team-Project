@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Wed May  7 10:57:34 2025
+# Process ID: 18288
+# Current directory: C:/harman/2025 april team Project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent12916 C:\harman\2025 april team Project\my_RISC-V.xpr
+# Log file: C:/harman/2025 april team Project/vivado.log
+# Journal file: C:/harman/2025 april team Project\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project {C:/harman/2025 april team Project/my_RISC-V.xpr}
+synth_design -rtl -rtl_skip_mlo -name rtl_1
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top MCU [current_fileset]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+refresh_design
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+wait_on_run impl_1
+reset_run impl_1

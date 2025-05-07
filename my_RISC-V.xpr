@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="54" Path="C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.xpr">
+<Project Version="7" Minor="54" Path="C:/harman/2025 april team Project/my_RISC-V.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="5bf14d21fa514446801ddada29bdc5de"/>
@@ -265,7 +265,7 @@
       </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
-        <Option Name="TopModule" Val="APB_Master"/>
+        <Option Name="TopModule" Val="MCU"/>
       </Config>
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
