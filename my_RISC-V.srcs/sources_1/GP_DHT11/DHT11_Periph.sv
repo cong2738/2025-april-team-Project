@@ -15,9 +15,11 @@ module DHT11_Periph (
     output logic        PREADY,
     inout  logic        DATA_IO
 );
-
+    logic [39:0] DHT11_data;
     logic [7:0] rh_int, t_int;
     logic finish_int;
+    assign rh_int = DHT11_data[39:32];
+    assign t_int = DHT11_data[23:16];
 
   APB_SlaveIntf_DHT11 U_APB_Intf (
       .PCLK      (PCLK),
@@ -38,8 +40,7 @@ module DHT11_Periph (
       .clk          (PCLK),
       .reset        (PRESET),
       .data         (DATA_IO),
-      .rh           (rh_int),
-      .t            (t_int),
+      .o_data       (DHT11_data),
       .w_finish_tick(finish_int)
   );
 endmodule
