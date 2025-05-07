@@ -5,9 +5,8 @@ module rom (
     output logic [31:0] data
 );
     logic [31:0] rom[0:2**15-1];
-
     initial begin
-        $readmemh("testcode.mem", rom);
+        $readmemh("code.mem", rom);
     end
     assign data = rom[addr[31:2]];
 endmodule

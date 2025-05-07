@@ -3,59 +3,273 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="tb_fifo_UVM_TEMPLET_behav.wdb" id="1">
+      <db_ref path="tb_HCSR04_behav.wdb" id="1">
          <top_modules>
-            <top_module name="\$unit_gpi_sv " />
             <top_module name="glbl" />
-            <top_module name="std" />
-            <top_module name="tb_fifo_UVM_TEMPLET" />
+            <top_module name="tb_HCSR04" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="1000000fs"></ZoomEndTime>
-      <Cursor1Time time="999996fs"></Cursor1Time>
+      <ZoomEndTime time="592005001fs"></ZoomEndTime>
+      <Cursor1Time time="592005000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="165"></NameColumnWidth>
-      <ValueColumnWidth column_width="79"></ValueColumnWidth>
+      <NameColumnWidth column_width="179"></NameColumnWidth>
+      <ValueColumnWidth column_width="100"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="9" />
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/reset" type="logic">
-      <obj_property name="ElementShortName">reset</obj_property>
-      <obj_property name="ObjectShortName">reset</obj_property>
+   <WVObjectSize size="6" />
+   <wvobject fp_name="group182" type="group">
+      <obj_property name="label">dut</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_HCSR04/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/reset" type="logic">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/sensorTick" type="logic">
+         <obj_property name="ElementShortName">sensorTick</obj_property>
+         <obj_property name="ObjectShortName">sensorTick</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/state" type="array">
+         <obj_property name="ElementShortName">state[3:0]</obj_property>
+         <obj_property name="ObjectShortName">state[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/IDLE" type="array">
+         <obj_property name="ElementShortName">IDLE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">IDLE[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/START" type="array">
+         <obj_property name="ElementShortName">START[31:0]</obj_property>
+         <obj_property name="ObjectShortName">START[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/WAIT" type="array">
+         <obj_property name="ElementShortName">WAIT[31:0]</obj_property>
+         <obj_property name="ObjectShortName">WAIT[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/DATA" type="array">
+         <obj_property name="ElementShortName">DATA[31:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA[31:0]</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/clk" type="logic">
-      <obj_property name="ElementShortName">clk</obj_property>
-      <obj_property name="ObjectShortName">clk</obj_property>
+   <wvobject fp_name="group113" type="group">
+      <obj_property name="label">sensor</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/reset" type="logic">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/start_trigger" type="logic">
+         <obj_property name="ElementShortName">start_trigger</obj_property>
+         <obj_property name="ObjectShortName">start_trigger</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/data" type="logic">
+         <obj_property name="ElementShortName">data</obj_property>
+         <obj_property name="ObjectShortName">data</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/start_tick" type="logic">
+         <obj_property name="ElementShortName">start_tick</obj_property>
+         <obj_property name="ObjectShortName">start_tick</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/o_data" type="array">
+         <obj_property name="ElementShortName">o_data[15:0]</obj_property>
+         <obj_property name="ObjectShortName">o_data[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/done" type="logic">
+         <obj_property name="ElementShortName">done</obj_property>
+         <obj_property name="ObjectShortName">done</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/w_tick" type="logic">
+         <obj_property name="ElementShortName">w_tick</obj_property>
+         <obj_property name="ObjectShortName">w_tick</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/MAX_COUNT" type="array">
+         <obj_property name="ElementShortName">MAX_COUNT[31:0]</obj_property>
+         <obj_property name="ObjectShortName">MAX_COUNT[31:0]</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/reset" type="logic">
-      <obj_property name="ElementShortName">reset</obj_property>
-      <obj_property name="ObjectShortName">reset</obj_property>
+   <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HCSR04_buffer/o_data" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">o_data[15:0]</obj_property>
+      <obj_property name="ObjectShortName">o_data[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="label">buffer</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/wdata" type="array">
-      <obj_property name="ElementShortName">wdata[7:0]</obj_property>
-      <obj_property name="ObjectShortName">wdata[7:0]</obj_property>
+   <wvobject fp_name="group197" type="group">
+      <obj_property name="label">sensor_CU</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/reset" type="logic">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/tick" type="logic">
+         <obj_property name="ElementShortName">tick</obj_property>
+         <obj_property name="ObjectShortName">tick</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/start_trigger" type="logic">
+         <obj_property name="ElementShortName">start_trigger</obj_property>
+         <obj_property name="ObjectShortName">start_trigger</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data" type="logic">
+         <obj_property name="ElementShortName">data</obj_property>
+         <obj_property name="ObjectShortName">data</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/start_tick" type="logic">
+         <obj_property name="ElementShortName">start_tick</obj_property>
+         <obj_property name="ObjectShortName">start_tick</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/o_data" type="array">
+         <obj_property name="ElementShortName">o_data[15:0]</obj_property>
+         <obj_property name="ObjectShortName">o_data[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/done" type="logic">
+         <obj_property name="ElementShortName">done</obj_property>
+         <obj_property name="ObjectShortName">done</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/state" type="array">
+         <obj_property name="ElementShortName">state[3:0]</obj_property>
+         <obj_property name="ObjectShortName">state[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/next" type="array">
+         <obj_property name="ElementShortName">next[3:0]</obj_property>
+         <obj_property name="ObjectShortName">next[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/tick_count" type="array">
+         <obj_property name="ElementShortName">tick_count[5:0]</obj_property>
+         <obj_property name="ObjectShortName">tick_count[5:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/tick_count_next" type="array">
+         <obj_property name="ElementShortName">tick_count_next[5:0]</obj_property>
+         <obj_property name="ObjectShortName">tick_count_next[5:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_reg" type="array">
+         <obj_property name="ElementShortName">data_reg[15:0]</obj_property>
+         <obj_property name="ObjectShortName">data_reg[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/data_next" type="array">
+         <obj_property name="ElementShortName">data_next[15:0]</obj_property>
+         <obj_property name="ObjectShortName">data_next[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/start_tick_reg" type="logic">
+         <obj_property name="ElementShortName">start_tick_reg</obj_property>
+         <obj_property name="ObjectShortName">start_tick_reg</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/start_tick_next" type="logic">
+         <obj_property name="ElementShortName">start_tick_next</obj_property>
+         <obj_property name="ObjectShortName">start_tick_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/done_next" type="logic">
+         <obj_property name="ElementShortName">done_next</obj_property>
+         <obj_property name="ObjectShortName">done_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/IDLE" type="array">
+         <obj_property name="ElementShortName">IDLE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">IDLE[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/START" type="array">
+         <obj_property name="ElementShortName">START[31:0]</obj_property>
+         <obj_property name="ObjectShortName">START[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/WAIT" type="array">
+         <obj_property name="ElementShortName">WAIT[31:0]</obj_property>
+         <obj_property name="ObjectShortName">WAIT[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/DATA" type="array">
+         <obj_property name="ElementShortName">DATA[31:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HC_SR04_module/U_senor_cu/MAX_DISTANCE" type="array">
+         <obj_property name="ElementShortName">MAX_DISTANCE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">MAX_DISTANCE[31:0]</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/wr_en" type="logic">
-      <obj_property name="ElementShortName">wr_en</obj_property>
-      <obj_property name="ObjectShortName">wr_en</obj_property>
+   <wvobject fp_name="group191" type="group">
+      <obj_property name="label">buff</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HCSR04_buffer/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HCSR04_buffer/reset" type="logic">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HCSR04_buffer/done" type="logic">
+         <obj_property name="ElementShortName">done</obj_property>
+         <obj_property name="ObjectShortName">done</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HCSR04_buffer/distance" type="array">
+         <obj_property name="ElementShortName">distance[15:0]</obj_property>
+         <obj_property name="ObjectShortName">distance[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/u_GP_HCSR04/u_HCSR04_buffer/o_data" type="array">
+         <obj_property name="ElementShortName">o_data[15:0]</obj_property>
+         <obj_property name="ObjectShortName">o_data[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/full" type="logic">
-      <obj_property name="ElementShortName">full</obj_property>
-      <obj_property name="ObjectShortName">full</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/rdata" type="array">
-      <obj_property name="ElementShortName">rdata[7:0]</obj_property>
-      <obj_property name="ObjectShortName">rdata[7:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/rd_en" type="logic">
-      <obj_property name="ElementShortName">rd_en</obj_property>
-      <obj_property name="ObjectShortName">rd_en</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_fifo_UVM_TEMPLET/fifo_if/empty" type="logic">
-      <obj_property name="ElementShortName">empty</obj_property>
-      <obj_property name="ObjectShortName">empty</obj_property>
+   <wvobject fp_name="group15" type="group">
+      <obj_property name="label">intf</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_HCSR04/intf/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/intf/reset" type="logic">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/intf/PADDR" type="array">
+         <obj_property name="ElementShortName">PADDR[3:0]</obj_property>
+         <obj_property name="ObjectShortName">PADDR[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/intf/PWDATA" type="array">
+         <obj_property name="ElementShortName">PWDATA[31:0]</obj_property>
+         <obj_property name="ObjectShortName">PWDATA[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/intf/PWRITE" type="logic">
+         <obj_property name="ElementShortName">PWRITE</obj_property>
+         <obj_property name="ObjectShortName">PWRITE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/intf/PENABLE" type="logic">
+         <obj_property name="ElementShortName">PENABLE</obj_property>
+         <obj_property name="ObjectShortName">PENABLE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/intf/PSEL" type="logic">
+         <obj_property name="ElementShortName">PSEL</obj_property>
+         <obj_property name="ObjectShortName">PSEL</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/intf/PRDATA" type="array">
+         <obj_property name="ElementShortName">PRDATA[31:0]</obj_property>
+         <obj_property name="ObjectShortName">PRDATA[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/intf/PREADY" type="logic">
+         <obj_property name="ElementShortName">PREADY</obj_property>
+         <obj_property name="ObjectShortName">PREADY</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/intf/echo_data" type="logic">
+         <obj_property name="ElementShortName">echo_data</obj_property>
+         <obj_property name="ObjectShortName">echo_data</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_HCSR04/intf/echo_start" type="logic">
+         <obj_property name="ElementShortName">echo_start</obj_property>
+         <obj_property name="ObjectShortName">echo_start</obj_property>
+      </wvobject>
    </wvobject>
 </wave_config>

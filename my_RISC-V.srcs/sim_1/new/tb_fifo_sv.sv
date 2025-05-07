@@ -164,6 +164,14 @@ class fifo_scoreboard;
     logic [7:0] scb_fifo[$];
     logic [7:0] pop_data;
 
+    integer TEST = 0;
+    integer WRITE = 0;
+    integer READ = 0;
+    integer QUEISFULL = 0;
+    integer QUEISEMPTY = 0;
+    integer PASS = 0;
+    integer FAIL = 0;
+
     function new(mailbox#(fifo_transaction) MonToSCB_mbox, event gen_next_event);
         this.MonToSCB_mbox  = MonToSCB_mbox;
         this.gen_next_event = gen_next_event;
@@ -171,29 +179,36 @@ class fifo_scoreboard;
 
     task run();
         forever begin
+            TEST++;
             MonToSCB_mbox.get(fifo_tr);
             fifo_tr.display("SCB");
             if (fifo_tr.wr_en == 1'b1) begin
+                WRITE++;
                 if (fifo_tr.full == 1'b0) begin
                     scb_fifo.push_back(fifo_tr.wdata);
                     $display("[SCB] : DATA Stored in queue : %d, %p",
                              fifo_tr.wdata, scb_fifo);
                 end else begin
                     $display("[SCB] : FIFO is full, %p", scb_fifo);
+                    QUEISFULL++;
                 end
             end
             if (fifo_tr.rd_en == 1'b1) begin
+                READ++;
                 if (fifo_tr.empty == 1'b0) begin
                     pop_data = scb_fifo.pop_front();
                     if (fifo_tr.rdata == pop_data) begin
                         $display("[SCB] : DATA Matched %h == %h",
                                  fifo_tr.rdata, pop_data);
+                        PASS++;
                     end else begin
                         $display("[SCB] : DATA Mismatched %h != %h",
                                  fifo_tr.rdata, pop_data);
+                        FAIL++;
                     end
                 end else begin
                     $display("[SCB] : FIFO is empty!");
+                    QUEISEMPTY++;
                 end
             end
             -> gen_next_event; // ?
@@ -227,6 +242,18 @@ class fifo_envirnment;
             fifo_scb.run();
         join_any
     endtask  //
+
+    task  show_Result();
+        $display("__________________________________");
+        $display("testCase: %d",fifo_scb.TEST);
+        $display("writeCase: %d",fifo_scb.WRITE);
+        $display("readCase: %d",fifo_scb.READ);
+        $display("FULLCase: %d",fifo_scb.QUEISFULL);
+        $display("emptyCase: %d",fifo_scb.QUEISEMPTY);
+        $display("PASSCase: %d",fifo_scb.PASS);
+        $display("FAILCase: %d",fifo_scb.FAIL);
+        $display("__________________________________");
+    endtask //
 endclass  //fifo_envirnment
 
 module tb_fifo_UVM_TEMPLET ();
@@ -259,8 +286,8 @@ module tb_fifo_UVM_TEMPLET ();
         @(posedge clk);
         env = new(fifo_if);
         env.run(100);
-        #50;
-        $finish;
+        env.show_Result();
+        #50 $finish;
     end
 
 endmodule

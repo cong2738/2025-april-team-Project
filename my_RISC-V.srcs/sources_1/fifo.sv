@@ -1,6 +1,9 @@
 `timescale 1ns / 1ps
 
-module fifo (
+module fifo #(
+    parameter FIFO_UNIT = 8,
+    parameter FIFO_CAP = 2**2
+) (
     input              clk,
     input              reset,
     input  logic       wr_en,
@@ -10,10 +13,13 @@ module fifo (
     output logic       full,
     output logic       empty
 );
-    logic [1:0] wr_ptr;
-    logic [1:0] rd_ptr;
+    logic [$clog2(FIFO_CAP)-1:0] wr_ptr;
+    logic [$clog2(FIFO_CAP)-1:0] rd_ptr;
 
-    fifo_ram u_fifo_ram (
+    fifo_ram #(
+        .FIFO_UNIT(FIFO_UNIT),
+        .FIFO_CAP(FIFO_CAP)
+    ) u_fifo_ram (
         .clk   (clk),
         .wr_ptr(wr_ptr),
         .wData (wData),
@@ -22,20 +28,26 @@ module fifo (
         .rData (rData)
     );
 
-    fifo_CU u_fifo_CU (.*);
+    fifo_CU #(
+        .FIFO_UNIT(FIFO_UNIT),
+        .FIFO_CAP(FIFO_CAP)
+    ) u_fifo_CU (.*);
 
 
 endmodule
 
-module fifo_ram (
+module fifo_ram #(
+    parameter FIFO_UNIT = 8,
+    parameter FIFO_CAP = 2**2
+) (
     input clk,
-    input logic [1:0] wr_ptr,
+    input logic [$clog2(FIFO_CAP)-1:0] wr_ptr,
     input logic [7:0] wData,
     input logic wr_en,
-    input logic [1:0] rd_ptr,
+    input logic [$clog2(FIFO_CAP)-1:0] rd_ptr,
     output logic [7:0] rData
 );
-    logic [7:0] mem[0:2**2-1];
+    logic [FIFO_UNIT-1:0] mem[0:FIFO_CAP-1];
 
     always @(posedge clk) begin
         if (wr_en) begin
@@ -46,16 +58,19 @@ module fifo_ram (
     assign rData = mem[rd_ptr];
 endmodule
 
-module fifo_CU (
+module fifo_CU #(
+    parameter FIFO_UNIT = 8,
+    parameter FIFO_CAP = 2**2
+) (
     input  logic       clk,
     input  logic       reset,
     // write side
     input  logic       wr_en,
-    output logic [1:0] wr_ptr,
+    output logic [$clog2(FIFO_CAP)-1:0] wr_ptr,
     output logic       full,
     // read side
     input  logic       rd_en,
-    output logic [1:0] rd_ptr,
+    output logic [$clog2(FIFO_CAP)-1:0] rd_ptr,
     output logic       empty
 );
     typedef enum logic [1:0] {
@@ -66,8 +81,8 @@ module fifo_CU (
     } state_e;
 
     logic [1:0] fifo_state;
-    logic [1:0] wr_ptr_reg, wr_ptr_next;
-    logic [1:0] rd_ptr_reg, rd_ptr_next;
+    logic [$clog2(FIFO_CAP)-1:0] wr_ptr_reg, wr_ptr_next;
+    logic [$clog2(FIFO_CAP)-1:0] rd_ptr_reg, rd_ptr_next;
     logic full_reg, full_next;
     logic empty_reg, empty_next;
 

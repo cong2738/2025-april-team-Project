@@ -76,6 +76,8 @@
 !*.md
 #png
 !*.png
+#gif
+!*.gif
 
 #ignore all tree exept srcs
 ./*

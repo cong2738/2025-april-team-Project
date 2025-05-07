@@ -20,13 +20,50 @@ module APB_Master (
     output logic [31:0] rdata,
     input  logic        write            // 1:write, 0:read
 );
+    logic [31:0] master_addr;
+    logic        decoder_en;
+
+    APB_Master_CU u_APB_Master_CU(.*);
+    
+    APB_Decoder U_APB_Decoder (
+        .en (decoder_en),
+        .sel(master_addr),
+        .y  (PSEL)
+    );
+
+    APB_Mux U_APB_Mux (
+        .sel  (master_addr),
+        .d   (PRDATA),
+        .r   (PREADY),
+        .rdata(rdata),
+        .ready(ready)
+    );
+endmodule
+
+module APB_Master_CU (
+    // global signal
+    input  logic        PCLK,
+    input  logic        PRESET,
+    // APB Interface Signals
+    output logic [31:0] PADDR,
+    output logic [31:0] PWDATA,
+    output logic        PWRITE,
+    output logic        PENABLE,
+    // Internal Interface Signals
+    input  logic        transfer,        // trigger signal
+    input  logic        ready,
+    input  logic [31:0] addr,
+    input  logic [31:0] wdata,
+    input  logic        write,           // 1:write, 0:read
+
+    output logic [31:0] master_addr,
+    output logic        decoder_en
+);
     logic [31:0] temp_addr_next, temp_addr_reg;
     logic [31:0] temp_wdata_next, temp_wdata_reg;
     logic temp_write_next, temp_write_reg;
-    logic decoder_en;
-    logic [15:0] pselx;
 
-    assign PSEL = pselx;
+    assign master_addr = temp_addr_reg;
 
     typedef enum bit [1:0] {
         IDLE,
@@ -98,20 +135,6 @@ module APB_Master (
             end
         endcase
     end
-
-    APB_Decoder U_APB_Decoder (
-        .en (decoder_en),
-        .sel(temp_addr_reg),
-        .y  (pselx)
-    );
-
-    APB_Mux U_APB_Mux (
-        .sel  (temp_addr_reg),
-        .d   (PRDATA),
-        .r   (PREADY),
-        .rdata(rdata),
-        .ready(ready)
-    );
 endmodule
 
 module APB_Decoder (

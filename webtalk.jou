@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sun May  4 00:55:42 2025
+# Process ID: 8368
+# Current directory: C:/harman/HarmanSemiconAcademy_2025April_TeamProject
+# Command line: wbtcv.exe -mode batch -source C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.hw/webtalk/labtool_webtalk.tcl -notrace
+# Log file: C:/harman/HarmanSemiconAcademy_2025April_TeamProject/webtalk.log
+# Journal file: C:/harman/HarmanSemiconAcademy_2025April_TeamProject\webtalk.jou
+#-----------------------------------------------------------
+source C:/harman/HarmanSemiconAcademy_2025April_TeamProject/my_RISC-V.hw/webtalk/labtool_webtalk.tcl -notrace
