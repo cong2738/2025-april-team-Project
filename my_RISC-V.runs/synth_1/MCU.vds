@@ -2,8 +2,8 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Wed May  7 16:13:45 2025
-# Process ID: 9120
+# Start of session at: Thu May  8 19:34:55 2025
+# Process ID: 23292
 # Current directory: C:/harman/2025 april team Project/my_RISC-V.runs/synth_1
 # Command line: vivado.exe -log MCU.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source MCU.tcl
 # Log file: C:/harman/2025 april team Project/my_RISC-V.runs/synth_1/MCU.vds
@@ -17,13 +17,13 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 12968
+INFO: [Synth 8-7075] Helper process launched with PID 23720
 WARNING: [Synth 8-2292] literal value truncated to fit in 2 bits [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/GP_watch.sv:93]
 WARNING: [Synth 8-2292] literal value truncated to fit in 2 bits [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/GP_watch.sv:94]
 WARNING: [Synth 8-2292] literal value truncated to fit in 2 bits [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/GP_watch.sv:95]
 WARNING: [Synth 8-2292] literal value truncated to fit in 2 bits [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/GP_watch.sv:96]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1103.996 ; gain = 0.000
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1104.258 ; gain = 0.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'MCU' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/MCU.sv:3]
 INFO: [Synth 8-6157] synthesizing module 'rom' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/rom.sv:3]
@@ -165,11 +165,9 @@ INFO: [Synth 8-6155] done synthesizing module 'GP_UART' (45#1) [C:/harman/2025 a
 WARNING: [Synth 8-689] width (32) of port connection 'PADDR' does not match port width (4) of module 'GP_UART' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/MCU.sv:102]
 INFO: [Synth 8-6157] synthesizing module 'GP_HCSR04' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:3]
 	Parameter MAX_COUNT bound to: 100000000 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'APB_HCSR04Intf' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:47]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:72]
-INFO: [Synth 8-6155] done synthesizing module 'APB_HCSR04Intf' (46#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:47]
-INFO: [Synth 8-6157] synthesizing module 'HCSR04_buffer' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:84]
-INFO: [Synth 8-6155] done synthesizing module 'HCSR04_buffer' (47#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:84]
+INFO: [Synth 8-6157] synthesizing module 'APB_HCSR04Intf' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:37]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:65]
+INFO: [Synth 8-6155] done synthesizing module 'APB_HCSR04Intf' (46#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:37]
 INFO: [Synth 8-6157] synthesizing module 'HC_SR04_module' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/HC_SR04_module.v:4]
 	Parameter MAX_COUNT bound to: 100000000 - type: integer 
 INFO: [Synth 8-6157] synthesizing module 'HC_SR04_cu' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/HC_SR04_module.v:47]
@@ -177,42 +175,40 @@ INFO: [Synth 8-6157] synthesizing module 'HC_SR04_cu' [C:/harman/2025 april team
 	Parameter START bound to: 1 - type: integer 
 	Parameter WAIT bound to: 2 - type: integer 
 	Parameter DATA bound to: 3 - type: integer 
-	Parameter MAX_DISTANCE bound to: 250 - type: integer 
+	Parameter MAX_DISTANCE bound to: 100 - type: integer 
 INFO: [Synth 8-155] case statement is not full and has no default [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/HC_SR04_module.v:94]
-INFO: [Synth 8-6155] done synthesizing module 'HC_SR04_cu' (48#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/HC_SR04_module.v:47]
+INFO: [Synth 8-6155] done synthesizing module 'HC_SR04_cu' (47#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/HC_SR04_module.v:47]
 INFO: [Synth 8-6157] synthesizing module 'tick_gen_1us' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/HC_SR04_module.v:144]
 	Parameter BAUD_COUNT bound to: 100 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'tick_gen_1us' (49#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/HC_SR04_module.v:144]
+INFO: [Synth 8-6155] done synthesizing module 'tick_gen_1us' (48#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/HC_SR04_module.v:144]
 INFO: [Synth 8-6157] synthesizing module 'tick_generator' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/clk_devider/tick_generator.sv:3]
 	Parameter MAX_COUNT bound to: 100000000 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'tick_generator' (50#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/clk_devider/tick_generator.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'tick_generator' (49#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/clk_devider/tick_generator.sv:3]
 WARNING: [Synth 8-6104] Input port 'start_trigger' has an internal driver [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/HC_SR04_module.v:42]
-INFO: [Synth 8-6155] done synthesizing module 'HC_SR04_module' (51#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/HC_SR04_module.v:4]
-INFO: [Synth 8-6155] done synthesizing module 'GP_HCSR04' (52#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'HC_SR04_module' (50#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/HC_SR04_module.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'GP_HCSR04' (51#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_HCSR04/GP_HCSR04.sv:3]
 WARNING: [Synth 8-689] width (32) of port connection 'PADDR' does not match port width (4) of module 'GP_HCSR04' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/MCU.sv:116]
 INFO: [Synth 8-6157] synthesizing module 'GP_calculator' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv:3]
 INFO: [Synth 8-6157] synthesizing module 'APB_calculatorIntf' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv:25]
 INFO: [Synth 8-155] case statement is not full and has no default [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv:60]
-INFO: [Synth 8-6155] done synthesizing module 'APB_calculatorIntf' (53#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv:25]
+INFO: [Synth 8-6155] done synthesizing module 'APB_calculatorIntf' (52#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv:25]
 INFO: [Synth 8-6157] synthesizing module 'calculator' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv:83]
 INFO: [Synth 8-155] case statement is not full and has no default [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv:91]
-INFO: [Synth 8-6155] done synthesizing module 'calculator' (54#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv:83]
-INFO: [Synth 8-6155] done synthesizing module 'GP_calculator' (55#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'calculator' (53#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv:83]
+INFO: [Synth 8-6155] done synthesizing module 'GP_calculator' (54#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_calculator/GP_calculator.sv:3]
 WARNING: [Synth 8-689] width (32) of port connection 'PADDR' does not match port width (4) of module 'GP_calculator' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/MCU.sv:125]
 INFO: [Synth 8-6157] synthesizing module 'DHT11_Periph' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:4]
-INFO: [Synth 8-6157] synthesizing module 'APB_SlaveIntf_DHT11' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:58]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:100]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:110]
-INFO: [Synth 8-6155] done synthesizing module 'APB_SlaveIntf_DHT11' (56#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:58]
-INFO: [Synth 8-6157] synthesizing module 'DHT11_buffer' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:126]
-INFO: [Synth 8-6155] done synthesizing module 'DHT11_buffer' (57#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:126]
+INFO: [Synth 8-6157] synthesizing module 'APB_SlaveIntf_DHT11' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:44]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:76]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:83]
+INFO: [Synth 8-6155] done synthesizing module 'APB_SlaveIntf_DHT11' (55#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:44]
 INFO: [Synth 8-6157] synthesizing module 'DHT11_module' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:23]
 INFO: [Synth 8-6157] synthesizing module 'IOBUF' [C:/Xilinx/Vivado/2020.2/scripts/rt/data/unisim_comp.v:36242]
 	Parameter DRIVE bound to: 12 - type: integer 
 	Parameter IBUF_LOW_PWR bound to: TRUE - type: string 
 	Parameter IOSTANDARD bound to: DEFAULT - type: string 
 	Parameter SLEW bound to: SLOW - type: string 
-INFO: [Synth 8-6155] done synthesizing module 'IOBUF' (58#1) [C:/Xilinx/Vivado/2020.2/scripts/rt/data/unisim_comp.v:36242]
+INFO: [Synth 8-6155] done synthesizing module 'IOBUF' (56#1) [C:/Xilinx/Vivado/2020.2/scripts/rt/data/unisim_comp.v:36242]
 INFO: [Synth 8-6157] synthesizing module 'sensor_cu' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:73]
 	Parameter IDLE bound to: 4'b0000 
 	Parameter START bound to: 4'b0001 
@@ -225,28 +221,28 @@ INFO: [Synth 8-6157] synthesizing module 'sensor_cu' [C:/harman/2025 april team 
 	Parameter WAIT4 bound to: 4'b1110 
 	Parameter DATA2 bound to: 4'b1111 
 INFO: [Synth 8-155] case statement is not full and has no default [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:149]
-INFO: [Synth 8-6155] done synthesizing module 'sensor_cu' (59#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:73]
+INFO: [Synth 8-6155] done synthesizing module 'sensor_cu' (57#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:73]
 WARNING: [Synth 8-689] width (6) of port connection 'o_state' does not match port width (4) of module 'sensor_cu' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:51]
 WARNING: [Synth 8-7071] port 'start_tick' of module 'sensor_cu' is unconnected for instance 'u_sen' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:43]
 WARNING: [Synth 8-7023] instance 'u_sen' of module 'sensor_cu' has 13 connections declared, but only 12 given [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:43]
 INFO: [Synth 8-6157] synthesizing module 'tick_1us' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:266]
 	Parameter BAUD_RATE bound to: 9600 - type: integer 
 	Parameter BAUD_COUNT bound to: 100 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'tick_1us' (60#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:266]
+INFO: [Synth 8-6155] done synthesizing module 'tick_1us' (58#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:266]
 INFO: [Synth 8-6157] synthesizing module 'tick_10sec' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:306]
 	Parameter BAUD_RATE bound to: 9600 - type: integer 
 	Parameter BAUD_COUNT bound to: 1000000000 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'tick_10sec' (61#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:306]
-INFO: [Synth 8-6155] done synthesizing module 'DHT11_module' (62#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:23]
-WARNING: [Synth 8-7071] port 'start_trigger' of module 'DHT11_module' is unconnected for instance 'U_DHT11_IP' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:49]
-WARNING: [Synth 8-7023] instance 'U_DHT11_IP' of module 'DHT11_module' has 6 connections declared, but only 5 given [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:49]
-INFO: [Synth 8-6155] done synthesizing module 'DHT11_Periph' (63#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'tick_10sec' (59#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:306]
+INFO: [Synth 8-6155] done synthesizing module 'DHT11_module' (60#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_module.v:23]
+WARNING: [Synth 8-7071] port 'start_trigger' of module 'DHT11_module' is unconnected for instance 'U_DHT11_IP' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:35]
+WARNING: [Synth 8-7023] instance 'U_DHT11_IP' of module 'DHT11_module' has 6 connections declared, but only 5 given [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:35]
+INFO: [Synth 8-6155] done synthesizing module 'DHT11_Periph' (61#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_DHT11/DHT11_Periph.sv:4]
 WARNING: [Synth 8-689] width (32) of port connection 'PADDR' does not match port width (4) of module 'DHT11_Periph' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/MCU.sv:132]
 INFO: [Synth 8-6157] synthesizing module 'GP_Watch' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/GP_watch.sv:3]
 INFO: [Synth 8-6157] synthesizing module 'APB_watchIntf' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/GP_watch.sv:46]
 INFO: [Synth 8-155] case statement is not full and has no default [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/GP_watch.sv:92]
 INFO: [Synth 8-155] case statement is not full and has no default [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/GP_watch.sv:100]
-INFO: [Synth 8-6155] done synthesizing module 'APB_watchIntf' (64#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/GP_watch.sv:46]
+INFO: [Synth 8-6155] done synthesizing module 'APB_watchIntf' (62#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/GP_watch.sv:46]
 INFO: [Synth 8-6157] synthesizing module 'watch_dp' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:3]
 	Parameter COUNT_100HZ bound to: 1000000 - type: integer 
 	Parameter MSEC_MAX bound to: 100 - type: integer 
@@ -255,37 +251,37 @@ INFO: [Synth 8-6157] synthesizing module 'watch_dp' [C:/harman/2025 april team P
 	Parameter HOUR_MAX bound to: 24 - type: integer 
 INFO: [Synth 8-6157] synthesizing module 'watch_tick_100hz' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:99]
 	Parameter COUNT_100HZ bound to: 1000000 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'watch_tick_100hz' (65#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:99]
+INFO: [Synth 8-6155] done synthesizing module 'watch_tick_100hz' (63#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:99]
 INFO: [Synth 8-6157] synthesizing module 'watch_counter_tick' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:129]
 	Parameter TICK_COUNT bound to: 100 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'watch_counter_tick' (66#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:129]
+INFO: [Synth 8-6155] done synthesizing module 'watch_counter_tick' (64#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:129]
 WARNING: [Synth 8-689] width (7) of port connection 'counter' does not match port width (32) of module 'watch_counter_tick' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:44]
 INFO: [Synth 8-6157] synthesizing module 'watch_counter_tick__parameterized0' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:129]
 	Parameter TICK_COUNT bound to: 60 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'watch_counter_tick__parameterized0' (66#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:129]
+INFO: [Synth 8-6155] done synthesizing module 'watch_counter_tick__parameterized0' (64#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:129]
 WARNING: [Synth 8-689] width (6) of port connection 'counter' does not match port width (32) of module 'watch_counter_tick__parameterized0' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:59]
 WARNING: [Synth 8-689] width (6) of port connection 'counter' does not match port width (32) of module 'watch_counter_tick__parameterized0' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:74]
 INFO: [Synth 8-6157] synthesizing module 'watch_counter_tick__parameterized1' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:129]
 	Parameter TICK_COUNT bound to: 24 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'watch_counter_tick__parameterized1' (66#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:129]
+INFO: [Synth 8-6155] done synthesizing module 'watch_counter_tick__parameterized1' (64#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:129]
 WARNING: [Synth 8-689] width (5) of port connection 'counter' does not match port width (32) of module 'watch_counter_tick__parameterized1' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:89]
-INFO: [Synth 8-6155] done synthesizing module 'watch_dp' (67#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:3]
-INFO: [Synth 8-6155] done synthesizing module 'GP_Watch' (68#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/GP_watch.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'watch_dp' (65#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/watch_dp.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'GP_Watch' (66#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/GP_watch/GP_watch.sv:3]
 WARNING: [Synth 8-689] width (32) of port connection 'PADDR' does not match port width (5) of module 'GP_Watch' [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/MCU.sv:140]
-INFO: [Synth 8-6155] done synthesizing module 'MCU' (69#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/MCU.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'MCU' (67#1) [C:/harman/2025 april team Project/my_RISC-V.srcs/sources_1/MCU.sv:3]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1103.996 ; gain = 0.000
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1104.258 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1103.996 ; gain = 0.000
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1104.258 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1103.996 ; gain = 0.000
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1104.258 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.051 . Memory (MB): peak = 1103.996 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.045 . Memory (MB): peak = 1104.258 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -298,27 +294,27 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/MCU_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1194.156 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1193.570 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 1 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 1 instance 
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 1194.156 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1193.570 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1194.156 ; gain = 90.160
+Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1193.570 ; gain = 89.312
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1194.156 ; gain = 90.160
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1193.570 ; gain = 89.312
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1194.156 ; gain = 90.160
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1193.570 ; gain = 89.312
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'ControlUnit'
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'APB_Master_CU'
@@ -406,7 +402,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'sensor_cu'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1194.156 ; gain = 90.160
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1193.570 ; gain = 89.312
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -430,12 +426,12 @@ Detailed RTL Component Info :
 +---XORs : 
 	   2 Input     32 Bit         XORs := 1     
 +---Registers : 
-	               40 Bit    Registers := 2     
-	               32 Bit    Registers := 45    
+	               40 Bit    Registers := 1     
+	               32 Bit    Registers := 48    
 	               30 Bit    Registers := 1     
 	               20 Bit    Registers := 1     
 	               17 Bit    Registers := 1     
-	               16 Bit    Registers := 3     
+	               16 Bit    Registers := 2     
 	               10 Bit    Registers := 1     
 	                8 Bit    Registers := 6     
 	                7 Bit    Registers := 2     
@@ -451,7 +447,7 @@ Detailed RTL Component Info :
 +---Muxes : 
 	   2 Input   40 Bit        Muxes := 1     
 	   9 Input   40 Bit        Muxes := 2     
-	   2 Input   32 Bit        Muxes := 27    
+	   2 Input   32 Bit        Muxes := 29    
 	   4 Input   32 Bit        Muxes := 8     
 	  10 Input   32 Bit        Muxes := 1     
 	  17 Input   32 Bit        Muxes := 1     
@@ -464,7 +460,7 @@ Detailed RTL Component Info :
 	   9 Input   16 Bit        Muxes := 1     
 	  14 Input   11 Bit        Muxes := 1     
 	   2 Input    8 Bit        Muxes := 3     
-	   4 Input    8 Bit        Muxes := 2     
+	   4 Input    8 Bit        Muxes := 1     
 	   9 Input    8 Bit        Muxes := 1     
 	   2 Input    6 Bit        Muxes := 1     
 	   9 Input    6 Bit        Muxes := 1     
@@ -515,7 +511,7 @@ DSP Report: Generating DSP RESULT0, operation Mode is: (PCIN>>17)+A*B.
 DSP Report: operator RESULT0 is absorbed into DSP RESULT0.
 DSP Report: operator RESULT0 is absorbed into DSP RESULT0.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:48 ; elapsed = 00:00:50 . Memory (MB): peak = 1257.629 ; gain = 153.633
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:55 ; elapsed = 00:00:57 . Memory (MB): peak = 1241.859 ; gain = 137.602
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -568,13 +564,13 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:54 ; elapsed = 00:00:56 . Memory (MB): peak = 1257.629 ; gain = 153.633
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1241.859 ; gain = 137.602
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:56 ; elapsed = 00:00:58 . Memory (MB): peak = 1263.172 ; gain = 159.176
+Finished Timing Optimization : Time (s): cpu = 00:01:02 ; elapsed = 00:01:05 . Memory (MB): peak = 1255.203 ; gain = 150.945
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -605,7 +601,7 @@ Start Technology Mapping
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-7052] The timing for the instance U_RAM/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:58 ; elapsed = 00:01:00 . Memory (MB): peak = 1351.383 ; gain = 247.387
+Finished Technology Mapping : Time (s): cpu = 00:01:05 ; elapsed = 00:01:07 . Memory (MB): peak = 1361.832 ; gain = 257.574
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -623,37 +619,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:00 ; elapsed = 00:01:02 . Memory (MB): peak = 1366.164 ; gain = 262.168
+Finished IO Insertion : Time (s): cpu = 00:01:07 ; elapsed = 00:01:10 . Memory (MB): peak = 1374.578 ; gain = 270.320
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:00 ; elapsed = 00:01:02 . Memory (MB): peak = 1366.164 ; gain = 262.168
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:07 ; elapsed = 00:01:10 . Memory (MB): peak = 1374.578 ; gain = 270.320
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:00 ; elapsed = 00:01:03 . Memory (MB): peak = 1366.164 ; gain = 262.168
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:08 ; elapsed = 00:01:10 . Memory (MB): peak = 1374.578 ; gain = 270.320
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:00 ; elapsed = 00:01:03 . Memory (MB): peak = 1366.164 ; gain = 262.168
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:08 ; elapsed = 00:01:10 . Memory (MB): peak = 1374.578 ; gain = 270.320
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1366.164 ; gain = 262.168
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:08 ; elapsed = 00:01:10 . Memory (MB): peak = 1374.605 ; gain = 270.348
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1366.164 ; gain = 262.168
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:08 ; elapsed = 00:01:10 . Memory (MB): peak = 1374.605 ; gain = 270.348
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -673,18 +669,18 @@ Report Cell Usage:
 |2     |CARRY4   |   766|
 |3     |DSP48E1  |     3|
 |4     |LUT1     |   209|
-|5     |LUT2     |   311|
-|6     |LUT3     |  2461|
+|5     |LUT2     |   314|
+|6     |LUT3     |  2476|
 |7     |LUT4     |   428|
-|8     |LUT5     |   464|
-|9     |LUT6     |  1681|
-|10    |MUXF7    |   263|
-|11    |MUXF8    |    76|
+|8     |LUT5     |   514|
+|9     |LUT6     |  1772|
+|10    |MUXF7    |   278|
+|11    |MUXF8    |    18|
 |12    |RAM32M   |    12|
 |13    |RAM64M   |    16|
 |14    |RAM64X1D |    16|
 |15    |RAMB36E1 |     1|
-|16    |FDCE     |  1416|
+|16    |FDCE     |  1422|
 |17    |FDPE     |    18|
 |18    |FDRE     |   205|
 |19    |LD       |     8|
@@ -694,18 +690,18 @@ Report Cell Usage:
 |23    |OBUFT    |    12|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1366.164 ; gain = 262.168
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:08 ; elapsed = 00:01:10 . Memory (MB): peak = 1374.605 ; gain = 270.348
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:56 ; elapsed = 00:01:01 . Memory (MB): peak = 1366.164 ; gain = 172.008
-Synthesis Optimization Complete : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1366.164 ; gain = 262.168
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:02 ; elapsed = 00:01:09 . Memory (MB): peak = 1374.605 ; gain = 181.035
+Synthesis Optimization Complete : Time (s): cpu = 00:01:08 ; elapsed = 00:01:10 . Memory (MB): peak = 1374.605 ; gain = 270.348
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.077 . Memory (MB): peak = 1366.164 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 1162 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.081 . Memory (MB): peak = 1374.605 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1119 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1366.164 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1374.605 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 53 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 1 instance 
@@ -715,9 +711,9 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   RAM64X1D => RAM64X1D (RAMD64E(x2)): 16 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-201 Infos, 30 Warnings, 0 Critical Warnings and 0 Errors encountered.
+197 Infos, 30 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:06 ; elapsed = 00:01:09 . Memory (MB): peak = 1366.164 ; gain = 262.168
+synth_design: Time (s): cpu = 00:01:12 ; elapsed = 00:01:16 . Memory (MB): peak = 1374.605 ; gain = 270.348
 INFO: [Common 17-1381] The checkpoint 'C:/harman/2025 april team Project/my_RISC-V.runs/synth_1/MCU.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file MCU_utilization_synth.rpt -pb MCU_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Wed May  7 16:14:58 2025...
+INFO: [Common 17-206] Exiting Vivado at Thu May  8 19:36:15 2025...

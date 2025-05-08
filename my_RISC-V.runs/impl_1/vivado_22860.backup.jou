@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Thu May  8 19:05:08 2025
+# Process ID: 22860
+# Current directory: C:/harman/2025 april team Project/my_RISC-V.runs/impl_1
+# Command line: vivado.exe -log MCU.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source MCU.tcl -notrace
+# Log file: C:/harman/2025 april team Project/my_RISC-V.runs/impl_1/MCU.vdi
+# Journal file: C:/harman/2025 april team Project/my_RISC-V.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source MCU.tcl -notrace

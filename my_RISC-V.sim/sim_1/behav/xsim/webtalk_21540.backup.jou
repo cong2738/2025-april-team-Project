@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Thu May  8 18:15:15 2025
+# Process ID: 21540
+# Current directory: C:/harman/2025 april team Project/my_RISC-V.sim/sim_1/behav/xsim
+# Command line: wbtcv.exe -mode batch -source C:/harman/2025 april team Project/my_RISC-V.sim/sim_1/behav/xsim/xsim.dir/tb_fifo_UVM_TEMPLET_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: C:/harman/2025 april team Project/my_RISC-V.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: C:/harman/2025 april team Project/my_RISC-V.sim/sim_1/behav/xsim\webtalk.jou
+#-----------------------------------------------------------
+source C:/harman/2025 -notrace

@@ -179,7 +179,7 @@ class fifo_scoreboard;
 
     task run();
         forever begin
-            TEST++;
+            TEST = WRITE + READ;
             MonToSCB_mbox.get(fifo_tr);
             fifo_tr.display("SCB");
             if (fifo_tr.wr_en == 1'b1) begin
