@@ -132,14 +132,15 @@ uint32_t StringToInt(uint32_t* time);
 /* main */
 int main(void)
 {
-    uint32_t psc = 100000-1, arr = 10000-1; // 단위시간 100_000/100_000_000 = 1msec, maxcount: 9999
+    uint32_t psc = 100000-1, arr = 100000-1; // 단위시간 100_000/100_000_000 = 1msec, maxcount
     LED_init(LED);
     ButtonInit(GPI);
     FND_init(GPFND, 1, 0x0);
     TIM_init(TIMER,psc,arr);
     TIM_start(TIMER);
-    uint32_t watchPreCnt = 0,printResPreCnt = 0,rxPreCnt = 0;
+    uint32_t sprinklerWaitPreCnt = 0, sprinklerRunPreCnt,printResPreCnt = 0,rxPreCnt = 0;
     uint32_t fnd_mode = 0, fndData = 0;
+    uint32_t sprinklerOn = 0;
     uint32_t readIdx = 0;
     uint32_t rxString[6]; // S00:00:00
     TimeStringInit(rxString);
@@ -149,14 +150,10 @@ int main(void)
     while (1)
     {  
         getTime(WATCH,&msec,&sec,&min,&hour);
-
-        uint32_t distance = HCSR04_READ(HCSR04);
+        
+        uint32_t distance = 100 - HCSR04_READ(HCSR04);
         uint32_t RH = dht11_readRH(DHT11);
         uint32_t TEM = dht11_readTEM(DHT11);
-
-        uint32_t h_m = combineData(hour,min,100);
-        uint32_t s_m = combineData(sec,msec,100);
-        uint32_t T_RH = combineData(TEM,RH,100);
         
         intToString(GPCAL,distance,distance_data,3);
         intToString(GPCAL,RH,RH_data,3);
@@ -164,17 +161,34 @@ int main(void)
         intToString(GPCAL,hour,hour_data,2);
         intToString(GPCAL,min,min_data,2);
         intToString(GPCAL,sec,sec_data,2);
+        
+        uint32_t led_data = 0b00000000;
+        if(distance < 50) led_data |= 0b00010000;
+        if(RH < 30) led_data |= 0b00100000;
+        if(TEM < 10) led_data |= 0b01000000;
+        if(time_ctrl(TIMER,arr,&sprinklerWaitPreCnt,10000)) {
+            sprinklerOn = 1; 
+            sprinklerRunPreCnt = TIM_readCounter(TIMER);
+        }
+        if(sprinklerOn) {
+            led_data |= 0b10000000;
+            if(time_ctrl(TIMER,arr,&sprinklerRunPreCnt,1000)) {
+                sprinklerOn = 0; 
+            }
+        }
+        LED_write(LED,led_data);
 
         if(time_ctrl(TIMER, arr, &printResPreCnt, 500)) {
             printTime(hour_data,min_data,sec_data);
             printRes(distance_data,RH_data,TEM_data);
         }
+        
         if(!UART_isEMPTY(GPUART)) {
             rxString[readIdx] = UART_read(GPUART); // read from input buffer
             readIdx = readIdx + 1;
             if(readIdx == 6) { // if string is full
                 if(RxDataCheck(rxString)) {
-                    fndData = StringToInt(rxString);
+                    fnd_mode = StringToInt(rxString);
                     transString(GPUART,rxString,6);
                     UART_trans(GPUART,'\n');
                 } else {
@@ -183,6 +197,28 @@ int main(void)
                 }
                 readIdx = 0; // reset idx
             }
+        }
+
+        uint32_t h_m = combineData(hour,min,100);
+        uint32_t s_m = combineData(sec,msec,100);
+        uint32_t T_RH = combineData(TEM,RH,100);
+        switch (fnd_mode)
+        {
+        case 0:
+            fndData = s_m;
+            break;
+        case 1:
+            fndData = h_m;
+            break;
+        case 2:
+            fndData = T_RH;
+            break;
+        case 3:
+            fndData = distance;
+            break;
+        default: 
+            fndData = 0;
+            break;
         }
         FND_writeData(GPFND,fndData,0b1111);
     }
@@ -377,9 +413,9 @@ uint16_t combineData(uint32_t data1, uint32_t data2, uint32_t sep) {
 
 /* print function */
 void printRes(uint32_t* distance_data, uint32_t* RH_data, uint32_t* TEM_data){
-    UART_trans(GPUART,'D');
-    UART_trans(GPUART,'I');
-    UART_trans(GPUART,'S');
+    UART_trans(GPUART,'W');
+    UART_trans(GPUART,'L');
+    UART_trans(GPUART,' ');
     UART_trans(GPUART,':');
     UART_trans(GPUART,' ');
     transDigit(GPUART,distance_data,3);
