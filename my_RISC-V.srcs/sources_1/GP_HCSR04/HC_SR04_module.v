@@ -57,7 +57,7 @@ module HC_SR04_cu (
     // FSM state
     parameter IDLE = 0, START = 1, WAIT = 2, DATA = 3;
 
-    parameter MAX_DISTANCE = 250;  //측정 최대 범위 400cm
+    parameter MAX_DISTANCE = 100;  //측정 최대 범위
 
     reg [3:0] state, next;
     reg [5:0] tick_count, tick_count_next;

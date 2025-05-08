@@ -16,11 +16,7 @@ module DHT11_Periph (
     inout  logic        DATA_IO
 );
     logic [39:0] DHT11_data;
-    logic [39:0] buff_out;
-    logic [7:0] rh_int, t_int;
     logic finish_int;
-    assign rh_int = buff_out[39:32];
-    assign t_int = buff_out[23:16];
 
   APB_SlaveIntf_DHT11 U_APB_Intf (
       .PCLK      (PCLK),
@@ -32,20 +28,10 @@ module DHT11_Periph (
       .PSEL      (PSEL),
       .PRDATA    (PRDATA),
       .PREADY    (PREADY),
-      .rh_int    (rh_int),
-      .t_int     (t_int),
+      .DHT11_data(DHT11_data),
       .finish_int(finish_int)
   );
 
-  DHT11_buffer u_DHT11_buffer(
-      .clk    (PCLK    ),
-      .reset  (PRESET  ),
-      .done   (finish_int   ),
-      .i_data (DHT11_data ),
-      .o_data (buff_out )
-  );
-  
-  
   DHT11_module U_DHT11_IP (
       .clk          (PCLK),
       .reset        (PRESET),
@@ -67,8 +53,7 @@ module APB_SlaveIntf_DHT11 (
     input  logic        PSEL,
     output logic [31:0] PRDATA,
     output logic        PREADY,
-    input  logic [ 7:0] rh_int,
-    input  logic [ 7:0] t_int,
+    input  logic [39:0] DHT11_data,
     input  logic        finish_int
 
 );
@@ -76,33 +61,21 @@ module APB_SlaveIntf_DHT11 (
 
   logic [31:0] slv_reg0, slv_reg1;
 
-//   assign slv_reg0[7:0] = rh_int;
-//   assign slv_reg1[7:0] = t_int;
-//   assign slv_reg2[0] = finish_int;
-
-  assign slv_reg0 = {24'd0, rh_int};
-  assign slv_reg1 = {24'd0, t_int};
-  assign slv_reg2 = {31'd0, finish_int};
-  
-
   always_ff @(posedge PCLK, posedge PRESET) begin
         if (PRESET) begin
-            //slv_reg0 <= 0;
-            //slv_reg1 <= 0;
-            //slv_reg2 <= 0;
-            // slv_reg3 <= 0;
-            // PREADY <= 1'b0;
-            // PRDATA <= 32'd0;
+            slv_reg0 <= 0;
+            slv_reg1 <= 0;
         end else begin
+            if(finish_int) begin
+                slv_reg0 <= DHT11_data[39:32];
+                slv_reg1 <= DHT11_data[23:16];
+            end
             if (PSEL && PENABLE) begin
                 PREADY <= 1'b1;
                 if (PWRITE) begin
                     case (PADDR[3:2])
                         2'd0: ;
                         2'd1: ;
-                        2'd2: ;
-                        // 2'd3: ;
-                        // 2'd3: slv_reg3 <= PWDATA;
                     endcase
                 end else begin
                     // PRDATA <= 32'bx;
@@ -110,10 +83,6 @@ module APB_SlaveIntf_DHT11 (
                     case (PADDR[3:2])
                         2'd0: PRDATA <= slv_reg0;
                         2'd1: PRDATA <= slv_reg1;
-                        2'd2: PRDATA <= slv_reg2;
-                        // 2'd3: PRDATA <= slv_reg3;
-                        // 2'd3: PRDATA <= slv_reg3;
-                        // default: PRDATA <= 32'd0; //수정
                     endcase
                 end
             end else begin

@@ -17,18 +17,8 @@ module GP_HCSR04 #(parameter MAX_COUNT = 100_000_000) (
     output logic        echo_start
 );
     logic [15:0] distance;
-    logic [15:0] IDR;
 
     APB_HCSR04Intf U_APB_Intf_GPIO (.*);
-
-    HCSR04_buffer u_HCSR04_buffer(
-        .clk      (PCLK      ),
-        .reset    (PRESET    ),
-        .done     (done     ),
-        .distance (distance ),
-        .o_data   (IDR   )
-    );
-
 
     HC_SR04_module #(
         .MAX_COUNT(MAX_COUNT)
@@ -57,14 +47,17 @@ module APB_HCSR04Intf (
     output logic [31:0] PRDATA,
     output logic        PREADY,
     // internal signals
-    input  logic [15:0] IDR
+    input  logic        done,
+    input  logic [15:0] distance
 );
     logic [31:0] slv_reg0;
-    assign slv_reg0 = IDR;
+    
 
     always_ff @(posedge PCLK, posedge PRESET) begin
         if (PRESET) begin
+            slv_reg0 <= 0;
         end else begin
+            if(done) slv_reg0 <= distance;
             if (PSEL && PENABLE) begin
                 PREADY <= 1'b1;
                 if (~PWRITE) begin
